@@ -15,6 +15,7 @@
         <module>basic-file-entity</module>
         <module>basic-file-api</module>
         <module>basic-file-service</module>
+        <module>basic-file-web</module>
     </modules>
 
     <properties>

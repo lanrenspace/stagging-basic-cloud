@@ -14,10 +14,6 @@
     <modules>
         <module>basic-common</module>
         <module>basic-file</module>
-        <module>basic-file/basic-file-entity</module>
-        <module>basic-file/basic-file-api</module>
-        <module>basic-file/basic-file-service</module>
-        <module>basic-file/basic-file-web</module>
         <module>basic-uums</module>
         <module>basic-tenant</module>
         <module>basic-gateway</module>
