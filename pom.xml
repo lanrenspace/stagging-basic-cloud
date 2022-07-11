@@ -18,6 +18,11 @@
         <module>basic-file/basic-file-api</module>
         <module>basic-file/basic-file-service</module>
         <module>basic-file/basic-file-web</module>
+        <module>basic-uums</module>
+        <module>basic-tenant</module>
+        <module>basic-gateway</module>
+        <module>basic-uaa</module>
+        <module>basic-abs-web</module>
     </modules>
 
     <properties>
@@ -31,6 +36,8 @@
         <mysql.version>8.0.23</mysql.version>
         <swagger.version>2.9.2</swagger.version>
         <swagger-ui.version>1.9.6</swagger-ui.version>
+        <oauthboot.version>2.1.4.RELEASE</oauthboot.version>
+        <abs.version>2.1.4</abs.version>
     </properties>
 
     <parent>
@@ -63,11 +70,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.basic.cloud</groupId>
-            <artifactId>basic-common</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
@@ -108,6 +110,27 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
                 <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security.oauth.boot</groupId>
+                <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+                <version>${oauthboot.version}</version>
+            </dependency>
+            <!--abs -->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-client</artifactId>
+                <version>${abs.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>${abs.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-server-ui</artifactId>
+                <version>${abs.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
