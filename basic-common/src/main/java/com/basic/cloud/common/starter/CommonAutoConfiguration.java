@@ -1,5 +1,6 @@
 package com.basic.cloud.common.starter;
 
+import com.basic.cloud.common.boot.AfterSpringLoad;
 import com.basic.cloud.common.boot.PlatformProperties;
 import org.apache.commons.lang.RandomStringUtils;
 import org.mybatis.spring.annotation.MapperScan;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.CollectionUtils;
@@ -67,5 +69,10 @@ public class CommonAutoConfiguration {
                 }
             });
         }
+    }
+
+    @Bean
+    public AfterSpringLoad afterSpringLoad() {
+        return new AfterSpringLoad();
     }
 }
