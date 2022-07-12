@@ -1,2 +1,2 @@
 # stagging-basic-cloud
-基础集成
+#### :laughing:组件说明
