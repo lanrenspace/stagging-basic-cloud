@@ -20,7 +20,13 @@ public class BisDataEntity<T> implements Serializable {
     protected Long createBy;
 
     /**
-     * 创建日期
+     * 创建用户名称
+     */
+    @TableField(value = "create_name", fill = FieldFill.INSERT)
+    protected String createName;
+
+    /**
+     * 创建时间
      */
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     protected Date createTime;
@@ -32,7 +38,13 @@ public class BisDataEntity<T> implements Serializable {
     protected Long updateBy;
 
     /**
-     * 编辑用户
+     * 编辑用户名称
+     */
+    @TableField(value = "update_name", fill = FieldFill.UPDATE)
+    protected Long updateName;
+
+    /**
+     * 更新时间
      */
     @TableField(value = "update_time", fill = FieldFill.UPDATE)
     protected Date updateTime;
@@ -42,7 +54,7 @@ public class BisDataEntity<T> implements Serializable {
      * 是否逻辑删除 1: 已删除 0: 未删除
      */
     @TableField(value = "del_flag", fill = FieldFill.INSERT)
-    protected Integer delFlag;
+    protected Boolean delFlag;
 
     /**
      * 租户编码

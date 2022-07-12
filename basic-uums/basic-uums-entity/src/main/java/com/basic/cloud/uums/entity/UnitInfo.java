@@ -39,7 +39,7 @@ public class UnitInfo extends BisDataEntity<UnitInfo> {
     /**
      * 组织机构类型，1组织机构，2部门，3分公司
      */
-    private String unitType;
+    private Integer unitType;
 
     /**
      * 排序号，越小越好

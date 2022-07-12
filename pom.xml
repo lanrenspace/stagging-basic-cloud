@@ -34,6 +34,8 @@
         <swagger-ui.version>1.9.6</swagger-ui.version>
         <oauthboot.version>2.1.4.RELEASE</oauthboot.version>
         <abs.version>2.1.4</abs.version>
+        <oauth2-autoconfigure.version>2.1.11.RELEASE</oauth2-autoconfigure.version>
+        <security-oauth2.version>2.3.4.RELEASE</security-oauth2.version>
     </properties>
 
     <parent>
@@ -107,11 +109,6 @@
                 <artifactId>springfox-swagger2</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.springframework.security.oauth.boot</groupId>
-                <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-                <version>${oauthboot.version}</version>
-            </dependency>
             <!--abs -->
             <dependency>
                 <groupId>de.codecentric</groupId>
@@ -127,6 +124,16 @@
                 <groupId>de.codecentric</groupId>
                 <artifactId>spring-boot-admin-server-ui</artifactId>
                 <version>${abs.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security.oauth.boot</groupId>
+                <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+                <version>${oauth2-autoconfigure.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${security-oauth2.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>

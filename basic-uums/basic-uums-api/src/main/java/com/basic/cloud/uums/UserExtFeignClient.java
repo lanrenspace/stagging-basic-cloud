@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Author lanrenspace@163.com
  * @Description:
  **/
-@FeignClient(value = "${api.feign.client.uum}", path = "/userExt",contextId = "userExtFeignClient")
+@FeignClient(value = "${api.feign.client.uum}", path = "/feign/userExt",contextId = "userExtFeignClient")
 public interface UserExtFeignClient {
 
     /**

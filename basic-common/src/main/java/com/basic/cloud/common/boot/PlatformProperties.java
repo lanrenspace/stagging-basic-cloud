@@ -39,6 +39,11 @@ public class PlatformProperties {
     private AliOss aliOss = new AliOss();
 
     /**
+     * jwt 配置信息
+     */
+    private Jwt jwt = new Jwt();
+
+    /**
      * 系统环境
      */
     @Data
@@ -172,5 +177,22 @@ public class PlatformProperties {
          * 端点域名
          */
         private String endpoint;
+    }
+
+    /**
+     * OAuth2 Jwt相关配置
+     */
+    @Data
+    public static class Jwt {
+        /**
+         * access token 有效时长
+         */
+        private Integer accessTokenValiditySeconds = 86400 * 3;
+
+        /**
+         * refresh token 有效时长
+         * 系统使用：refreshTokenValiditySeconds * (86400 * 3)
+         */
+        private Integer refreshTokenValiditySeconds = 86400 * 4;
     }
 }

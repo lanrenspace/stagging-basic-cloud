@@ -1,8 +1,10 @@
 package com.basic.cloud.uums;
 
 import com.basic.cloud.uums.entity.RoleInfo;
+import com.basic.cloud.uums.vo.RoleInfoVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
  * @Author lanrenspace@163.com
  * @Description:
  **/
-@FeignClient(value = "${api.feign.client.uum}", path = "/userGroupRole", contextId = "userGroupRoleFeignClient")
+@FeignClient(value = "${api.feign.client.uum}", path = "/feign/userGroupRole", contextId = "userGroupRoleFeignClient")
 public interface UserGroupRoleFeignClient {
 
     /**
@@ -19,5 +21,5 @@ public interface UserGroupRoleFeignClient {
      * @param userId 用户ID
      */
     @GetMapping("/getRolesByUserId")
-    List<RoleInfo> getRolesByUserId(Long userId);
+    List<RoleInfoVO> getRolesByUserId(@RequestParam("userId") Long userId);
 }
