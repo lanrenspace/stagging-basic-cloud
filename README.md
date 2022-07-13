@@ -13,7 +13,7 @@
 
 ![image](https://github.com/lanrenspace/stagging-basic-cloud/blob/master/design/model.png)
 
-- Service：其他业务服务
+- Tripartie Service：其他业务服务
 - Entity：业务对象实体（PO、VO、DTO）服务常量定义（CONTSTANT）
 - Service：具体业务逻辑处理实现
 - Api：业务对外提供服务API定义
