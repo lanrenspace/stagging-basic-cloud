@@ -9,3 +9,7 @@
 | basic-uaa     | 业务组件：SpringSecurity OAuth2 认证服务 |      development                                        |
 | basic-uums    | 业务组件：用户服务中心                     |     development                                                    |
 | basic-tenant  | 业务组件：租户服务中心                     |     development                                                               |
+#### 业务组件包拆分说明
+
+![image](https://github.com/lanrenspace/stagging-basic-cloud/blob/master/design/model.png)
+
