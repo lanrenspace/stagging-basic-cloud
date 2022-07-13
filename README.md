@@ -1,5 +1,5 @@
-# stagging-basic-cloud
-#### :laughing:组件说明
+# 基础组件
+#### 组件说明
 | 组件名称          | 说明                              | 进度          |
 |:--------------|:--------------------------------|-------------|
 | basic-common  | 业务基础组件                          | development |
@@ -13,3 +13,8 @@
 
 ![image](https://github.com/lanrenspace/stagging-basic-cloud/blob/master/design/model.png)
 
+- Service：其他业务服务
+- Entity：业务对象实体（PO、VO、DTO）服务常量定义（CONTSTANT）
+- Service：具体业务逻辑处理实现
+- Api：业务对外提供服务API定义
+- Web：业务服务提供者
