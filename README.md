@@ -18,3 +18,7 @@
 - Service：具体业务逻辑处理实现
 - Api：业务对外提供服务API定义
 - Web：业务服务提供者
+
+#### 业务系统架构图
+
+![image](https://github.com/lanrenspace/stagging-basic-cloud/blob/master/design/projectArchitecture.png)
