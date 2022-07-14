@@ -47,11 +47,11 @@
 
    ```xml
    <dependencies>
-   <dependency>
-   <groupId>com.basic.cloud</groupId>
-           <artifactId>basic-common</artifactId>
-           <version>${last version}</version>
-       </dependency>
+      <dependency>
+         <groupId>com.basic.cloud</groupId>
+         <artifactId>basic-common</artifactId>
+         <version>${last version}</version>
+      </dependency>
    </dependencies>
    
    <dependencyManagement>
