@@ -43,7 +43,7 @@
    </dependencyManagement>
    ```
 
-2. 引入所需组件：
+2. 按需引入所需组件：
 
    ```xml
    <dependencies>
