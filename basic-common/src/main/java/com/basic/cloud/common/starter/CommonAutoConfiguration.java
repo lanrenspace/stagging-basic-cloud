@@ -2,6 +2,7 @@ package com.basic.cloud.common.starter;
 
 import com.basic.cloud.common.boot.AfterSpringLoad;
 import com.basic.cloud.common.boot.PlatformProperties;
+import com.basic.cloud.common.utils.RedisUtil;
 import org.apache.commons.lang.RandomStringUtils;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
@@ -13,6 +14,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.CollectionUtils;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -40,9 +43,12 @@ public class CommonAutoConfiguration {
     private final PlatformProperties platformProperties;
     private final ConfigurableApplicationContext applicationContext;
 
-    public CommonAutoConfiguration(PlatformProperties platformProperties, ConfigurableApplicationContext applicationContext) {
+    private final RedisTemplate<String, Object> redisTemplate;
+
+    public CommonAutoConfiguration(PlatformProperties platformProperties, ConfigurableApplicationContext applicationContext, RedisTemplate<String, Object> redisTemplate) {
         this.platformProperties = platformProperties;
         this.applicationContext = applicationContext;
+        this.redisTemplate = redisTemplate;
         initSwaggerConfig();
         logger.info("load Common comp success!");
     }
@@ -69,6 +75,11 @@ public class CommonAutoConfiguration {
                 }
             });
         }
+    }
+
+    @Bean
+    public RedisUtil redisUtil() {
+        return new RedisUtil(redisTemplate);
     }
 
     @Bean
