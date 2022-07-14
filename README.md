@@ -47,8 +47,8 @@
 
    ```xml
    <dependencies>
-   	<dependency>
-       	<groupId>com.basic.cloud</groupId>
+   <dependency>
+   <groupId>com.basic.cloud</groupId>
            <artifactId>basic-common</artifactId>
            <version>${last version}</version>
        </dependency>
