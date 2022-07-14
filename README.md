@@ -31,15 +31,15 @@
 
    ```xml
    <dependencyManagement>
-   	<dependencies>
-       	<dependency>
-           	<groupId>com.basic.cloud</groupId>
-               <artifactId>stagging-basic-cloud</artifactId>
-               <version>${last version}</version>
-               <type>pom</type>
-               <scope>import</scope>
-           </dependency>
-       </dependencies>
+      <dependencies>
+         <dependency>
+            <groupId>com.basic.cloud</groupId>
+            <artifactId>stagging-basic-cloud</artifactId>
+            <version>${last version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+         </dependency>
+      </dependencies>
    </dependencyManagement>
    ```
 
@@ -55,15 +55,15 @@
    </dependencies>
    
    <dependencyManagement>
-   	<dependencies>
-       	<dependency>
-           	<groupId>com.basic.cloud</groupId>
-               <artifactId>stagging-basic-cloud</artifactId>
-               <version>${last version}</version>
-               <type>pom</type>
-               <scope>import</scope>
-           </dependency>
-       </dependencies>
+      <dependencies>
+         <dependency>
+            <groupId>com.basic.cloud</groupId>
+            <artifactId>stagging-basic-cloud</artifactId>
+            <version>${last version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+         </dependency>
+      </dependencies>
    </dependencyManagement>
    ```
 
