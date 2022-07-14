@@ -22,3 +22,50 @@
 #### 业务系统架构图
 
 ![image](https://github.com/lanrenspace/stagging-basic-cloud/blob/master/design/projectArchitecture.png)
+
+#### QuickStart Guide
+
+##### 在Maven Project 中使用
+
+1. 在具体业务实现服务`pom.xml` 文件中添加依赖：
+
+   ```xml
+   <dependencyManagement>
+   	<dependencies>
+       	<dependency>
+           	<groupId>com.basic.cloud</groupId>
+               <artifactId>stagging-basic-cloud</artifactId>
+               <version>${last version}</version>
+               <type>pom</type>
+               <scope>import</scope>
+           </dependency>
+       </dependencies>
+   </dependencyManagement>
+   ```
+
+2. 引入所需组件：
+
+   ```xml
+   <dependencies>
+   	<dependency>
+       	<groupId>com.basic.cloud</groupId>
+           <artifactId>basic-common</artifactId>
+           <version>${last version}</version>
+       </dependency>
+   </dependencies>
+   
+   <dependencyManagement>
+   	<dependencies>
+       	<dependency>
+           	<groupId>com.basic.cloud</groupId>
+               <artifactId>stagging-basic-cloud</artifactId>
+               <version>${last version}</version>
+               <type>pom</type>
+               <scope>import</scope>
+           </dependency>
+       </dependencies>
+   </dependencyManagement>
+   ```
+
+   
+
