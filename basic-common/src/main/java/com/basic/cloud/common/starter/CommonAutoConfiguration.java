@@ -1,7 +1,10 @@
 package com.basic.cloud.common.starter;
 
+import com.basic.cloud.common.base.IdInjectionStrategy;
+import com.basic.cloud.common.bean.DefaultIdInjectionStrategy;
 import com.basic.cloud.common.boot.AfterSpringLoad;
 import com.basic.cloud.common.boot.PlatformProperties;
+import com.basic.cloud.common.utils.AppContextHelper;
 import com.basic.cloud.common.utils.RedisUtil;
 import org.apache.commons.lang.RandomStringUtils;
 import org.mybatis.spring.annotation.MapperScan;
@@ -75,6 +78,27 @@ public class CommonAutoConfiguration {
                 }
             });
         }
+    }
+
+    /**
+     * 全局上下文对象
+     *
+     * @return
+     */
+    @Bean("getApplicationContext")
+    public AppContextHelper appContextHelper() {
+        return new AppContextHelper();
+    }
+
+
+    /**
+     * 默认id策略实现
+     *
+     * @return
+     */
+    @Bean
+    public IdInjectionStrategy defaultIdInjectionStrategy() {
+        return new DefaultIdInjectionStrategy();
     }
 
     @Bean

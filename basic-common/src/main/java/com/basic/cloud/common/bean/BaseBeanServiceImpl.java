@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.basic.cloud.common.base.BaseBeanMapper;
 import com.basic.cloud.common.base.IBaseBeanService;
+import com.basic.cloud.common.base.IdInjectionStrategy;
+import com.basic.cloud.common.utils.AppContextHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -59,5 +61,10 @@ public class BaseBeanServiceImpl<T extends BisDataEntity<T>, M extends BaseBeanM
         if (getClass().getGenericSuperclass() instanceof ParameterizedType) {
             this.beanClass = ((Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
         }
+    }
+
+    @Override
+    public IdInjectionStrategy getIdStrategy() {
+        return AppContextHelper.getBean(IdInjectionStrategy.class);
     }
 }
