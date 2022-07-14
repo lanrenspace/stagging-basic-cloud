@@ -23,7 +23,7 @@ public interface CacheDefine {
      * @param key
      * @return
      */
-    default String getKey(String serviceName, String key) {
+    static String getKey(String serviceName, String key) {
         Assert.notNull(serviceName, "serviceName 不能为空!");
         Assert.notNull(key, "key 不能为空!");
         return PREFIX + SP + serviceName + SP + key;

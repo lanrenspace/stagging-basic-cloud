@@ -1,6 +1,7 @@
 package com.basic.cloud.uaa.exception;
 
 import com.basic.cloud.common.enums.SysErrorTypeEnum;
+import com.basic.cloud.common.exceptions.ServiceException;
 import com.basic.cloud.uums.enums.UumErrorTypeEnum;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,10 @@ public class OAuth2ExceptionTranslator extends DefaultWebResponseExceptionTransl
             return ResponseEntity.status(HttpStatus.OK).body(new OAuth2ExceptionHandler(SysErrorTypeEnum.SYSTEM_ERROR.getMsg(), serviceException.getMessage()));
         }
         e.printStackTrace();
+        if (e instanceof ServiceException) {
+            ServiceException serviceException = (ServiceException) e;
+            return builder.body(new OAuth2ExceptionHandler(serviceException.getMsg(), serviceException.getCode().toString()));
+        }
         return null;
     }
 }

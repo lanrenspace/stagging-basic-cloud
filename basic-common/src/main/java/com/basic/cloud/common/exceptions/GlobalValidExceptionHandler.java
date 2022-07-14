@@ -1,5 +1,6 @@
 package com.basic.cloud.common.exceptions;
 
+import com.basic.cloud.common.enums.SysErrorTypeEnum;
 import com.basic.cloud.common.vo.ResultData;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -39,6 +40,12 @@ public class GlobalValidExceptionHandler {
         } else if (ex instanceof HttpRequestMethodNotSupportedException) {
             errorMsg = ex.getMessage();
             resultData = ResultData.error(errorMsg, ex.getMessage());
+        } else if (ex instanceof ServiceException) {
+            ServiceException serviceException = (ServiceException) ex;
+            resultData = ResultData.error(serviceException.getMsg(), serviceException.getCode());
+        } else if (ex instanceof DataException) {
+            DataException dataException = (DataException) ex;
+            resultData = ResultData.error(dataException.getErrorMsg(), SysErrorTypeEnum.DATA_ERROR.getCode(), null);
         } else {
             ex.printStackTrace();
             resultData = ResultData.error(errorMsg, ex.getMessage());

@@ -10,6 +10,7 @@ import lombok.Getter;
 @Getter
 public enum SysErrorTypeEnum implements ErrorType {
     SYSTEM_ERROR(-1, "系统异常"),
+    DATA_ERROR(1000, "数据异常!"),
     GATEWAY_ERROR(4416, "网关异常"),
     GATEWAY_CONNECT_TIME_OUT(4098, "网关超时"),
     GATEWAY_NOT_FOUND_SERVICE(4356, "服务未找到"),

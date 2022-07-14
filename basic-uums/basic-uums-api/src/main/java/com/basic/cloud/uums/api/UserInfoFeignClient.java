@@ -1,5 +1,6 @@
 package com.basic.cloud.uums.api;
 
+import com.basic.cloud.common.vo.ResultData;
 import com.basic.cloud.uums.entity.UserInfo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,5 +19,14 @@ public interface UserInfoFeignClient {
      * @param userAccount 账号
      */
     @GetMapping("/queryUserByAccount")
-    UserInfo queryUserByAccount(@RequestParam("userAccount")String userAccount);
+    UserInfo queryUserByAccount(@RequestParam("userAccount") String userAccount);
+
+    /**
+     * 根据用户ID获取用户详情
+     *
+     * @param userId
+     * @return
+     */
+    @GetMapping("/getUserDetailInfo")
+    ResultData getUserDetailInfo(@RequestParam("userId") Long userId);
 }

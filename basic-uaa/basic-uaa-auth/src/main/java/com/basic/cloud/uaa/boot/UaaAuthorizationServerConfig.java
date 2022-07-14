@@ -1,8 +1,10 @@
 package com.basic.cloud.uaa.boot;
 
+import com.basic.cloud.common.utils.RedisUtil;
 import com.basic.cloud.uaa.exception.OAuth2ExceptionTranslator;
 import com.basic.cloud.uaa.multiple.MultipleAuthenticationFilter;
 import com.basic.cloud.uaa.oauth2.enhancer.UaaTokenEnhancer;
+import com.basic.cloud.uums.api.UserInfoFeignClient;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,6 +46,8 @@ public class UaaAuthorizationServerConfig extends AuthorizationServerConfigurerA
     final UserDetailsService userDetailsService;
     private final AuthenticationManager authenticationManager;
     private final MultipleAuthenticationFilter multipleAuthenticationFilter;
+    private final RedisUtil redisUtil;
+    private final UserInfoFeignClient userInfoFeignClient;
 
     /**
      * jwt 对称加密密钥
@@ -52,11 +56,14 @@ public class UaaAuthorizationServerConfig extends AuthorizationServerConfigurerA
     private String signingKey;
 
     public UaaAuthorizationServerConfig(DataSource dataSource, @Qualifier("userDetailsService") UserDetailsService userDetailsService,
-                                        AuthenticationManager authenticationManager, MultipleAuthenticationFilter multipleAuthenticationFilter) {
+                                        AuthenticationManager authenticationManager, MultipleAuthenticationFilter multipleAuthenticationFilter,
+                                        RedisUtil redisUtil, UserInfoFeignClient userInfoFeignClient) {
         this.dataSource = dataSource;
         this.userDetailsService = userDetailsService;
         this.authenticationManager = authenticationManager;
         this.multipleAuthenticationFilter = multipleAuthenticationFilter;
+        this.redisUtil = redisUtil;
+        this.userInfoFeignClient = userInfoFeignClient;
     }
 
     @Override
@@ -124,7 +131,7 @@ public class UaaAuthorizationServerConfig extends AuthorizationServerConfigurerA
     @Bean
     public TokenEnhancerChain tokenEnhancerChain() {
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(new UaaTokenEnhancer(), accessTokenConverter()));
+        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(new UaaTokenEnhancer(redisUtil, userInfoFeignClient), accessTokenConverter()));
         return tokenEnhancerChain;
     }
 
