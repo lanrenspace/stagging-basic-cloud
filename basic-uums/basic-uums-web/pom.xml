@@ -19,7 +19,6 @@
         <dependency>
             <groupId>com.basic.cloud</groupId>
             <artifactId>basic-uums-service</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -28,20 +27,6 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.basic.cloud</groupId>
-            <artifactId>basic-uaa-resource</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

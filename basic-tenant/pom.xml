@@ -25,7 +25,6 @@
         <dependency>
             <groupId>com.basic.cloud</groupId>
             <artifactId>basic-common</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

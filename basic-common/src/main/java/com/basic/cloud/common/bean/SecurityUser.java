@@ -1,9 +1,9 @@
 package com.basic.cloud.common.bean;
 
 import com.basic.cloud.common.base.User;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.List;
  * @Author lanrenspace@163.com
  * @Description:
  **/
-public class SecurityUser implements UserDetails, User {
+public class SecurityUser implements /*UserDetails,*/ User {
     /**
      * 账号过期
      */
@@ -322,24 +322,24 @@ public class SecurityUser implements UserDetails, User {
         return admin;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> auths = new ArrayList<>();
-        if (!CollectionUtils.isEmpty(this.getRoles())) {
-            this.getRoles().forEach(roleId -> auths.add(new SimpleGrantedAuthority(roleId)));
-        }
-        return auths;
-    }
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        List<GrantedAuthority> auths = new ArrayList<>();
+//        if (!CollectionUtils.isEmpty(this.getRoles())) {
+//            this.getRoles().forEach(roleId -> auths.add(new SimpleGrantedAuthority(roleId)));
+//        }
+//        return auths;
+//    }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return userAccount;
-    }
+//    @Override
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    @Override
+//    public String getUsername() {
+//        return userAccount;
+//    }
 
     @Override
     public boolean isAccountNonExpired() {

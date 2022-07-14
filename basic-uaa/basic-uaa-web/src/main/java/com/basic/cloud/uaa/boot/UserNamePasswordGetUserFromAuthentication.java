@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserNamePasswordGetUserFromAuthentication implements GetUserFromAuthentication {
 
-    @Override
+    /*@Override
     public User getUser(Authentication authentication) {
         Object principal = authentication.getPrincipal();
         Object details = authentication.getDetails();
@@ -34,5 +34,5 @@ public class UserNamePasswordGetUserFromAuthentication implements GetUserFromAut
     @Override
     public boolean match(Authentication authentication) {
         return authentication instanceof UsernamePasswordAuthenticationToken;
-    }
+    }*/
 }

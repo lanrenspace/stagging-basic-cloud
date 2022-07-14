@@ -1,4 +1,4 @@
-package com.basic.cloud.uums;
+package com.basic.cloud.uums.api;
 
 import com.basic.cloud.uums.entity.RoleInfo;
 import com.basic.cloud.uums.vo.RoleInfoVO;

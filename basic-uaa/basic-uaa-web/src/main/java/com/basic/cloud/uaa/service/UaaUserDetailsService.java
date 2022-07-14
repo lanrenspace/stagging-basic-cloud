@@ -1,7 +1,7 @@
 package com.basic.cloud.uaa.service;
 
 import com.basic.cloud.common.bean.SecurityUser;
-import com.basic.cloud.uums.UserInfoFeignClient;
+import com.basic.cloud.uums.api.UserInfoFeignClient;
 import com.basic.cloud.uums.entity.UserInfo;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,7 +37,7 @@ public class UaaUserDetailsService implements UserDetailsService {
         SecurityUser user = new SecurityUser(userInfo.getAccount(), userInfo.getPassword(), true,
                 true, true, true);
         user.setRoles(roles);
-        return user;
+        return (UserDetails) user;
 
     }
 }

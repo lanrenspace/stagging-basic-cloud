@@ -20,12 +20,10 @@
         <dependency>
             <groupId>com.basic.cloud</groupId>
             <artifactId>basic-file-entity</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.basic.cloud</groupId>
             <artifactId>basic-file-service</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

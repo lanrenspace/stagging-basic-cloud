@@ -13,16 +13,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class OAuth2GetUserFromAuthentication implements GetUserFromAuthentication {
 
-    @Override
+   /* @Override
     public User getUser(Authentication authentication) {
         Object principal = authentication.getPrincipal();
         Object details = authentication.getDetails();
         SecurityUser securityUser = new SecurityUser();
         return securityUser;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public boolean match(Authentication authentication) {
         return false;
-    }
+    }*/
 }

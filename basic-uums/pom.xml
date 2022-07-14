@@ -16,6 +16,7 @@
         <module>basic-uums-api</module>
         <module>basic-uums-service</module>
         <module>basic-uums-web</module>
+        <module>basic-uums-authority-api</module>
     </modules>
 
     <properties>
@@ -27,7 +28,6 @@
         <dependency>
             <groupId>com.basic.cloud</groupId>
             <artifactId>basic-common</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

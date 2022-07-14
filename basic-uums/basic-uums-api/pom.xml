@@ -19,7 +19,6 @@
         <dependency>
             <groupId>com.basic.cloud</groupId>
             <artifactId>basic-uums-entity</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

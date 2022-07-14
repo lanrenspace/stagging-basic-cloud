@@ -46,24 +46,5 @@
             <version>2.6</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-oauth2</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.security.oauth.boot</groupId>
-                    <artifactId>spring-security-oauth2-autoconfigure
-                    </artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security.oauth.boot</groupId>
-            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
-        </dependency>
     </dependencies>
 </project>

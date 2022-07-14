@@ -17,11 +17,6 @@ import org.springframework.web.bind.support.WebExchangeBindException;
 @RestControllerAdvice
 public class GlobalValidExceptionHandler {
 
-    public GlobalValidExceptionHandler() {
-        System.out.println("load GlobalValidExceptionHandler..");
-    }
-
-
     /**
      * 统一异常处理
      *

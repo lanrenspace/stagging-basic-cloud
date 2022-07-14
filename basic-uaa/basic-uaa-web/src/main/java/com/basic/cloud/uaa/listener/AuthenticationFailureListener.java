@@ -1,6 +1,6 @@
 package com.basic.cloud.uaa.listener;
 
-import com.basic.cloud.uums.UserExtFeignClient;
+import com.basic.cloud.uums.api.UserExtFeignClient;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 import org.springframework.stereotype.Component;

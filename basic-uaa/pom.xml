@@ -11,9 +11,9 @@
     <artifactId>basic-uaa</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>basic-uaa-entity</module>
         <module>basic-uaa-web</module>
         <module>basic-uaa-resource</module>
+        <module>basic-uaa-auth</module>
     </modules>
 
     <properties>
@@ -42,17 +42,14 @@
         <dependency>
             <groupId>com.nimbusds</groupId>
             <artifactId>nimbus-jose-jwt</artifactId>
-            <version>7.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.basic.cloud</groupId>
             <artifactId>basic-common</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.basic.cloud</groupId>
             <artifactId>basic-uums-api</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

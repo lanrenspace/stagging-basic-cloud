@@ -1,9 +1,9 @@
 package com.basic.cloud.uaa.boot;
 
 import com.basic.cloud.common.contstant.OrgConst;
-import com.basic.cloud.uums.UnitFeignClient;
-import com.basic.cloud.uums.UserGroupRoleFeignClient;
-import com.basic.cloud.uums.UserInfoFeignClient;
+import com.basic.cloud.uums.api.UnitFeignClient;
+import com.basic.cloud.uums.api.UserGroupRoleFeignClient;
+import com.basic.cloud.uums.api.UserInfoFeignClient;
 import com.basic.cloud.uums.entity.UnitInfo;
 import com.basic.cloud.uums.entity.UserInfo;
 import org.springframework.security.core.Authentication;

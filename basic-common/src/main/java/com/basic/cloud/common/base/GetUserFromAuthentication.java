@@ -1,6 +1,6 @@
 package com.basic.cloud.common.base;
 
-import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.Authentication;
 
 /**
  * @Author lanrenspace@163.com
@@ -14,7 +14,7 @@ public interface GetUserFromAuthentication {
      * @param authentication
      * @return
      */
-    User getUser(Authentication authentication);
+//    User getUser(Authentication authentication);
 
 
     /**
@@ -23,6 +23,6 @@ public interface GetUserFromAuthentication {
      * @param authentication
      * @return
      */
-    boolean match(Authentication authentication);
+//    boolean match(Authentication authentication);
 
 }

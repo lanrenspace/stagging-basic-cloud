@@ -1,7 +1,7 @@
 package com.basic.cloud.common.vo;
 
+import com.basic.cloud.common.base.ErrorType;
 import lombok.Data;
-import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
 
@@ -46,7 +46,7 @@ public class ResultData implements Serializable {
 
     public static ResultData ok(Object data) {
         ResultData response = new ResultData();
-        response.setStatus(HttpStatus.OK.value());
+        response.setStatus(200);
         response.setMsg("request success!");
         response.setData(data);
         return response;
@@ -81,6 +81,13 @@ public class ResultData implements Serializable {
         response.setStatus(500);
         response.setMsg(msg);
         return response;
+    }
+
+    public static ResultData error(ErrorType errorType) {
+        ResultData resultData = new ResultData();
+        resultData.setStatus(errorType.getCode());
+        resultData.setMsg(errorType.getMsg());
+        return resultData;
     }
 
     public static ResultData error(String msg, Object data) {
