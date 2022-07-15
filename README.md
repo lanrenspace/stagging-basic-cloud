@@ -1,12 +1,11 @@
-* [基础组件](#基础组件)
-  * [组件说明](#组件说明)
-  * [业务组件包拆分说明](#业务组件包拆分说明)
-  * [业务系统架构图](#业务系统架构图)
-  * [QuickStart Guide](#quickstart-guide)
-    * [在Maven Project 中使用](#在maven-project-中使用)
-    * [Basic Usage（基于SpringBoot编写）](#basic-usage基于springboot编写)
-    * [集成Nacos Discovery 与 Nacos Config](#集成nacos-discovery-与-nacos-config)
 # 基础组件
+* [组件说明](#组件说明)
+* [业务组件包拆分说明](#业务组件包拆分说明)
+* [业务系统架构图](#业务系统架构图)
+* [QuickStart Guide](#quickstart-guide)
+  * [在Maven Project 中使用](#在maven-project-中使用)
+  * [Basic Usage（基于SpringBoot编写）](#basic-usage基于springboot编写)
+  * [集成Nacos Discovery 与 Nacos Config](#集成nacos-discovery-与-nacos-config)
 #### 组件说明
 | 组件名称          | 说明                              | 进度          |
 |:--------------|:--------------------------------|-------------|
