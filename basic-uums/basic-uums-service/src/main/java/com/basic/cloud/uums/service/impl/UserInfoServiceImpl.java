@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  * @Description:
  **/
 @Service
-public class UserInfoServiceImpl extends BaseBeanServiceImpl<UserInfo, UserInfoMapper> implements UserInfoService {
+public class UserInfoServiceImpl extends BaseBeanServiceImpl<UserInfoMapper, UserInfo> implements UserInfoService {
 
     private final UserGroupRoleService userGroupRoleService;
     private final UnitInfoService unitInfoService;

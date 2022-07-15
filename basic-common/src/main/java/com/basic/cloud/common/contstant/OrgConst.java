@@ -21,4 +21,9 @@ public interface OrgConst {
      */
     int UNIT_INIT_MAX_CODE = 100000;
 
+    /**
+     * 租户过滤列
+     */
+    String TENANT_CODE_COLUMN = "tenant_code";
+
 }

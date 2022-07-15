@@ -11,5 +11,5 @@ import org.springframework.stereotype.Service;
  * @Description:
  **/
 @Service
-public class RoleInfoServiceImpl extends BaseBeanServiceImpl<RoleInfo, RoleInfoMapper> implements RoleInfoService {
+public class RoleInfoServiceImpl extends BaseBeanServiceImpl<RoleInfoMapper, RoleInfo> implements RoleInfoService {
 }

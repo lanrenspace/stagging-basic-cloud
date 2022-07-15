@@ -1,6 +1,7 @@
 package com.basic.cloud.uaa.oauth2.enhancer;
 
 import com.basic.cloud.common.contstant.CacheDefine;
+import com.basic.cloud.common.contstant.SysConst;
 import com.basic.cloud.common.enums.SysErrorTypeEnum;
 import com.basic.cloud.common.exceptions.ServiceException;
 import com.basic.cloud.common.utils.RedisUtil;
@@ -35,16 +36,16 @@ public class UaaTokenEnhancer implements TokenEnhancer {
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
         Map<String, Object> additionalInfo = Maps.newHashMap();
-        additionalInfo.put("userAccount", authentication.getName());
+        additionalInfo.put(SysConst.TOKEN_AFFIX_USER_ACCOUNT, authentication.getName());
         UserJwt details = (UserJwt) authentication.getPrincipal();
         if (null != details) {
-            additionalInfo.put("userId", details.getId());
+            additionalInfo.put(SysConst.TOKEN_AFFIX_USER_ID, details.getId());
             ResultData resultData = userInfoFeignClient.getUserDetailInfo(details.getId());
             if (resultData.getStatus() != HttpStatus.OK.value()) {
                 throw new ServiceException(resultData.getStatus(), resultData.getMsg());
             }
             if (resultData.getData() != null) {
-                redisUtil.set(CacheDefine.getKey("uaa:auth", details.getId().toString()), resultData.getData());
+                redisUtil.set(String.format(SysConst.AUTH_LOGIN_CACHE_KEY, details.getId().toString()), resultData.getData());
             }
         }
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @Description:
  **/
 @Service
-public class UserExtServiceImpl extends BaseBeanServiceImpl<UserExt, UserExtMapper> implements UserExtService {
+public class UserExtServiceImpl extends BaseBeanServiceImpl<UserExtMapper, UserExt> implements UserExtService {
 
     /**
      * 限制登录失败总次数

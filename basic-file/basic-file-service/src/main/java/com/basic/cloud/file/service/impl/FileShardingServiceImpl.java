@@ -11,5 +11,5 @@ import org.springframework.stereotype.Service;
  * @Description:
  **/
 @Service
-public class FileShardingServiceImpl extends BaseBeanServiceImpl<FileSharding, FileShardingMapper> implements FileShardingService {
+public class FileShardingServiceImpl extends BaseBeanServiceImpl<FileShardingMapper, FileSharding> implements FileShardingService {
 }

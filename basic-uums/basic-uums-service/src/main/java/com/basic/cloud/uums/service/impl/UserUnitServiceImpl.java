@@ -11,5 +11,5 @@ import org.springframework.stereotype.Service;
  * @Description:
  **/
 @Service
-public class UserUnitServiceImpl extends BaseBeanServiceImpl<UserUnit, UserUnitMapper> implements UserUnitService {
+public class UserUnitServiceImpl extends BaseBeanServiceImpl<UserUnitMapper, UserUnit> implements UserUnitService {
 }

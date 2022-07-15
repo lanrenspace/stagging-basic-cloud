@@ -59,5 +59,6 @@ public class BisDataEntity<T> implements Serializable {
     /**
      * 租户编码
      */
+    @TableField(value = "tenant_code", fill = FieldFill.INSERT)
     protected String tenantCode;
 }

@@ -1,9 +1,11 @@
 package com.basic.cloud.common.starter;
 
+import com.basic.cloud.common.base.AutoConfigurationConditional;
 import com.basic.cloud.common.base.IdInjectionStrategy;
 import com.basic.cloud.common.bean.DefaultIdInjectionStrategy;
 import com.basic.cloud.common.boot.AfterSpringLoad;
 import com.basic.cloud.common.boot.PlatformProperties;
+import com.basic.cloud.common.boot.UserSetting;
 import com.basic.cloud.common.utils.AppContextHelper;
 import com.basic.cloud.common.utils.RedisUtil;
 import org.apache.commons.lang.RandomStringUtils;
@@ -13,12 +15,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.CollectionUtils;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -104,6 +107,17 @@ public class CommonAutoConfiguration {
     @Bean
     public RedisUtil redisUtil() {
         return new RedisUtil(redisTemplate);
+    }
+
+    /**
+     * 授权用户操作工具
+     *
+     * @return
+     */
+    @Bean
+    @ConditionalOnMissingBean(value = {AutoConfigurationConditional.class})
+    public UserSetting userSetting() {
+        return new UserSetting(redisUtil());
     }
 
     @Bean

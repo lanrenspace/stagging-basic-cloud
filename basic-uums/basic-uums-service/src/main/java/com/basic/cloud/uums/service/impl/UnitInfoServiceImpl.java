@@ -19,7 +19,7 @@ import java.util.Optional;
  * @Description:
  **/
 @Service
-public class UnitInfoServiceImpl extends BaseBeanServiceImpl<UnitInfo, UnitInfoMapper> implements UnitInfoService {
+public class UnitInfoServiceImpl extends BaseBeanServiceImpl<UnitInfoMapper, UnitInfo> implements UnitInfoService {
 
     private final UserUnitService userUnitService;
 

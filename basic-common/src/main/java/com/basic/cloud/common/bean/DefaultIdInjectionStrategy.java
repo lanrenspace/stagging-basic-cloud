@@ -59,7 +59,7 @@ public class DefaultIdInjectionStrategy implements IdInjectionStrategy {
 
 
     @Override
-    public synchronized Object id() {
+    public synchronized String id() {
         // 保证当前时间大于最后时间。时间回退会导致产生重复id
         long currentMillis = getCurrentMillis();
         Preconditions.checkState(lastTime <= currentMillis, "Clock is moving backwards, last time is %d milliseconds, current time is %d milliseconds", lastTime, currentMillis);
@@ -76,7 +76,8 @@ public class DefaultIdInjectionStrategy implements IdInjectionStrategy {
         lastTime = currentMillis;
 
         // 生成编号
-        return ((currentMillis - EPOCH) << TIMESTAMP_LEFT_SHIFT_BITS) | (workerId << WORKER_ID_LEFT_SHIFT_BITS) | sequence;
+        long seqKey = ((currentMillis - EPOCH) << TIMESTAMP_LEFT_SHIFT_BITS) | (workerId << WORKER_ID_LEFT_SHIFT_BITS) | sequence;
+        return String.valueOf(seqKey);
     }
 
     /**

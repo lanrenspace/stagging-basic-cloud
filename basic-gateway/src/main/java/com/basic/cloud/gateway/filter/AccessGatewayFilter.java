@@ -24,6 +24,8 @@ import java.net.URI;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 
+import static com.basic.cloud.common.contstant.SysConst.*;
+
 /**
  * @Author lanrenspace@163.com
  * @Description:
@@ -36,10 +38,6 @@ public class AccessGatewayFilter implements GlobalFilter {
      * log
      */
     private final Logger logger = LoggerFactory.getLogger(getClass());
-
-    private static final String X_USER_ID = "x-user-id";
-    private static final String X_USER_NAME = "x-user-name";
-    private static final String X_USER_IP = "x-user-ip";
 
     @Autowired
     private AuthService authService;
@@ -82,18 +80,18 @@ public class AccessGatewayFilter implements GlobalFilter {
         try {
             Jws<Claims> jwt = authService.getJwt(authentication);
             if (null != jwt && null != jwt.getBody()) {
-                userId = jwt.getBody().get("userId", Long.class);
-                account = jwt.getBody().get("userAccount", String.class);
+                userId = jwt.getBody().get(TOKEN_AFFIX_USER_ID, Long.class);
+                account = jwt.getBody().get(TOKEN_AFFIX_USER_ACCOUNT, String.class);
 
                 ServerHttpRequest.Builder builder = request.mutate();
                 if (StringUtils.isNotBlank(account)) {
-                    builder.header(X_USER_NAME, account);
+                    builder.header(REQ_USER_ACCOUNT, account);
                 }
                 if (!ObjectUtils.isEmpty(userId)) {
-                    builder.header(X_USER_ID, userId.toString());
+                    builder.header(REQ_USER_ID, userId.toString());
                 }
                 if (StringUtils.isNotBlank(ip)) {
-                    builder.header(X_USER_IP, ip);
+                    builder.header(REQ_USER_IP, ip);
                 }
                 exchange = exchange.mutate().request(builder.build()).build();
                 logger.info("userId:{}, userName:{}, access_token:{}, url:{}", userId, account, authentication, url);

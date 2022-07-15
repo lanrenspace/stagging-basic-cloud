@@ -38,7 +38,7 @@ import java.util.Objects;
  * @Description:
  **/
 @Service
-public class FileInfoServiceImpl extends BaseBeanServiceImpl<FileInfo, FileInfoMapper> implements FileInfoService {
+public class FileInfoServiceImpl extends BaseBeanServiceImpl<FileInfoMapper, FileInfo> implements FileInfoService {
 
     private final PlatformProperties properties;
     private final FileShardingService fileShardingService;
@@ -178,7 +178,7 @@ public class FileInfoServiceImpl extends BaseBeanServiceImpl<FileInfo, FileInfoM
         assert originalFilename != null;
         String fileName = this.appendFileNamePrefix(originalFilename);
         FileInfo fileInfo = new FileInfo();
-        fileInfo.setId((Long) getIdStrategy().id());
+        fileInfo.setId(Long.parseLong(getIdStrategy().id()));
         fileInfo.setOriginalName(originalFilename);
         fileInfo.setFileName(fileName);
         fileInfo.setSize(multipartFile.getSize());
@@ -212,7 +212,7 @@ public class FileInfoServiceImpl extends BaseBeanServiceImpl<FileInfo, FileInfoM
         generatePresignedUrlRequest.setExpiration(new Date(System.currentTimeMillis() + 3600L * 1000L * 24L * 365L * 100L));
         URL url = ossClient.generatePresignedUrl(generatePresignedUrlRequest);
         FileInfo fileInfo = new FileInfo();
-        fileInfo.setId((Long) getIdStrategy().id());
+        fileInfo.setId(Long.parseLong(getIdStrategy().id()));
         fileInfo.setOriginalName(multipartFile.getOriginalFilename());
         fileInfo.setFileName(fileName);
         fileInfo.setSize(multipartFile.getSize());
@@ -233,7 +233,7 @@ public class FileInfoServiceImpl extends BaseBeanServiceImpl<FileInfo, FileInfoM
         StorePath upload = fastdfsUtil.upload(multipartFile);
         String fileName = this.appendFileNamePrefix(Objects.requireNonNull(multipartFile.getOriginalFilename()));
         FileInfo fileInfo = new FileInfo();
-        fileInfo.setId((Long) getIdStrategy().id());
+        fileInfo.setId(Long.parseLong(getIdStrategy().id()));
         fileInfo.setOriginalName(multipartFile.getOriginalFilename());
         fileInfo.setFileName(fileName);
         fileInfo.setSize(multipartFile.getSize());

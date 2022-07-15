@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  * @Description:
  **/
 @Service
-public class UserGroupRoleServiceImpl extends BaseBeanServiceImpl<UserGroupRole, UserGroupRoleMapper> implements UserGroupRoleService {
+public class UserGroupRoleServiceImpl extends BaseBeanServiceImpl<UserGroupRoleMapper, UserGroupRole> implements UserGroupRoleService {
 
     private final RoleInfoService roleInfoService;
 

@@ -12,5 +12,5 @@ public interface IdInjectionStrategy {
      *
      * @return
      */
-    Object id();
+    String id();
 }
