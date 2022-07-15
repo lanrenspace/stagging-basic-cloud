@@ -1,10 +1,11 @@
 # 基础组件
 * [组件说明](#组件说明)
+* [基础依赖服务启动说明](#基础依赖服务启动说明nacos注册中心需自行部署)
 * [业务组件包拆分说明](#业务组件包拆分说明)
 * [业务系统架构图](#业务系统架构图)
 * [QuickStart Guide](#quickstart-guide)
   * [在Maven Project 中使用](#在maven-project-中使用)
-  * [Basic Usage（基于SpringBoot编写）](#basic-usage基于springboot编写)
+  * [Basic Usage](#basic-usage基于springboot编写)
   * [集成Nacos Discovery 与 Nacos Config](#集成nacos-discovery-与-nacos-config)
   * [集成Gateway网关](#集成gateway网关)
 #### 组件说明
@@ -17,6 +18,47 @@
 | basic-uaa     | 业务组件：SpringSecurity OAuth2 认证服务 |      development                                        |
 | basic-uums    | 业务组件：用户服务中心                     |     development                                                    |
 | basic-tenant  | 业务组件：租户服务中心                     |     development                                                               |
+#### 基础依赖服务启动说明(Nacos注册中心需自行部署)
+
+1. Step 1
+
+   ```shell
+   git clone https://github.com/lanrenspace/stagging-basic-cloud.git
+   ```
+
+2. Step 2
+
+   ```shell
+   mvn clean install
+   ```
+
+3. Step 3
+
+   - 启动用户中心服务
+
+      ```shell
+      cd ~/basic-uums/basic-uums-web/target
+      java -jar basic-uums-web-1.0.0.jar
+      ```
+
+   - 启动授权服务
+
+      ```shell
+      cd ~/basic-uaa/basic-uua-auth/target
+      java -jar basic-uaa-auth-1.0.0.jar
+      ```
+
+   - 启动网关服务
+
+      ```shell
+      cd ~/basic-gateway/target
+      java -jar basic-gateway-1.0.0.jar
+      ```
+
+4. Step 4
+
+   其他服务按需启动即可
+   
 #### 业务组件包拆分说明
 
 ![image](https://github.com/lanrenspace/stagging-basic-cloud/blob/master/design/model.png)
