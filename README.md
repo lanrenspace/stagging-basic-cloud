@@ -67,5 +67,155 @@
    </dependencyManagement>
    ```
 
-   
 
+##### Basic usage
+
+1. 增删改查操作基础项目结构搭建
+
+   - 引入 `basic-common` 组件
+
+     ```xml
+     <dependencies>
+        <dependency>
+           <groupId>com.basic.cloud</groupId>
+           <artifactId>basic-common</artifactId>
+           <version>${last version}</version>
+        </dependency>
+     </dependencies>
+     ```
+
+   - 新建 `yml` 或 `properties` 配置文件
+
+     ```yaml
+     server:
+       port: 7000
+     spring:
+       application:
+         name: example
+       datasource:
+         driver-class-name: com.mysql.cj.jdbc.Driver
+         url: jdbc:mysql://xxx.xxx.x.xxx:xxxx/xxxx?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+         username: xxxx
+         password: xxxxxx
+     ```
+
+   - 新建 `Entity(po)、Mapper、Service、Controller` 文件
+
+     - Entity：entity业务对象继承 ```BisDataEntity``` 类
+
+       ```java
+       @Data
+       @TableName("example_info")
+       public class ExampleInfo extends BisDataEntity<ExampleInfo> {
+       
+           /**
+            * 主键ID
+            */
+           @TableId
+           private Long id;
+       
+           /**
+            * 名称
+            */
+           private String name;
+       }
+       ```
+
+     - Mapper：mapper 接口继承 ```BaseBeanMapper``` 接口
+
+       ```java
+       public interface ExampleInfoMapper extends BaseBeanMapper<ExampleInfo> {
+       }
+       ```
+
+     - Service：service 接口继承 ```IBaseBeanService``` 接口，service实现基础 ```BaseBeanServiceImpl``` 类
+
+       ```java
+       public interface ExampleInfoService extends IBaseBeanService<ExampleInfo> {
+       }
+       ```
+
+     - Controller
+
+       ```java
+       @RestController
+       @RequestMapping("/example")
+       public class ExampleInfoController {
+       }
+       ```
+
+   - 新建启动类
+
+     ```java
+     @MapperScan("org.example.mapper")
+     @SpringBootApplication
+     public class Application {
+     
+         public static void main(String[] args) {
+             SpringApplication.run(Application.class, args);
+         }
+     }
+     ```
+
+2. 新增、修改、删除接口实现
+
+   在controller中引入业务service并添加接口
+
+   ```java
+   @RestController
+   @RequestMapping("/example")
+   public class ExampleInfoController {
+       
+       private final ExampleInfoService exampleInfoService;
+       
+       public ExampleInfoController(ExampleInfoService exampleInfoService) {
+           this.exampleInfoService = exampleInfoService;
+       }
+       
+       @GetMapping("/save")
+       public ResultData save(@RequestBody ExampleInfo exampleInfo) {
+           // ......
+           // save(entity) 方法当没有主键ID时，默认为insert操作，当有主键ID时默认为update操作
+           return ResultData.ok(this.exampleInfoService.save(exampleInfo));
+       }
+       
+       @DeleteMapping("/delete/{id}")
+       public ResultData delete(@PathVariable Long id) {
+           // ......
+           // 通过业务service执行的默认delete操作为逻辑删除
+           // 物理删除需在mapper.xml 中自定义delete sql 进行操作
+           return ResultData.ok(this.exampleInfoService.removeById(id));
+       }
+   }
+   ```
+
+3. 查询接口实现
+
+   ```java
+   @RestController
+   @RequestMapping("/example")
+   public class ExampleInfoController {
+       
+       private final ExampleInfoService exampleInfoService;
+       
+       public ExampleInfoController(ExampleInfoService exampleInfoService) {
+           this.exampleInfoService = exampleInfoService;
+       }
+       
+       @GetMapping("/list")
+       public ResultData list() {
+           // ......
+           // 数据列表查询
+           return ResultData.ok(this.exampleInfoService.list());
+       }
+   
+       @GetMapping("/page")
+       public ResultData page(@RequestBody PageDTO pageDTO) {
+           // ......
+           // 分页列表查询
+           return ResultData.ok(this.exampleInfoService.page(new Page<>(pageDTO.getPageNumber(), pageDTO.getPageSize())));
+       }
+   }
+   ```
+
+   
