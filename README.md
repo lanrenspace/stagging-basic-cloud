@@ -68,13 +68,21 @@
    ```
 
 
-##### Basic usage
+##### Basic Usage（基于SpringBoot编写）
 
 1. 增删改查操作基础项目结构搭建
 
    - 引入 `basic-common` 组件
 
      ```xml
+     <parent>
+     	<groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-parent</artifactId>
+         <version>2.1.6.RELEASE</version>
+     </parent>
+     <!--
+     ......
+     -->
      <dependencies>
         <dependency>
            <groupId>com.basic.cloud</groupId>
