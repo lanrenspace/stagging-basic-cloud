@@ -1,7 +1,7 @@
 * [基础组件](#基础组件)
   * [组件说明](#组件说明)
-  * [业务组件包拆分说明](#业务组件包拆分说明)
   * [业务系统架构图](#业务系统架构图)
+  * [业务组件包拆分说明](#业务组件包拆分说明)
   * [QuickStart Guide](#quickstart-guide)
   * [在Maven Project 中使用](#在maven-project-中使用)
   * [Basic Usage（基于SpringBoot编写）](#basic-usage基于springboot编写)
@@ -231,6 +231,49 @@
            return ResultData.ok(this.exampleInfoService.page(new Page<>(pageDTO.getPageNumber(), pageDTO.getPageSize())));
        }
    }
+   ```
+
+
+##### 集成Nacos Discovery 与 Nacos Config
+
+1. 引入组件 ```basic-nacos-import```
+
+   ```xml
+   <!--
+   ......
+   -->
+   <dependencies>
+      <dependency>
+         <groupId>com.basic.cloud</groupId>
+         <artifactId>basic-nacos-import</artifactId>
+         <version>${last version}</version>
+      </dependency>
+   </dependencies>
+   ```
+
+2. 新建 ``bootstrap.yml`` 配置文件
+
+   ```yaml
+   spring:
+     application:
+     # 指定注册服务名
+       name: example.service
+     profiles:
+     # 指定config文件使用环境
+       active: dev
+     cloud:
+       nacos:
+         # 配置nacos注册中心地址信息
+         discovery:
+           server-addr: xxxxx
+           namespace: xxx
+         # 配置nacos配置中心地址信息
+         config:
+           server-addr: xxxxx
+           namespace: xxxx
+           group: xxxx
+           file-extension: xxx
+   
    ```
 
    
