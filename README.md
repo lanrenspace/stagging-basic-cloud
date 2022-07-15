@@ -76,7 +76,7 @@
 
      ```xml
      <parent>
-     	<groupId>org.springframework.boot</groupId>
+         <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-parent</artifactId>
          <version>2.1.6.RELEASE</version>
      </parent>
