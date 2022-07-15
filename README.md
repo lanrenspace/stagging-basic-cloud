@@ -6,6 +6,7 @@
   * [在Maven Project 中使用](#在maven-project-中使用)
   * [Basic Usage（基于SpringBoot编写）](#basic-usage基于springboot编写)
   * [集成Nacos Discovery 与 Nacos Config](#集成nacos-discovery-与-nacos-config)
+  * [集成Gateway网关](#集成gateway网关)
 #### 组件说明
 | 组件名称          | 说明                              | 进度          |
 |:--------------|:--------------------------------|-------------|
@@ -276,4 +277,20 @@
    
    ```
 
-   
+##### 集成Gateway网关
+
+在网关服务配置文件中添加如下配置：
+
+```yaml
+# ......
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: example.service # 服务名
+          uri: lb://example.service # 服务uri
+          predicates: # 断言
+            - Path=/example/**
+          filters:
+            - StripPrefix=1
+```
