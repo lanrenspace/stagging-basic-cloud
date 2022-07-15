@@ -19,6 +19,7 @@
         <module>basic-gateway</module>
         <module>basic-uaa</module>
         <module>basic-abs-web</module>
+        <module>basic-nacos-import</module>
     </modules>
 
     <properties>
@@ -215,6 +216,11 @@
             <dependency>
                 <groupId>com.basic.cloud</groupId>
                 <artifactId>basic-uums-authority-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.basic.cloud</groupId>
+                <artifactId>basic-nacos-import</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
