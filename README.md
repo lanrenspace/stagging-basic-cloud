@@ -1,6 +1,7 @@
 # 基础组件
 * [组件说明](#组件说明)
-* [基础依赖服务启动说明](#基础依赖服务启动说明nacos注册中心需自行部署)
+* [基础依赖服务启动说明（jar）](#基础依赖服务启动说明nacos注册中心需自行部署)
+* [基础依赖服务启动说明（Docker）](#基础依赖服务启动说明docker方式)
 * [业务组件包拆分说明](#业务组件包拆分说明)
 * [业务系统架构图](#业务系统架构图)
 * [中间件安装配置](#中间件安装配置)
@@ -59,6 +60,18 @@
 4. Step 4
 
    其他服务按需启动即可
+   
+#### 基础依赖服务启动说明(Docker方式)
+
+使用相应服务下的Dockerfile配置文件
+
+```shell
+docker build --rm -t ImageTagName --build-arg JAR_FILE=service path
+```
+
+```shell
+docker run -itd --name ContainerName ImageTagName
+```
    
 #### 业务组件包拆分说明
 
