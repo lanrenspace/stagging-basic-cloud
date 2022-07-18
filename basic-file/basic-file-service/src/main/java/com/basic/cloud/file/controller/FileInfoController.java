@@ -63,7 +63,7 @@ public class FileInfoController {
             return ResultData.error("上传失败,请稍后重试!");
         }
         FileInfoVO result = new FileInfoVO();
-        ModelMapper.map(fileInfo, result);
+        ModelMapper.map(result, fileInfo);
         return ResultData.ok(result);
     }
 

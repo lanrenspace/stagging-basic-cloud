@@ -237,9 +237,9 @@ public class FileInfoServiceImpl extends BaseBeanServiceImpl<FileInfoMapper, Fil
         fileInfo.setOriginalName(multipartFile.getOriginalFilename());
         fileInfo.setFileName(fileName);
         fileInfo.setSize(multipartFile.getSize());
-        fileInfo.setStorageServer(properties.getFileInfo().getServerPath() + fileInfo.getId());
+        fileInfo.setStorageServer(properties.getFileInfo().getServerPath());
         fileInfo.setStoragePath(upload.getPath());
-        fileInfo.setPath(upload.getFullPath());
+        fileInfo.setPath(fileInfo.getStorageServer() + "/" + upload.getFullPath());
         fileInfo.setGroupName(upload.getGroup());
         getBaseMapper().insert(fileInfo);
         return fileInfo;

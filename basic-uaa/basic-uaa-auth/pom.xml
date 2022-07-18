@@ -35,6 +35,7 @@
     </dependencies>
 
     <build>
+        <finalName>basic.uaa.service.${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
