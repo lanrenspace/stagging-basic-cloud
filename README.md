@@ -3,6 +3,7 @@
 * [基础依赖服务启动说明](#基础依赖服务启动说明nacos注册中心需自行部署)
 * [业务组件包拆分说明](#业务组件包拆分说明)
 * [业务系统架构图](#业务系统架构图)
+* [中间件安装配置](#中间件安装配置)
 * [QuickStart Guide](#quickstart-guide)
   * [在Maven Project 中使用](#在maven-project-中使用)
   * [Basic Usage](#basic-usage基于springboot编写)
@@ -72,6 +73,101 @@
 #### 业务系统架构图
 
 ![image](https://github.com/lanrenspace/stagging-basic-cloud/blob/master/design/projectArchitecture.png)
+
+#### 中间件安装配置
+
+1. 安装MySql（使用版本8.0.25）
+
+   创建配置及数据挂载目录
+
+   ```shell
+   ~# mkdir /home/mysql/conf
+   ~# mkdir /home/mysql/data
+   ~# mkdir /home/mysql/logs
+   ```
+
+   Docker 命令
+
+   ```shell
+   docker run --name mysql \
+       -v /home/mysql/conf/my.cnf:/etc/mysql/my.cnf \
+       -v /home/mysql/data:/var/lib/mysql \
+       -v /home/mysql/logs:/var/log/mysql \
+       -p 3306:3306 \
+       -e MYSQL_ROOT_PASSWORD=mysql_root_password \
+       -d mysql:8.0.29
+   ```
+
+   修改权限
+
+   ```shell
+   ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'custom_mysql_root_password';
+   FLUSH PRIVILEGES;
+   ```
+
+2. 安装Redis（使用版本6.2）
+
+   创建数据挂载目录及配置文件
+
+   ```shell
+   ~# mkdir /home/redis/data
+   ~# mkdir /home/redis/conf
+   ~# touch /home/redis/conf/redis.conf
+   ```
+
+   Docker 命令
+
+   ```shell
+   docker run -p 6379:6379 --name redis \
+       -v /home/redis/data:/data \
+       -v /home/redis/conf/redis.conf:/etc/redis/redis.conf \
+       -d redis:6.2 redis-server /etc/redis/redis.conf
+   ```
+
+   添加Redis密码及数据持久化
+
+   ```shell
+   ~# vim /home/redis/conf/redis.conf
+   
+   # 添加或修改配置
+   requirepass custom_redis_password
+   appendonly yes
+   ```
+
+3. 安装Nacos服务（使用版本1.2.0）
+
+   Docker 命令
+
+   ```shell
+   docker  run \
+       --name nacos -d \
+       -p 8848:8848 \
+       --privileged=true \
+       --restart=always \
+       -e JVM_XMS=256m \
+       -e JVM_XMX=256m \
+       -e MODE=standalone \
+       -e PREFER_HOST_MODE=hostname \
+       nacos/nacos-server:1.2.0
+   ```
+
+4. 安装FastDfs
+
+   创建数据挂载目录
+
+   ```shell
+   ~# mkdir /home/fastdfs
+   ```
+
+   Docker 命令
+
+   ```shell
+   docker run --name fastdfs --privileged=true --net=host \
+            -e IP=tms.jxncyy.com -e WEB_PORT=8888 \
+            -v /home/fastdfs:/var/local/fdfs \
+            -d --restart=always \
+            registry.cn-beijing.aliyuncs.com/itstyle/fastdfs:1.0
+   ```
 
 #### QuickStart Guide
 
