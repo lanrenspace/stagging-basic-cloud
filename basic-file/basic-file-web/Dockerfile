@@ -5,7 +5,7 @@ ENV TZ Asia/Shanghai
 ARG JAR_FILE
 COPY ${JAR_FILE} app.jar
 ADD ${CONF_DIR} /conf
-EXPOSE 8761
+EXPOSE 9000
 # build param
-# image tag: stagging-basic-cloud:gateway_v1.0.0
+# image tag: stagging-basic-cloud:file_v1.0.0
 ENTRYPOINT ["java","-server", "-Xms512m", "-Xmx512m","-jar","/app.jar","--spring.config.location=/conf/bootstrap.yml"]
