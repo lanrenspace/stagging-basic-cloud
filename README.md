@@ -10,6 +10,9 @@
   * [Basic Usage](#basic-usage基于springboot编写)
   * [集成Nacos Discovery 与 Nacos Config](#集成nacos-discovery-与-nacos-config)
   * [集成Gateway网关](#集成gateway网关)
+* [数据库设计说明](#数据库设计说明)
+  * [ER图](#er图)
+  * [数据实体描述](#数据实体描述)
 #### 组件说明
 | 组件名称          | 说明                              | 进度          |
 |:--------------|:--------------------------------|-------------|
@@ -445,3 +448,67 @@ spring:
           filters:
             - StripPrefix=1
 ```
+
+#### 数据库设计说明
+
+##### ER图
+
+- **basic-file**
+
+  ![image](https://github.com/lanrenspace/stagging-basic-cloud/blob/master/design/er/file_er.png)
+
+- **basic-uaa**
+
+- **basic-uums**
+
+##### 数据实体描述
+
+- **basic-file**
+
+  主文件信息表
+
+  | 字段名称       | 类型     | 约束 | 描述         |
+  | -------------- | -------- | ---- | ------------ |
+  | id             | bigint   | PK   | 主键ID       |
+  | file_name      | varchar  |      | 文件名称     |
+  | original_name  | varchar  |      | 原名         |
+  | storage_path   | varchar  |      | 存储路径     |
+  | storage_server | varchar  |      | 存储服务     |
+  | size           | bigint   |      | 文件大小     |
+  | category       | varchar  |      | 业务目录     |
+  | group_name     | varchar  |      | 分组名称     |
+  | path           | varchar  |      | 完整路径     |
+  | remark         | varchar  |      | 文件备注     |
+  | sort           | tinyint  |      | 排序         |
+  | tenant_code    | varchar  |      | 租户编码     |
+  | create_by      | bigint   |      | 创建用户     |
+  | create_name    | varchar  |      | 创建用户名称 |
+  | create_time    | datetime |      | 创建日期     |
+  | update_by      | bigint   |      | 编辑用户     |
+  | update_name    | varchar  |      | 更新时间     |
+  | update_time    | datetime |      | 更新时间     |
+  | del_flag       | tinyint  |      | 是否逻辑删除 |
+
+  文件分片表
+
+  | 字段名称    | 类型     | 约束 | 描述         |
+  | ----------- | -------- | ---- | ------------ |
+  | id          | bigint   | PK   | 主键ID       |
+  | shard_key   | varchar  |      | 分片编码     |
+  | file_id     | bigint   |      | 文件ID       |
+  | shard_index | int      |      | 第几个分片   |
+  | total       | int      |      | 总分片       |
+  | tenant_code | varchar  |      | 租户编码     |
+  | create_by   | bigint   |      | 创建用户     |
+  | create_name | varchar  |      | 创建用户名称 |
+  | create_time | datetime |      | 创建日期     |
+  | update_by   | bigint   |      | 编辑用户     |
+  | update_name | varchar  |      | 更新时间     |
+  | update_time | datetime |      | 更新时间     |
+  | del_flag    | tinyint  |      | 是否逻辑删除 |
+
+  
+
+- **basic-uaa**
+
+- **basic-uums**
