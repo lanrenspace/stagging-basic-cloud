@@ -1,7 +1,10 @@
 package com.basic.cloud.uums.authority.service;
 
+import com.basic.cloud.uums.vo.BlackIpVO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
+
+import java.util.List;
 
 /**
  * @Author lanrenspace@163.com
@@ -24,4 +27,10 @@ public interface AuthService {
      * @return
      */
     boolean ignoreAuthentication(String url);
+
+    /**
+     * 获取所有的IP黑名单
+     * @return
+     */
+    List<BlackIpVO> getBlackIps();
 }

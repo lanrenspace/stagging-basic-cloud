@@ -1,6 +1,8 @@
 package com.basic.cloud.uums.authority.service.impl;
 
+import com.basic.cloud.uums.api.BlackIpsFeignClient;
 import com.basic.cloud.uums.authority.service.AuthService;
+import com.basic.cloud.uums.vo.BlackIpVO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -8,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 /**
@@ -16,6 +19,12 @@ import java.util.stream.Stream;
  **/
 @Service
 public class AuthServiceImpl implements AuthService {
+
+    private final BlackIpsFeignClient blackIpsFeignClient;
+
+    public AuthServiceImpl(BlackIpsFeignClient blackIpsFeignClient) {
+        this.blackIpsFeignClient = blackIpsFeignClient;
+    }
 
     /**
      * Authorization认证头
@@ -46,12 +55,17 @@ public class AuthServiceImpl implements AuthService {
             jwtToken = StringUtils.substring(jwtToken, BEARER.length());
         }
         return Jwts.parser()
-                .setSigningKey(signingKey.getBytes()) //设置签名的秘钥
+                .setSigningKey(signingKey.getBytes())
                 .parseClaimsJws(jwtToken);
     }
 
     @Override
     public boolean ignoreAuthentication(String url) {
         return Stream.of(this.ignoreUrls.split(",")).anyMatch(ignoreUrl -> url.startsWith(StringUtils.trim(ignoreUrl)));
+    }
+
+    @Override
+    public List<BlackIpVO> getBlackIps() {
+        return blackIpsFeignClient.getAllBlackIps();
     }
 }

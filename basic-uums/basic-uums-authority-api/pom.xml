@@ -20,5 +20,9 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.basic.cloud</groupId>
+            <artifactId>basic-uums-api</artifactId>
+        </dependency>
     </dependencies>
 </project>
