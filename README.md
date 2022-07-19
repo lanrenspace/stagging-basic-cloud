@@ -10,6 +10,7 @@
   * [Basic Usage](#basic-usage基于springboot编写)
   * [集成Nacos Discovery 与 Nacos Config](#集成nacos-discovery-与-nacos-config)
   * [集成Gateway网关](#集成gateway网关)
+  * [文件上传](#文件上传)
 * [数据库设计说明](#数据库设计说明)
   * [ER图](#er图)
   * [数据实体描述](#数据实体描述)
@@ -448,6 +449,34 @@ spring:
           filters:
             - StripPrefix=1
 ```
+
+##### 文件上传
+
+在业务服务中上传文件附件使用
+
+1. 引入文件服务Api
+
+   ```xml
+   <!--
+   ......
+   -->
+   <dependencies>
+      <dependency>
+         <groupId>com.basic.cloud</groupId>
+         <artifactId>basic-file-api</artifactId>
+         <version>${last version}</version>
+      </dependency>
+   </dependencies>
+   ```
+
+2. 调用上传
+
+   ```java
+   //.... 需自行注入
+   private final FileInfoFeignClient fileInfoFeignClient;
+   
+   ```
+
 
 #### 数据库设计说明
 
