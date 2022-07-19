@@ -1,5 +1,6 @@
 package com.basic.cloud.gateway.filter;
 
+import com.basic.cloud.gateway.contstant.FilterHeaderCont;
 import com.basic.cloud.uums.authority.service.AuthService;
 import io.jsonwebtoken.*;
 import org.apache.commons.lang.StringUtils;
@@ -39,8 +40,11 @@ public class AccessGatewayFilter implements GlobalFilter {
      */
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    private AuthService authService;
+    private final AuthService authService;
+
+    public AccessGatewayFilter(AuthService authService) {
+        this.authService = authService;
+    }
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -48,6 +52,10 @@ public class AccessGatewayFilter implements GlobalFilter {
         String url = request.getPath().value();
         String authentication = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         logger.info("Access filter. url:{}, access_token:{}", url, authentication);
+        // 白名单请求
+        if (anonymousReq(request)) {
+            return chain.filter(exchange);
+        }
         // 有授权请求头,校验权限
         if (!ObjectUtils.isEmpty(authentication)) {
             return this.validateAuthentication(exchange, chain, authentication, url);
@@ -138,5 +146,15 @@ public class AccessGatewayFilter implements GlobalFilter {
         DataBuffer buffer = exchange.getResponse()
                 .bufferFactory().wrap(httpStatus.getReasonPhrase().getBytes());
         return exchange.getResponse().writeWith(Flux.just(buffer));
+    }
+
+    /**
+     * 匿名请求
+     *
+     * @param request
+     * @return
+     */
+    private boolean anonymousReq(ServerHttpRequest request) {
+        return FilterHeaderCont.ANONYMOUS_REQ_VALUE.equals(request.getHeaders().getFirst(FilterHeaderCont.ANONYMOUS_REQ_PARAM));
     }
 }

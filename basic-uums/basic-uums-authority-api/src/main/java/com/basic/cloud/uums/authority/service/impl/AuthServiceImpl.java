@@ -1,7 +1,9 @@
 package com.basic.cloud.uums.authority.service.impl;
 
+import com.basic.cloud.uums.api.AnonymousInfoFeignClient;
 import com.basic.cloud.uums.api.BlackIpsFeignClient;
 import com.basic.cloud.uums.authority.service.AuthService;
+import com.basic.cloud.uums.vo.AnonymousInfoVO;
 import com.basic.cloud.uums.vo.BlackIpVO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -21,9 +23,11 @@ import java.util.stream.Stream;
 public class AuthServiceImpl implements AuthService {
 
     private final BlackIpsFeignClient blackIpsFeignClient;
+    private final AnonymousInfoFeignClient anonymousInfoFeignClient;
 
-    public AuthServiceImpl(BlackIpsFeignClient blackIpsFeignClient) {
+    public AuthServiceImpl(BlackIpsFeignClient blackIpsFeignClient, AnonymousInfoFeignClient anonymousInfoFeignClient) {
         this.blackIpsFeignClient = blackIpsFeignClient;
+        this.anonymousInfoFeignClient = anonymousInfoFeignClient;
     }
 
     /**
@@ -67,5 +71,10 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public List<BlackIpVO> getBlackIps() {
         return blackIpsFeignClient.getAllBlackIps();
+    }
+
+    @Override
+    public List<AnonymousInfoVO> getAnonymousInfos() {
+        return anonymousInfoFeignClient.all();
     }
 }

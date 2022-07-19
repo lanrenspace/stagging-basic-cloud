@@ -1,5 +1,6 @@
 package com.basic.cloud.uums.authority.service;
 
+import com.basic.cloud.uums.vo.AnonymousInfoVO;
 import com.basic.cloud.uums.vo.BlackIpVO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -30,7 +31,15 @@ public interface AuthService {
 
     /**
      * 获取所有的IP黑名单
+     *
      * @return
      */
     List<BlackIpVO> getBlackIps();
+
+    /**
+     * 获取所有的白名单信息
+     *
+     * @return
+     */
+    List<AnonymousInfoVO> getAnonymousInfos();
 }
