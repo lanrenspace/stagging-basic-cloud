@@ -20,6 +20,7 @@
         <module>basic-uaa</module>
         <module>basic-abs-web</module>
         <module>basic-nacos-import</module>
+        <module>basic-feign-import</module>
     </modules>
 
     <properties>
@@ -221,6 +222,11 @@
             <dependency>
                 <groupId>com.basic.cloud</groupId>
                 <artifactId>basic-nacos-import</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.basic.cloud</groupId>
+                <artifactId>basic-feign-import</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

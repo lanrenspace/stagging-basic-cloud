@@ -12,29 +12,22 @@ import java.io.Serializable;
 public class FileInfoDTO implements Serializable {
 
     /**
-     * 分片key
-     */
-    private String key;
-
-    /**
-     * 分片下标
-     */
-    private Long shardIndex;
-
-    /**
-     * 分片总数
-     */
-    private Long shardTotal;
-
-
-    /**
      * 文件名
      */
     private String fileName;
 
+    /**
+     * 业务目录
+     */
+    private String category;
 
     /**
-     * 文件ID
+     * 备注
      */
-    private Long fileId;
+    private String remark;
+
+    /**
+     * 文件大小
+     */
+    private Long size;
 }

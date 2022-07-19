@@ -9,13 +9,14 @@ import com.basic.cloud.common.bean.SecurityUser;
 import com.basic.cloud.common.boot.PlatformProperties;
 import com.basic.cloud.common.contstant.StorageShape;
 import com.basic.cloud.common.exceptions.TripartiteServiceException;
+import com.basic.cloud.file.dto.FileInfoDTO;
+import com.basic.cloud.file.dto.FileShardingInfoDTO;
 import com.basic.cloud.file.entity.FileInfo;
 import com.basic.cloud.file.entity.FileSharding;
 import com.basic.cloud.file.mapper.FileInfoMapper;
 import com.basic.cloud.file.service.FileInfoService;
 import com.basic.cloud.file.service.FileShardingService;
 import com.basic.cloud.file.utils.FastdfsUtil;
-import com.basic.cloud.file.dto.FileInfoDTO;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -82,6 +83,23 @@ public class FileInfoServiceImpl extends BaseBeanServiceImpl<FileInfoMapper, Fil
         return null;
     }
 
+    @Override
+    public FileInfo upload(FileInfoDTO fileInfoDTO, InputStream inputStream) throws IOException {
+        String storagePath = properties.getFileInfo().getStorageShape();
+        try {
+            if (StorageShape.FAST_DFS_STORAGE.equals(storagePath)) {
+                return this.fdfsStorage(inputStream, fileInfoDTO);
+            } else if (StorageShape.LOCAL_STORAGE.equals(storagePath)) {
+                return this.localStorage(inputStream, fileInfoDTO);
+            }
+        } finally {
+            if (null != inputStream) {
+                inputStream.close();
+            }
+        }
+        return new FileInfo();
+    }
+
     /**
      * 合并文件
      *
@@ -91,7 +109,7 @@ public class FileInfoServiceImpl extends BaseBeanServiceImpl<FileInfoMapper, Fil
      */
     @Async("fileMergeTaskExecutor")
     @Override
-    public void mergeFileAsync(FileInfoDTO fileInfoDTO, SecurityUser userInfo) throws IOException {
+    public void mergeFileAsync(FileShardingInfoDTO fileInfoDTO, SecurityUser userInfo) throws IOException {
         Long shardTotal = fileInfoDTO.getShardTotal();
         File newFile = new File(properties.getFileInfo().getStoragePath() + fileInfoDTO.getFileName());
         if (newFile.exists()) {
@@ -194,6 +212,49 @@ public class FileInfoServiceImpl extends BaseBeanServiceImpl<FileInfoMapper, Fil
     }
 
     /**
+     * 本地存储
+     *
+     * @param inputStream
+     * @param fileInfoDTO
+     * @return
+     */
+    private FileInfo localStorage(InputStream inputStream, FileInfoDTO fileInfoDTO) throws IOException {
+        File fullDir = this.getUploadPath();
+        FileInfo fileInfo = this.constructionFileInfo(fileInfoDTO);
+        fileInfo.setStorageServer(properties.getFileInfo().getServerPath() + fileInfo.getId());
+        fileInfo.setStoragePath(fullDir.getAbsolutePath() + File.separator + fileInfo.getFileName());
+        try (BufferedOutputStream outputStream = new BufferedOutputStream(
+                Files.newOutputStream(new File(fileInfo.getStoragePath()).toPath()))) {
+            byte[] bytes = new byte[inputStream.available()];
+            int read = inputStream.read(bytes);
+            fileInfo.setSize((long) bytes.length);
+            outputStream.write(bytes);
+            outputStream.flush();
+        }
+        getBaseMapper().insert(fileInfo);
+        return fileInfo;
+    }
+
+
+    /**
+     * 构造fileInfo对象
+     *
+     * @param fileInfoDTO
+     * @return
+     */
+    private FileInfo constructionFileInfo(FileInfoDTO fileInfoDTO) {
+        String fileName = this.appendFileNamePrefix(fileInfoDTO.getFileName());
+        FileInfo fileInfo = new FileInfo();
+        fileInfo.setFileName(fileName);
+        fileInfo.setOriginalName(fileInfoDTO.getFileName());
+        fileInfo.setId(Long.parseLong(getIdStrategy().id()));
+        fileInfo.setSize(fileInfo.getSize());
+        fileInfo.setCategory(fileInfoDTO.getCategory());
+        fileInfo.setRemark(fileInfo.getRemark());
+        return fileInfo;
+    }
+
+    /**
      * OSS存储
      *
      * @param multipartFile
@@ -237,6 +298,24 @@ public class FileInfoServiceImpl extends BaseBeanServiceImpl<FileInfoMapper, Fil
         fileInfo.setOriginalName(multipartFile.getOriginalFilename());
         fileInfo.setFileName(fileName);
         fileInfo.setSize(multipartFile.getSize());
+        fileInfo.setStorageServer(properties.getFileInfo().getServerPath());
+        fileInfo.setStoragePath(upload.getPath());
+        fileInfo.setPath(fileInfo.getStorageServer() + "/" + upload.getFullPath());
+        fileInfo.setGroupName(upload.getGroup());
+        getBaseMapper().insert(fileInfo);
+        return fileInfo;
+    }
+
+    /**
+     * fdfs 存储
+     *
+     * @param stream      输入流
+     * @param fileInfoDTO 文件基本信息
+     * @return
+     */
+    private FileInfo fdfsStorage(InputStream stream, FileInfoDTO fileInfoDTO) throws IOException {
+        FileInfo fileInfo = this.constructionFileInfo(fileInfoDTO);
+        StorePath upload = fastdfsUtil.upload(stream, fileInfo.getFileName());
         fileInfo.setStorageServer(properties.getFileInfo().getServerPath());
         fileInfo.setStoragePath(upload.getPath());
         fileInfo.setPath(fileInfo.getStorageServer() + "/" + upload.getFullPath());

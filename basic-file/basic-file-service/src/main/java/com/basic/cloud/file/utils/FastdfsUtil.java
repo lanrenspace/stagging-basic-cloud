@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URLEncoder;
 import java.util.HashSet;
 import java.util.Set;
@@ -41,6 +42,17 @@ public class FastdfsUtil {
         metaData.add(new MetaData("author", "fastdfs"));
         metaData.add(new MetaData("description", multipartFile.getOriginalFilename()));
         return storageClient.uploadFile(multipartFile.getInputStream(), multipartFile.getSize(), FilenameUtils.getExtension(multipartFile.getOriginalFilename()), metaData);
+    }
+
+    /**
+     * 上传
+     *
+     * @param inputStream
+     * @param fileName
+     * @return
+     */
+    public StorePath upload(InputStream inputStream, String fileName) throws IOException {
+        return storageClient.uploadFile(inputStream, inputStream.available(), FilenameUtils.getExtension(fileName), null);
     }
 
     /**

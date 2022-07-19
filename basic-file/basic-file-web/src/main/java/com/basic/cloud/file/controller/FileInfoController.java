@@ -13,7 +13,6 @@ import com.basic.cloud.file.service.FileInfoService;
 import com.basic.cloud.file.service.FileShardingService;
 import com.basic.cloud.file.vo.FileInfoVO;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -52,7 +51,6 @@ public class FileInfoController {
      * @param multipartFile
      * @return
      */
-    @ApiOperation(value = "根据主键ID查询{单表操作}", notes = "请求格式:/业务对象Service/id/要查询的业务ID")
     @PostMapping("/fullUpload")
     public ResultData upload(@RequestParam(value = "file") MultipartFile multipartFile) throws IOException {
         if (!fileInfoService.checkFileSuffix(multipartFile, "")) {

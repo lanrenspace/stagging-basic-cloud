@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @Description:
  **/
 @Data
-public class ResultData implements Serializable {
+public class ResultData<T> implements Serializable {
 
     /**
      * 响应状态
@@ -20,7 +20,7 @@ public class ResultData implements Serializable {
     /**
      * 响应数据
      */
-    private Object data;
+    private T data;
 
     /**
      * 响应消息
@@ -31,37 +31,37 @@ public class ResultData implements Serializable {
 
     }
 
-    public ResultData(Integer status, String msg, Object data) {
+    public ResultData(Integer status, String msg, T data) {
         this.status = status;
         this.msg = msg;
         this.data = data;
     }
 
-    public static ResultData ok() {
-        ResultData response = new ResultData();
+    public static <T> ResultData<T> ok() {
+        ResultData<T> response = new ResultData<>();
         response.setStatus(200);
         response.setMsg("request success!");
         return response;
     }
 
-    public static ResultData ok(Object data) {
-        ResultData response = new ResultData();
+    public static <T> ResultData<T> ok(T data) {
+        ResultData<T> response = new ResultData<>();
         response.setStatus(200);
         response.setMsg("request success!");
         response.setData(data);
         return response;
     }
 
-    public static ResultData ok(String msg) {
-        ResultData response = new ResultData();
+    public static <T> ResultData<T> ok(String msg) {
+        ResultData<T> response = new ResultData<>();
         response.setStatus(200);
         response.setMsg(msg);
         return response;
     }
 
 
-    public static ResultData ok(String msg, Object data) {
-        ResultData response = new ResultData();
+    public static <T> ResultData<T> ok(String msg, T data) {
+        ResultData<T> response = new ResultData<>();
         response.setStatus(200);
         response.setMsg(msg);
         response.setData(data);
@@ -69,44 +69,44 @@ public class ResultData implements Serializable {
     }
 
 
-    public static ResultData error() {
-        ResultData response = new ResultData();
+    public static <T> ResultData<T> error() {
+        ResultData<T> response = new ResultData<>();
         response.setStatus(500);
         response.setMsg("处理失败");
         return response;
     }
 
-    public static ResultData error(String msg) {
-        ResultData response = new ResultData();
+    public static <T> ResultData<T> error(String msg) {
+        ResultData<T> response = new ResultData<>();
         response.setStatus(500);
         response.setMsg(msg);
         return response;
     }
 
-    public static ResultData error(ErrorType errorType) {
-        ResultData resultData = new ResultData();
+    public static <T> ResultData<T> error(ErrorType errorType) {
+        ResultData<T> resultData = new ResultData<>();
         resultData.setStatus(errorType.getCode());
         resultData.setMsg(errorType.getMsg());
         return resultData;
     }
 
-    public static ResultData error(String msg, Object data) {
-        ResultData response = new ResultData();
+    public static <T> ResultData<T> error(String msg, T data) {
+        ResultData<T> response = new ResultData<>();
         response.setStatus(500);
         response.setMsg(msg);
         response.setData(data);
         return response;
     }
 
-    public static ResultData error(String msg, int code) {
-        ResultData response = new ResultData();
+    public static <T> ResultData<T> error(String msg, int code) {
+        ResultData<T> response = new ResultData<>();
         response.setStatus(code);
         response.setMsg(msg);
         return response;
     }
 
-    public static ResultData error(String msg, int code, Object data) {
-        ResultData response = new ResultData();
+    public static <T> ResultData<T> error(String msg, int code, T data) {
+        ResultData<T> response = new ResultData<>();
         response.setStatus(code);
         response.setMsg(msg);
         response.setData(data);
