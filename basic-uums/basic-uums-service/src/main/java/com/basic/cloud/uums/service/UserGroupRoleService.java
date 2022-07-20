@@ -19,4 +19,12 @@ public interface UserGroupRoleService extends IBaseBeanService<UserGroupRole> {
      * @return
      */
     List<RoleInfoVO> getRolesByUserId(Long userId);
+
+    /**
+     * 根据用户ID获取角色ID
+     *
+     * @param userId
+     * @return
+     */
+    List<Long> getRoleByUserId(Long userId);
 }

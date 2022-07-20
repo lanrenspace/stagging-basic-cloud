@@ -27,11 +27,11 @@ public class UserGroupRole extends BisDataEntity<UserGroupRole> {
     /**
      * 当关联以用户为单位时，这里放的是用户ID，当以组织部门为单位时，这里放的是组织部门ID
      */
-    private Integer userGroupId;
+    private Long userGroupId;
 
     /**
      * 关联类型，1用户为单位，2组织部门为单位
      */
-    private Integer userGroupType;
+    private Long userGroupType;
 
 }

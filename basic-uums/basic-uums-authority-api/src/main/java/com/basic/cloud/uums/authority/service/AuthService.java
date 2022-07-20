@@ -42,4 +42,14 @@ public interface AuthService {
      * @return
      */
     List<AnonymousInfoVO> getAnonymousInfos();
+
+    /**
+     * 资源验证权
+     *
+     * @param userId
+     * @param url
+     * @param httpMethod
+     * @return
+     */
+    boolean hasPermission(Long userId, String url, String httpMethod);
 }

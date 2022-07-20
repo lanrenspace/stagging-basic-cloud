@@ -1,7 +1,9 @@
 package com.basic.cloud.uums.authority.service.impl;
 
+import com.basic.cloud.common.vo.ResultData;
 import com.basic.cloud.uums.api.AnonymousInfoFeignClient;
 import com.basic.cloud.uums.api.BlackIpsFeignClient;
+import com.basic.cloud.uums.api.ResourceAuthorityFeignClient;
 import com.basic.cloud.uums.authority.service.AuthService;
 import com.basic.cloud.uums.vo.AnonymousInfoVO;
 import com.basic.cloud.uums.vo.BlackIpVO;
@@ -11,6 +13,7 @@ import io.jsonwebtoken.Jwts;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -24,10 +27,13 @@ public class AuthServiceImpl implements AuthService {
 
     private final BlackIpsFeignClient blackIpsFeignClient;
     private final AnonymousInfoFeignClient anonymousInfoFeignClient;
+    private final ResourceAuthorityFeignClient resourceAuthorityFeignClient;
 
-    public AuthServiceImpl(BlackIpsFeignClient blackIpsFeignClient, AnonymousInfoFeignClient anonymousInfoFeignClient) {
+    public AuthServiceImpl(BlackIpsFeignClient blackIpsFeignClient, AnonymousInfoFeignClient anonymousInfoFeignClient,
+                           ResourceAuthorityFeignClient resourceAuthorityFeignClient) {
         this.blackIpsFeignClient = blackIpsFeignClient;
         this.anonymousInfoFeignClient = anonymousInfoFeignClient;
+        this.resourceAuthorityFeignClient = resourceAuthorityFeignClient;
     }
 
     /**
@@ -76,5 +82,14 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public List<AnonymousInfoVO> getAnonymousInfos() {
         return anonymousInfoFeignClient.all();
+    }
+
+    @Override
+    public boolean hasPermission(Long userId, String url, String httpMethod) {
+        if (ObjectUtils.isEmpty(userId) || ObjectUtils.isEmpty(url) || ObjectUtils.isEmpty(httpMethod)) {
+            return Boolean.FALSE;
+        }
+        ResultData<Boolean> resultData = resourceAuthorityFeignClient.permission(userId, url, httpMethod);
+        return resultData.getSuccess() && resultData.getData();
     }
 }
