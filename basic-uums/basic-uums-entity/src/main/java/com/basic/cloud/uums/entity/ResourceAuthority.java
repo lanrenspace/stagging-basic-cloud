@@ -37,7 +37,7 @@ public class ResourceAuthority extends BisDataEntity<ResourceAuthority> {
     /**
      * 资源操作类型,1可以使用,2可分配
      */
-    private Long resourceOpt;
+    private Integer resourceOpt;
 
     /**
      * 描述

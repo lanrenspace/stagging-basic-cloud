@@ -82,7 +82,6 @@ public class AccessGatewayFilter implements GlobalFilter {
         ServerHttpRequest request = exchange.getRequest();
         String method = request.getMethodValue();
         String ip = Objects.requireNonNull(request.getRemoteAddress()).getAddress().getHostAddress();
-        LinkedHashSet<URI> originUrl = exchange.getRequiredAttribute(ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR);
         Long userId = null;
         String account = null;
         try {
@@ -102,7 +101,7 @@ public class AccessGatewayFilter implements GlobalFilter {
                     builder.header(REQ_USER_IP, ip);
                 }
                 exchange = exchange.mutate().request(builder.build()).build();
-                logger.info("userId:{}, userName:{}, access_token:{}, url:{}", userId, account, authentication, url);
+                logger.info("userId:{}, userAccount:{}, access_token:{}, url:{}", userId, account, authentication, url);
             }
         } catch (ExpiredJwtException | MalformedJwtException | SignatureException exception) {
             logger.error("user token error :{}", exception.getMessage());
@@ -113,9 +112,9 @@ public class AccessGatewayFilter implements GlobalFilter {
         if (authService.ignoreAuthentication(url)) {
             return chain.filter(exchange);
         }
-        boolean hasPermission = true;
-        if (hasPermission && !ObjectUtils.isEmpty(userId) && !ObjectUtils.isEmpty(account)) {
-            logger.info("User can access. userId:{}, userName:{}, url:{}, method:{}", userId, account, url, method);
+        boolean hasPermission = authService.hasPermission(userId, url, method);
+        if (hasPermission) {
+            logger.info("User can access. userId:{}, userAccount:{}, url:{}, method:{}", userId, account, url, method);
             return chain.filter(exchange);
         }
         return forbidden(exchange);

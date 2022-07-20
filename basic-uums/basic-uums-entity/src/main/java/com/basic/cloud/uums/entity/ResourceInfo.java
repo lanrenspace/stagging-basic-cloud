@@ -20,7 +20,7 @@ public class ResourceInfo extends BisDataEntity<ResourceInfo> {
     private Long id;
 
     /**
-     * 资产名称
+     * 资源名称
      */
     private String name;
 

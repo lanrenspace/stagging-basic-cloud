@@ -1,8 +1,7 @@
 package com.basic.cloud.common.vo;
 
 import com.basic.cloud.common.base.ErrorType;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.util.ObjectUtils;
 
 import java.io.Serializable;
@@ -11,34 +10,32 @@ import java.io.Serializable;
  * @Author lanrenspace@163.com
  * @Description:
  **/
+@Data
 public class ResultData<T> implements Serializable {
 
     /**
      * 响应状态
      */
-    @Getter
-    @Setter
     private Integer status;
 
     /**
      * 响应数据
      */
-    @Getter
-    @Setter
     private T data;
 
     /**
      * 响应消息
      */
-    @Getter
-    @Setter
     private String msg;
 
     /**
      * 是否成功
      */
-    @Getter
     private Boolean success;
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
 
     public ResultData() {
 
@@ -135,7 +132,7 @@ public class ResultData<T> implements Serializable {
      * @return
      */
     private static <T> ResultData<T> setSuccess(ResultData<T> resultData) {
-        resultData.success = !ObjectUtils.isEmpty(resultData.getStatus()) && resultData.getStatus() == 200;
+        resultData.setSuccess(!ObjectUtils.isEmpty(resultData.getStatus()) && resultData.getStatus() == 200);
         return resultData;
     }
 

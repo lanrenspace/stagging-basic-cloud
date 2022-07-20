@@ -47,7 +47,7 @@ public class ResourceInfoServiceImpl extends BaseBeanServiceImpl<ResourceInfoMap
     public boolean matchUserResources(List<Long> resourceIds, String url, String httpMethod) {
         boolean existInResources = this.matchRequestUrl(url, httpMethod);
         if (!existInResources) {
-            logger.warn("url未在资源池中找到，拒绝访问: url:{},httpMethod:{}", url, httpMethod);
+            logger.warn("url未在资源中找到，拒绝访问: url:{},httpMethod:{}", url, httpMethod);
             return false;
         }
         return listByIds(resourceIds).stream().anyMatch(resourceInfo ->
