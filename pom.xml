@@ -19,8 +19,7 @@
         <module>basic-gateway</module>
         <module>basic-uaa</module>
         <module>basic-abs-web</module>
-        <module>basic-nacos-import</module>
-        <module>basic-feign-import</module>
+        <module>basic-import</module>
     </modules>
 
     <properties>
