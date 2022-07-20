@@ -28,5 +28,4 @@ public class UnitTenantType extends BisDataEntity<UnitTenantType> {
      * 管理的租户ID
      */
     private Long applyTenantId;
-
 }

@@ -21,6 +21,7 @@
         <module>basic-abs-web</module>
         <module>basic-nacos-import</module>
         <module>basic-feign-import</module>
+        <module>basic-print</module>
     </modules>
 
     <properties>
@@ -44,6 +45,7 @@
         <jose-jwt.version>7.0.1</jose-jwt.version>
         <redis.version>2.7.2</redis.version>
         <fastjson.version>1.2.56</fastjson.version>
+        <jasperreports.version>6.9.0</jasperreports.version>
     </properties>
 
     <parent>
@@ -194,6 +196,25 @@
                 <artifactId>basic-file-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.ywkj.cloud</groupId>
+                <artifactId>basic-print-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ywkj.cloud</groupId>
+                <artifactId>basic-print-entity</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ywkj.cloud</groupId>
+                <artifactId>basic-print-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.basic.cloud</groupId>
                 <artifactId>basic-uaa-resource</artifactId>
@@ -248,6 +269,14 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>2.1.0.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sf.jasperreports</groupId>
+                <artifactId>jasperreports</artifactId>
+                <version>${jasperreports.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

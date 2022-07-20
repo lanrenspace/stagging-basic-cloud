@@ -6,6 +6,7 @@ import com.basic.cloud.common.bean.BisDataEntity;
 import lombok.Data;
 
 /**
+ * 租户和菜单的绑定关系
  * @Author lanrenspace@163.com
  * @Description:
  **/
@@ -43,5 +44,4 @@ public class AppMenuTemplate extends BisDataEntity<AppMenuTemplate> {
      * 产品ID
      */
     private Long productId;
-
 }

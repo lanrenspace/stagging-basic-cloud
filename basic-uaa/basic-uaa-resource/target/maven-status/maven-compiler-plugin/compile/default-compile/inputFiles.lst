@@ -1,0 +1,9 @@
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-resource/src/main/java/com/basic/cloud/uaa/boot/OAuth2GetUserFromAuthentication.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-resource/src/main/java/com/basic/cloud/uaa/boot/KeyConfig.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-resource/src/main/java/com/basic/cloud/uaa/exception/OAuth2AuthenticationEntryPoint.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-resource/src/main/java/com/basic/cloud/uaa/exception/OAuth2ExceptionJacksonSerializer.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-resource/src/main/java/com/basic/cloud/uaa/exception/OAuth2ExceptionTranslator.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-resource/src/main/java/com/basic/cloud/uaa/boot/SubjectAttributeUserTokenConverter.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-resource/src/main/java/com/basic/cloud/uaa/boot/UaaResourceServerConfig.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-resource/src/main/java/com/basic/cloud/uaa/exception/OAuth2ExceptionHandler.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-resource/src/main/java/com/basic/cloud/uaa/starter/ResourceServerAutoConfiguration.java

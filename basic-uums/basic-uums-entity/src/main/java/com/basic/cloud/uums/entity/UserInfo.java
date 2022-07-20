@@ -84,7 +84,6 @@ public class UserInfo extends BisDataEntity<UserInfo> {
      */
     private String nickName;
 
-
     /**
      * 三方编码（公司编码）
      */

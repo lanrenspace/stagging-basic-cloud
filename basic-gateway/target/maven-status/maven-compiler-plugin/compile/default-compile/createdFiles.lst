@@ -1,0 +1,4 @@
+com/basic/cloud/gateway/filter/AccessGatewayFilter.class
+com/basic/cloud/gateway/exception/CustomErrorWebExceptionHandler.class
+com/basic/cloud/gateway/exception/GateWayExceptionHandlerAdvice.class
+com/basic/cloud/gateway/exception/ExceptionAutoConfiguration.class

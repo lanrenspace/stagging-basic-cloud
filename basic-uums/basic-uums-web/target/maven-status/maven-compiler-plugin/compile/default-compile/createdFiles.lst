@@ -1,0 +1,5 @@
+com/basic/cloud/uums/UumApplication.class
+com/basic/cloud/uums/feignclient/UserExtController.class
+com/basic/cloud/uums/feignclient/UserInfoController.class
+com/basic/cloud/uums/feignclient/UnitController.class
+com/basic/cloud/uums/feignclient/UserGroupRoleController.class

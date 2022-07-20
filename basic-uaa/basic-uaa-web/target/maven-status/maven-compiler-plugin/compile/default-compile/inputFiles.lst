@@ -1,0 +1,17 @@
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-web/src/main/java/com/basic/cloud/uaa/service/UaaUserDetailsService.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-web/src/main/java/com/basic/cloud/uaa/listener/AuthenticationSuccessEventListener.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-web/src/main/java/com/basic/cloud/uaa/boot/UaaSecurityConfig.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-web/src/main/java/com/basic/cloud/uaa/endpoints/TokenRestEndpoint.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-web/src/main/java/com/basic/cloud/uaa/exception/OAuth2ExceptionHandler.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-web/src/main/java/com/basic/cloud/uaa/boot/UaaOauthServerConfig.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-web/src/main/java/com/basic/cloud/uaa/exception/OAuth2ExceptionJacksonSerializer.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-web/src/main/java/com/basic/cloud/uaa/boot/UserNamePasswordGetUserFromAuthentication.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-web/src/main/java/com/basic/cloud/uaa/listener/AuthenticationFailureListener.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-web/src/main/java/com/basic/cloud/uaa/exception/OAuth2ExceptionTranslator.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-web/src/main/java/com/basic/cloud/uaa/boot/JwkSetEndpoint.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-web/src/main/java/com/basic/cloud/uaa/boot/SubjectAttributeUserTokenConverter.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-web/src/main/java/com/basic/cloud/uaa/boot/UaaAuthenticationEntryPoint.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-web/src/main/java/com/basic/cloud/uaa/UaaAuthServerApplication.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-web/src/main/java/com/basic/cloud/uaa/boot/KeyConfig.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-web/src/main/java/com/basic/cloud/uaa/filter/UaaClientCredentialsTokenEndpointFilter.java
+/Users/huji/Documents/workspace/idea/nanhua/stagging-basic-cloud/basic-uaa/basic-uaa-web/src/main/java/com/basic/cloud/uaa/boot/UaaPasswordEncoder.java

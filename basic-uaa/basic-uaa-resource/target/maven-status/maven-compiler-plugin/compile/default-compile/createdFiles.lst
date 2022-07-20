@@ -1,0 +1,9 @@
+com/basic/cloud/uaa/boot/OAuth2GetUserFromAuthentication.class
+com/basic/cloud/uaa/starter/ResourceServerAutoConfiguration.class
+com/basic/cloud/uaa/exception/OAuth2ExceptionHandler.class
+com/basic/cloud/uaa/boot/UaaResourceServerConfig.class
+com/basic/cloud/uaa/exception/OAuth2AuthenticationEntryPoint.class
+com/basic/cloud/uaa/boot/SubjectAttributeUserTokenConverter.class
+com/basic/cloud/uaa/exception/OAuth2ExceptionTranslator.class
+com/basic/cloud/uaa/boot/KeyConfig.class
+com/basic/cloud/uaa/exception/OAuth2ExceptionJacksonSerializer.class

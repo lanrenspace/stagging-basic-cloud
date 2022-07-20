@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/basic-abs-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-feign-import/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-file/basic-file-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-file/basic-file-entity/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-file/basic-file-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-file/basic-file-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-file/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-file/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-nacos-import/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-print/basic-print-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-print/basic-print-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-print/basic-print-entity/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-print/basic-print-entity/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-print/basic-print-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-print/basic-print-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-print/basic-print-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-print/basic-print-web/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-print/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-print/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-tenant/basic-tenant-entity/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-tenant/basic-tenant-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-tenant/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-tenant/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-uaa/basic-uaa-auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-uaa/basic-uaa-entity/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-uaa/basic-uaa-resource/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-uaa/basic-uaa-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-uaa/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-uaa/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-uums/basic-uums-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-uums/basic-uums-authority-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-uums/basic-uums-entity/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-uums/basic-uums-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-uums/basic-uums-tenant/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-uums/basic-uums-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-uums/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-uums/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-doc/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-doc/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

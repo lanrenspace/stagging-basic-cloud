@@ -1,0 +1,17 @@
+com/basic/cloud/uaa/boot/UaaWebServerSecurityConfig.class
+com/basic/cloud/uaa/oauth2/userdetail/MultipleUserDetailsService.class
+com/basic/cloud/uaa/endpoints/TokenRestEndpoint.class
+com/basic/cloud/uaa/multiple/authenticator/MultipleAuthenticator.class
+com/basic/cloud/uaa/boot/AllowedMethodConfig.class
+com/basic/cloud/uaa/exception/OAuth2ExceptionTranslator.class
+com/basic/cloud/uaa/exception/OAuth2ExceptionHandler.class
+com/basic/cloud/uaa/boot/UaaAuthorizationServerConfig.class
+com/basic/cloud/uaa/multiple/MultipleAuthenticationContext.class
+com/basic/cloud/uaa/multiple/MultipleAuthenticationFilter.class
+com/basic/cloud/uaa/multiple/MultipleAuthentication.class
+com/basic/cloud/uaa/entity/UserJwt.class
+com/basic/cloud/uaa/oauth2/enhancer/UaaTokenEnhancer.class
+com/basic/cloud/uaa/multiple/authenticator/AbstractMultipleAuthenticator.class
+com/basic/cloud/uaa/UaaAuthServerApplication.class
+com/basic/cloud/uaa/multiple/authenticator/pwd/UsernamePasswordAuthenticator.class
+com/basic/cloud/uaa/exception/OAuth2ExceptionJacksonSerializer.class

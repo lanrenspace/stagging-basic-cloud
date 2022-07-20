@@ -1,0 +1,4 @@
+com/basic/cloud/file/vo/FileInfoVO.class
+com/basic/cloud/file/dto/FileInfoDTO.class
+com/basic/cloud/file/entity/FileSharding.class
+com/basic/cloud/file/entity/FileInfo.class
