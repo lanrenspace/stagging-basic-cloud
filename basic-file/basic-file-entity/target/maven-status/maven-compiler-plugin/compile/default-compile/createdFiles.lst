@@ -1,7 +1,0 @@
-com\basic\cloud\file\entity\FileSharding.class
-com\basic\cloud\file\dto\FileReqDTO.class
-com\basic\cloud\file\dto\ByteReqDTO.class
-com\basic\cloud\file\dto\FileShardingInfoDTO.class
-com\basic\cloud\file\entity\FileInfo.class
-com\basic\cloud\file\vo\FileInfoVO.class
-com\basic\cloud\file\dto\FileInfoDTO.class
