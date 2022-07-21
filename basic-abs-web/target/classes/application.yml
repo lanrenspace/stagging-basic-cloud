@@ -1,9 +1,0 @@
-server:
-  port: 8100
-spring:
-  application:
-    name: basic.abs.service
-  security:
-    user:
-      name: admin
-      password: admin
