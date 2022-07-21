@@ -1,9 +1,0 @@
-com\basic\cloud\tenant\service\TenantInfoService.class
-com\basic\cloud\tenant\service\TenantMenuTemplateService.class
-com\basic\cloud\tenant\mapper\ResourceAuthorityMapper.class
-com\basic\cloud\tenant\service\UnitTenantTypeService.class
-com\basic\cloud\tenant\service\TenantTypeService.class
-com\basic\cloud\tenant\mapper\TenantInfoMapper.class
-com\basic\cloud\tenant\mapper\UnitTenantTypeMapper.class
-com\basic\cloud\tenant\mapper\TenantTypeMapper.class
-com\basic\cloud\tenant\mapper\AppMenuTemplateMapper.class
