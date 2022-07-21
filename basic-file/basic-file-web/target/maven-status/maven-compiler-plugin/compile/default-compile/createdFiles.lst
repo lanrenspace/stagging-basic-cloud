@@ -1,1 +1,3 @@
-com/basic/cloud/file/Application.class
+com\basic\cloud\file\Application.class
+com\basic\cloud\file\controller\FileInfoController.class
+com\basic\cloud\file\feignclient\FileController.class

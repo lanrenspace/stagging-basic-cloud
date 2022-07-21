@@ -38,14 +38,15 @@
         <oauthboot.version>2.1.4.RELEASE</oauthboot.version>
         <abs.version>2.1.4</abs.version>
         <oauth2-autoconfigure.version>2.1.11.RELEASE</oauth2-autoconfigure.version>
-        <lombok.version>1.18.4</lombok.version>
+        <lombok.version>1.18.20</lombok.version>
         <jjwt.version>0.9.1</jjwt.version>
         <security-jwt.version>1.1.1.RELEASE</security-jwt.version>
         <security-oauth2.version>[2.2.4,)</security-oauth2.version>
         <jose-jwt.version>7.0.1</jose-jwt.version>
         <redis.version>2.7.2</redis.version>
         <fastjson.version>1.2.56</fastjson.version>
-        <jasperreports.version>6.9.0</jasperreports.version>
+        <com.hutool.version>>5.8.4</com.hutool.version>
+        <com.lowagie.itext.version>2.1.7</com.lowagie.itext.version>
     </properties>
 
     <parent>
@@ -198,19 +199,19 @@
             </dependency>
 
             <dependency>
-                <groupId>com.ywkj.cloud</groupId>
+                <groupId>com.basic.cloud</groupId>
                 <artifactId>basic-print-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ywkj.cloud</groupId>
+                <groupId>com.basic.cloud</groupId>
                 <artifactId>basic-print-entity</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ywkj.cloud</groupId>
+                <groupId>com.basic.cloud</groupId>
                 <artifactId>basic-print-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -274,11 +275,9 @@
             </dependency>
 
             <dependency>
-                <groupId>net.sf.jasperreports</groupId>
-                <artifactId>jasperreports</artifactId>
-                <version>${jasperreports.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <groupId>com.lowagie</groupId>
+                <artifactId>itext</artifactId>
+                <version>${com.lowagie.itext.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

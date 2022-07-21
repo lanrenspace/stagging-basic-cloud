@@ -5,6 +5,7 @@ import com.basic.cloud.common.vo.ResultData;
 import com.basic.cloud.file.dto.ByteReqDTO;
 import com.basic.cloud.file.vo.FileInfoVO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -23,4 +24,7 @@ public interface FileInfoFeignClient {
      */
     @PostMapping("/byteUpload")
     ResultData<FileInfoVO> byteUpload(@RequestBody ByteReqDTO reqDTO);
+
+    @GetMapping("/id")
+    FileInfoVO findById(Long fileId);
 }

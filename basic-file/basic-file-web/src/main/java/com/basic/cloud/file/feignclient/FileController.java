@@ -6,11 +6,9 @@ import com.basic.cloud.file.dto.ByteReqDTO;
 import com.basic.cloud.file.entity.FileInfo;
 import com.basic.cloud.file.service.FileInfoService;
 import com.basic.cloud.file.vo.FileInfoVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -48,5 +46,12 @@ public class FileController {
         } catch (IOException e) {
             return ResultData.error(e.getMessage());
         }
+    }
+
+    @GetMapping("/id")
+    public ResultData<FileInfoVO> findById(Long fileId) {
+        FileInfoVO result = new FileInfoVO();
+        BeanUtils.copyProperties(result, fileInfoService.getById(fileId));
+        return ResultData.ok(result);
     }
 }

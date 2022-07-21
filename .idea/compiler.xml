@@ -65,6 +65,7 @@
       <module name="basic-uums-service" options="-parameters" />
       <module name="basic-uums-tenant" options="-parameters" />
       <module name="basic-uums-web" options="-parameters" />
+      <module name="stagging-basic-cloud" options="-parameters" />
     </option>
   </component>
 </project>

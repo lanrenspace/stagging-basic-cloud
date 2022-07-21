@@ -6,6 +6,8 @@ import com.basic.cloud.file.vo.FileInfoVO;
 import com.ywkj.cloud.basic.print.entity.dto.PrintDataDto;
 import com.ywkj.cloud.basic.print.entity.entity.PrintRecord;
 
+import javax.servlet.http.HttpServletResponse;
+
 public interface PrintService extends IBaseBeanService<PrintRecord> {
 
     /**
@@ -13,5 +15,5 @@ public interface PrintService extends IBaseBeanService<PrintRecord> {
      * @param printDataDto
      * @return
      */
-    FileInfoVO printPdf(PrintDataDto printDataDto);
+    FileInfoVO printPdf(PrintDataDto printDataDto, HttpServletResponse response) throws Exception;
 }

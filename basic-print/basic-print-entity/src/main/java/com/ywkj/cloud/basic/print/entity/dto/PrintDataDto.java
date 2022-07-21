@@ -11,9 +11,9 @@ import java.util.List;
 @ApiModel(value = "打印参数")
 public class PrintDataDto {
 
-    @ApiModelProperty(value = "打印方案")
+    @ApiModelProperty(value = "打印方案编号")
     @NotNull
-    private String templateName;
+    private String templateNo;
 
     @ApiModelProperty(value = "汇总字段")
     @NotNull

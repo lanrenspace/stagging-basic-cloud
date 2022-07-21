@@ -1,5 +1,5 @@
-com/basic/cloud/uums/api/UserInfoFeignClient.class
-com/basic/cloud/uums/api/UnitFeignClient.class
-com/basic/cloud/uums/api/UserGroupRoleFeignClient.class
-com/basic/cloud/uums/api/UserExtFeignClient.class
-com/basic/cloud/uums/enums/UumErrorTypeEnum.class
+com\basic\cloud\uums\enums\UumErrorTypeEnum.class
+com\basic\cloud\uums\api\UserExtFeignClient.class
+com\basic\cloud\uums\api\UserGroupRoleFeignClient.class
+com\basic\cloud\uums\api\UserInfoFeignClient.class
+com\basic\cloud\uums\api\UnitFeignClient.class

@@ -1,10 +1,20 @@
 package com.ywkj.clound.basic.print.api;
 
+import com.basic.cloud.common.vo.ResultData;
+import com.basic.cloud.file.vo.FileInfoVO;
 import com.ywkj.cloud.basic.print.entity.dto.PrintDataDto;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @FeignClient(value = "${api.feign.client.uum}", path = "/basic/feign/print", contextId = "printFeignClient")
 public interface PrintFeignClient {
 
-    String print(PrintDataDto printDataDto);
+    /**
+     * 获取所有的白名单信息
+     *
+     * @return
+     */
+    @PostMapping("/pdf")
+    ResultData<FileInfoVO> pdf(PrintDataDto printDataDto);
 }
