@@ -1,7 +1,0 @@
-com\basic\cloud\file\service\impl\FileInfoServiceImpl.class
-com\basic\cloud\file\service\FileInfoService.class
-com\basic\cloud\file\mapper\FileInfoMapper.class
-com\basic\cloud\file\service\impl\FileShardingServiceImpl.class
-com\basic\cloud\file\service\FileShardingService.class
-com\basic\cloud\file\mapper\FileShardingMapper.class
-com\basic\cloud\file\utils\FastdfsUtil.class
