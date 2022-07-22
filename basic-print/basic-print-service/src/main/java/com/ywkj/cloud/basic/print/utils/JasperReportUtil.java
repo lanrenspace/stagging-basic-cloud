@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
@@ -66,21 +68,23 @@ public class JasperReportUtil {
         return jasperPrint;
     }
 
-    public static void exportToPdf(String jasperPath, Map parameters, List<?> list, HttpServletResponse response) throws Exception {
-        OutputStream outputStream = response.getOutputStream();
+    public static byte[] exportToPdf(String jasperPath, Map parameters, List<?> list) throws Exception {
+
+        URL url;
+        HttpURLConnection urlCon = null;
         try {
-            ClassPathResource resource = new ClassPathResource(jasperPath);
-            response.setContentType(getContentType(ReportTypeEnum.PDF));
-            InputStream jasperStream = resource.getInputStream();
+            url = new URL(jasperPath);
+            urlCon = (HttpURLConnection) url.openConnection();
+            InputStream jasperStream = urlCon.getInputStream();
             JasperPrint jasperPrint = getJasperPrint(jasperStream, parameters, list);
-            JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
+            return JasperExportManager.exportReportToPdf(jasperPrint);
         } catch (Exception e) {
             log.error("读取报表异常", e);
-            outputStream.write("读取报表异常".getBytes());
         } finally {
-            outputStream.flush();
-            outputStream.close();
+            urlCon.disconnect();
         }
+
+        return null;
     }
 
 

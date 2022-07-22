@@ -14,5 +14,5 @@ public interface PrintService extends IBaseBeanService<PrintRecord> {
      * @param printDataDto
      * @return
      */
-    FileInfoVO printPdf(PrintDataDto printDataDto, HttpServletResponse response) throws Exception;
+    FileInfoVO printPdf(PrintDataDto printDataDto) throws Exception;
 }

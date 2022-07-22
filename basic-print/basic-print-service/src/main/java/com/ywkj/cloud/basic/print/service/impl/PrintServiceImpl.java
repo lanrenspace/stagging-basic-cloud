@@ -2,7 +2,9 @@ package com.ywkj.cloud.basic.print.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.basic.cloud.common.bean.BaseBeanServiceImpl;
+import com.basic.cloud.common.vo.ResultData;
 import com.basic.cloud.file.api.FileInfoFeignClient;
+import com.basic.cloud.file.dto.ByteReqDTO;
 import com.basic.cloud.file.vo.FileInfoVO;
 import com.ywkj.cloud.basic.print.dto.PrintDataDto;
 import com.ywkj.cloud.basic.print.dto.PrintDetailDto;
@@ -16,6 +18,7 @@ import com.ywkj.cloud.basic.print.utils.JasperReportUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -32,8 +35,9 @@ public class PrintServiceImpl extends BaseBeanServiceImpl<PrintMapper, PrintReco
     @Resource
     FileInfoFeignClient fileInfoFeignClient;
 
+
     @Override
-    public FileInfoVO printPdf(PrintDataDto printDataDto, HttpServletResponse response) throws Exception {
+    public FileInfoVO printPdf(PrintDataDto printDataDto) throws Exception {
         FileInfoVO fileInfoVO = new FileInfoVO();
 
         // 获取模板ID
@@ -45,7 +49,8 @@ public class PrintServiceImpl extends BaseBeanServiceImpl<PrintMapper, PrintReco
         Assert.isTrue(!CollectionUtils.isEmpty(printTemplateInfos), "找不到对应的打印方案："+printDataDto.getTemplateNo());
 
         // 查找文件
-        FileInfoVO templateFileInfoVo = fileInfoFeignClient.findById(printTemplateInfos.get(0).getFileId());
+        ResultData<FileInfoVO> templateFileInfoVo = fileInfoFeignClient.getFileInfoById(printTemplateInfos.get(0).getFileId());
+        Assert.isTrue(!ObjectUtils.isEmpty(templateFileInfoVo), "查找文件为空："+printTemplateInfos.get(0).getFileId());
 
         final Map<String, Object> param = new HashMap<>();
         printDataDto.getFields().forEach(field -> {
@@ -69,9 +74,13 @@ public class PrintServiceImpl extends BaseBeanServiceImpl<PrintMapper, PrintReco
             }
         }
 
-        JasperReportUtil.exportToPdf(templateFileInfoVo.getPath(), param, detail, response);
+        byte[] byt = JasperReportUtil.exportToPdf(templateFileInfoVo.getData().getPath(), param, detail);
 
+        ByteReqDTO byteReqDTO = new ByteReqDTO();
+        byteReqDTO.setBytes(byt);
+        byteReqDTO.setFileName(getIdStrategy().id()+".PDF");
+        ResultData<FileInfoVO> result = fileInfoFeignClient.byteUpload(byteReqDTO);
         // 上传至文件服务器
-        return fileInfoVO;
+        return result.getData();
     }
 }
