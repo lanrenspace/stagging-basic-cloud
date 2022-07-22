@@ -8,6 +8,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @Author lanrenspace@163.com
@@ -25,6 +26,12 @@ public interface FileInfoFeignClient {
     @PostMapping("/byteUpload")
     ResultData<FileInfoVO> byteUpload(@RequestBody ByteReqDTO reqDTO);
 
-    @GetMapping("/id")
-    FileInfoVO findById(Long fileId);
+    /**
+     * 根据主键ID获取文件信息
+     *
+     * @param fileId
+     * @return
+     */
+    @GetMapping("/getFileByPk")
+    ResultData<FileInfoVO> getFileInfoById(@RequestParam("fileId") Long fileId);
 }
