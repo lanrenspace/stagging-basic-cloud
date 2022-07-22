@@ -7,10 +7,7 @@ import com.basic.cloud.file.entity.FileInfo;
 import com.basic.cloud.file.service.FileInfoService;
 import com.basic.cloud.file.vo.FileInfoVO;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -48,5 +45,25 @@ public class FileController {
         } catch (IOException e) {
             return ResultData.error(e.getMessage());
         }
+    }
+
+    /**
+     * 根据主键ID获取文件信息
+     *
+     * @param fileId
+     * @return
+     */
+    @GetMapping("/getFileByPk")
+    public ResultData<FileInfoVO> getFileInfoById(Long fileId) {
+        if (ObjectUtils.isEmpty(fileId)) {
+            return ResultData.error("请求参数 fileId 不能为空!");
+        }
+        FileInfo fileInfo = fileInfoService.getById(fileId);
+        if (ObjectUtils.isEmpty(fileInfo)) {
+            return ResultData.ok();
+        }
+        FileInfoVO result = new FileInfoVO();
+        ModelMapper.map(result, fileInfo);
+        return ResultData.ok(result);
     }
 }

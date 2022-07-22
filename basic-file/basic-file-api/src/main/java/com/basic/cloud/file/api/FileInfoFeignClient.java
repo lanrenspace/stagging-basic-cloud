@@ -5,8 +5,10 @@ import com.basic.cloud.common.vo.ResultData;
 import com.basic.cloud.file.dto.ByteReqDTO;
 import com.basic.cloud.file.vo.FileInfoVO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @Author lanrenspace@163.com
@@ -23,4 +25,13 @@ public interface FileInfoFeignClient {
      */
     @PostMapping("/byteUpload")
     ResultData<FileInfoVO> byteUpload(@RequestBody ByteReqDTO reqDTO);
+
+    /**
+     * 根据主键ID获取文件信息
+     *
+     * @param fileId
+     * @return
+     */
+    @GetMapping("/getFileByPk")
+    ResultData<FileInfoVO> getFileInfoById(@RequestParam("fileId") Long fileId);
 }
