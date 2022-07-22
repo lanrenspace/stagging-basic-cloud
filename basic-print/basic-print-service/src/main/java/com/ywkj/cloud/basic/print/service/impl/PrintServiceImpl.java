@@ -75,11 +75,13 @@ public class PrintServiceImpl extends BaseBeanServiceImpl<PrintMapper, PrintReco
         }
 
         byte[] byt = JasperReportUtil.exportToPdf(templateFileInfoVo.getData().getPath(), param, detail);
+        Assert.isTrue(!ObjectUtils.isEmpty(byt), "pdf打印文件生成失败");
 
         ByteReqDTO byteReqDTO = new ByteReqDTO();
         byteReqDTO.setBytes(byt);
         byteReqDTO.setFileName(getIdStrategy().id()+".PDF");
         ResultData<FileInfoVO> result = fileInfoFeignClient.byteUpload(byteReqDTO);
+
         // 上传至文件服务器
         return result.getData();
     }
