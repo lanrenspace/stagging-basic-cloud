@@ -25,7 +25,8 @@ public class PrintController {
 
     @ApiOperation(value = "生成pdf打印")
     @PostMapping("/pdf")
-    public ResultData<FileInfoVO> print(@RequestBody @Validated PrintDataDto printDataDto, HttpServletResponse response) throws Exception {
+    public ResultData<FileInfoVO> pdf(@RequestBody @Validated PrintDataDto printDataDto, HttpServletResponse response) throws Exception {
         return ResultData.ok(printService.printPdf(printDataDto, response));
     }
+
 }

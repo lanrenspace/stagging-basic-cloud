@@ -8,6 +8,7 @@ import com.basic.cloud.file.service.FileInfoService;
 import com.basic.cloud.file.vo.FileInfoVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.ObjectUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayInputStream;
@@ -34,7 +35,7 @@ public class FileController {
      * @return
      */
     @PostMapping("/byteUpload")
-    public ResultData<FileInfoVO> byteUpload(@RequestBody ByteReqDTO reqDTO) {
+    public ResultData<FileInfoVO> byteUpload(@RequestBody @Validated ByteReqDTO reqDTO) {
         if (ObjectUtils.isEmpty(reqDTO.getBytes()) || ObjectUtils.isEmpty(reqDTO.getFileName())) {
             return ResultData.error("上传请求参数不能为空!");
         }

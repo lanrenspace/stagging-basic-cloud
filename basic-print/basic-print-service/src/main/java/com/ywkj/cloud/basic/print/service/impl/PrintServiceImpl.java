@@ -45,8 +45,7 @@ public class PrintServiceImpl extends BaseBeanServiceImpl<PrintMapper, PrintReco
         Assert.isTrue(!CollectionUtils.isEmpty(printTemplateInfos), "找不到对应的打印方案："+printDataDto.getTemplateNo());
 
         // 查找文件
-        FileInfoVO templateFileInfoVo = fileInfoFeignClient.findById(printTemplateInfos.get(0).getFieldId());
-
+        FileInfoVO templateFileInfoVo = fileInfoFeignClient.findById(printTemplateInfos.get(0).getFileId());
 
         final Map<String, Object> param = new HashMap<>();
         printDataDto.getFields().forEach(field -> {

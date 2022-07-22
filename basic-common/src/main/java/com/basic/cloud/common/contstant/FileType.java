@@ -22,11 +22,16 @@ public interface FileType {
     String IMG_JPEG = "JPEG";
 
     /**
+     * JASPER
+     */
+    String JASPER_JPEG = "JASPER";
+
+    /**
      * 默认允许的文件后缀
      *
      * @return
      */
     static String suffixList() {
-        return IMG_PNG + "," + IMG_JPG + "," + IMG_JPEG;
+        return IMG_PNG + "," + IMG_JPG + "," + IMG_JPEG + "," + JASPER_JPEG;
     }
 }
