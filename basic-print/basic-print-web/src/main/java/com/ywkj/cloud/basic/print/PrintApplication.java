@@ -1,4 +1,4 @@
-package com.ywkj.cloud.basic.print.web;
+package com.ywkj.cloud.basic.print;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -11,7 +11,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  **/
 @SpringBootApplication
 @EnableDiscoveryClient
-@MapperScan("com.ywkj.cloud.print.mapper")
+@MapperScan("com.ywkj.cloud.basic.print.mapper")
 public class PrintApplication {
 
     public static void main(String[] args) {

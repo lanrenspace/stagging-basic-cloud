@@ -1,8 +1,8 @@
-package com.ywkj.cloud.basic.print.web.controller;
+package com.ywkj.cloud.basic.print.controller;
 
 import com.basic.cloud.common.vo.ResultData;
 import com.basic.cloud.file.vo.FileInfoVO;
-import com.ywkj.cloud.basic.print.entity.dto.PrintDataDto;
+import com.ywkj.cloud.basic.print.dto.PrintDataDto;
 import com.ywkj.cloud.basic.print.service.PrintService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;

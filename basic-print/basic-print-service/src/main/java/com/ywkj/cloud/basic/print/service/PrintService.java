@@ -1,10 +1,9 @@
 package com.ywkj.cloud.basic.print.service;
 
 import com.basic.cloud.common.base.IBaseBeanService;
-import com.basic.cloud.common.boot.PlatformProperties;
 import com.basic.cloud.file.vo.FileInfoVO;
-import com.ywkj.cloud.basic.print.entity.dto.PrintDataDto;
-import com.ywkj.cloud.basic.print.entity.entity.PrintRecord;
+import com.ywkj.cloud.basic.print.dto.PrintDataDto;
+import com.ywkj.cloud.basic.print.entity.PrintRecord;
 
 import javax.servlet.http.HttpServletResponse;
 

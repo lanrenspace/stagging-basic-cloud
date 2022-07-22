@@ -194,6 +194,23 @@
                 <artifactId>basic-file-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.basic.cloud</groupId>
+                <artifactId>basic-print-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.basic.cloud</groupId>
+                <artifactId>basic-print-entity</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.basic.cloud</groupId>
+                <artifactId>basic-print-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.basic.cloud</groupId>
                 <artifactId>basic-uaa-resource</artifactId>

@@ -1,4 +1,4 @@
-package com.ywkj.cloud.basic.print.entity.dto;
+package com.ywkj.cloud.basic.print.dto;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;

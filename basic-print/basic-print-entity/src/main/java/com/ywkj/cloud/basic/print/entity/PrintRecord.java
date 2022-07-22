@@ -1,4 +1,4 @@
-package com.ywkj.cloud.basic.print.entity.entity;
+package com.ywkj.cloud.basic.print.entity;
 
 import com.basic.cloud.common.bean.BisDataEntity;
 import io.swagger.annotations.ApiModel;

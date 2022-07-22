@@ -1,4 +1,4 @@
-package com.ywkj.cloud.basic.print.entity.enums;
+package com.ywkj.cloud.basic.print.enums;
 
 public enum ReportTypeEnum {
     HTML,

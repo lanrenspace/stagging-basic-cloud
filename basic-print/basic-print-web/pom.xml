@@ -26,6 +26,7 @@
             <groupId>com.basic.cloud</groupId>
             <artifactId>basic-nacos-import</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.basic.cloud</groupId>
             <artifactId>basic-file-api</artifactId>

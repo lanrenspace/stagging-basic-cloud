@@ -1,6 +1,6 @@
 package com.ywkj.cloud.basic.print.utils;
 
-import com.ywkj.cloud.basic.print.entity.enums.ReportTypeEnum;
+import com.ywkj.cloud.basic.print.enums.ReportTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -12,7 +12,6 @@ import net.sf.jasperreports.export.SimpleHtmlReportConfiguration;
 import org.springframework.core.io.ClassPathResource;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;

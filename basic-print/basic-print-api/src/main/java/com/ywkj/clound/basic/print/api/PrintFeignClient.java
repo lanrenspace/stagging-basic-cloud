@@ -2,9 +2,8 @@ package com.ywkj.clound.basic.print.api;
 
 import com.basic.cloud.common.vo.ResultData;
 import com.basic.cloud.file.vo.FileInfoVO;
-import com.ywkj.cloud.basic.print.entity.dto.PrintDataDto;
+import com.ywkj.cloud.basic.print.dto.PrintDataDto;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @FeignClient(value = "${api.feign.client.uum}", path = "/basic/feign/print", contextId = "printFeignClient")
