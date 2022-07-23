@@ -44,6 +44,7 @@
         <jose-jwt.version>7.0.1</jose-jwt.version>
         <redis.version>2.7.2</redis.version>
         <fastjson.version>1.2.56</fastjson.version>
+        <hutool.version>5.8.4</hutool.version>
     </properties>
 
     <parent>
@@ -267,6 +268,12 @@
                 <version>2.1.0.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
