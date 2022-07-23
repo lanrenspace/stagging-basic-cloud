@@ -24,7 +24,6 @@ public class PrintController {
     private PrintService printService;
     private MergeFileService mergeFileService;
 
-
     @ApiOperation(value = "生成pdf打印")
     @PostMapping("/pdf")
     public ResultData<FileInfoVO> pdf(@RequestBody @Validated PrintDataDto printDataDto) throws Exception {
@@ -36,5 +35,4 @@ public class PrintController {
     public ResultData<FileInfoVO> merge(@RequestBody @Validated MergeFileReqDto mergeFileReqDto) throws Exception {
         return ResultData.ok(mergeFileService.mergeFile(mergeFileReqDto));
     }
-
 }

@@ -12,9 +12,19 @@ import java.util.List;
 @ApiModel(value = "文件合并")
 public class MergeFileReqDto {
 
+    /**
+     * 横向
+     */
+    public static final int HORIZONTAL = 0;
+
+
+
     @ApiModelProperty(value = "文件列表")
     List<FileInfoVO> files;
 
     @ApiModelProperty(value = "合并后文件格式")
     ReportTypeEnum toExt;
+
+    @ApiModelProperty(value = "方向(1：是纵向，2：横向)")
+    Integer direction;
 }

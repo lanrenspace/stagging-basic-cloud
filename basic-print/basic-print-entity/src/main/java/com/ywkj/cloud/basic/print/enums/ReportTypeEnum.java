@@ -23,7 +23,7 @@ public enum ReportTypeEnum {
 
     public static ReportTypeEnum get(String fileExt) {
         for (ReportTypeEnum ext : values()) {
-            if (ext.getFileExt().equals(fileExt)) {
+            if (ext.getFileExt().toUpperCase().equals(fileExt.toUpperCase())) {
                 //获取指定的枚举
                 return ext;
             }
@@ -36,6 +36,15 @@ public enum ReportTypeEnum {
             case JPG:
             case JPEG:
             case PNG: {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isPDF(ReportTypeEnum typeEnum) {
+        switch (typeEnum) {
+            case PDF: {
                 return true;
             }
         }
