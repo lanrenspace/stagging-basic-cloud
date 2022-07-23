@@ -5,7 +5,7 @@ ENV TZ Asia/Shanghai
 ARG JAR_FILE
 COPY ${JAR_FILE} app.jar
 ADD ${CONF_DIR} /conf
-EXPOSE 8081
+EXPOSE 8089
 # build param
-# image tag: stagging-basic-cloud:auth_v1.0.0
-ENTRYPOINT ["java","-server", "-Xms128m", "-Xmx256m","-jar","/app.jar","--spring.config.location=/conf/bootstrap.yml"]
+# image tag: stagging-basic-cloud:print_v1.0.0
+ENTRYPOINT ["java","-server", "-Xms256m", "-Xmx512m","-jar","/app.jar","--spring.config.location=/conf/bootstrap.yml"]
