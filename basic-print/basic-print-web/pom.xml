@@ -34,7 +34,7 @@
     </dependencies>
 
     <build>
-        <finalName>basic.uum.service.${project.version}</finalName>
+        <finalName>basic.print.service.${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

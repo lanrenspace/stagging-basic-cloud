@@ -7,7 +7,7 @@ import com.ywkj.cloud.basic.print.dto.merge.MergeFileReqDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@FeignClient(value = "${api.feign.client.uum}", path = "/basic/feign/print", contextId = "printFeignClient")
+@FeignClient(value = "${api.feign.client.print}", path = "/basic/feign/print", contextId = "printFeignClient")
 public interface PrintFeignClient {
 
     /**

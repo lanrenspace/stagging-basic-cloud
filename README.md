@@ -11,6 +11,7 @@
   * [集成Nacos Discovery 与 Nacos Config](#集成nacos-discovery-与-nacos-config)
   * [集成Gateway网关](#集成gateway网关)
   * [文件上传](#文件上传)
+  * [登录认证、续签、退出](#登录认证退出)
 * [数据库设计说明](#数据库设计说明)
   * [ER图](#er图)
   * [数据实体描述](#数据实体描述)
@@ -188,6 +189,17 @@ docker run -itd --name ContainerName ImageTagName
 
 #### QuickStart Guide
 
+##### 环境信息定义
+
+| 定义         | 描述                      |
+| ------------ | ------------------------- |
+| LAST_VERSION | 基础服务最后文档版本      |
+| GATEWAY      | GateWay网关服务           |
+| AUTH         | 认证授权代理前缀 eg：/uaa |
+
+**注意：之后文档中出现的${`定义`}值均为变量，具体值选择以上表格中的信息.**
+
+
 ##### 在Maven Project 中使用
 
 1. 在具体业务实现服务`pom.xml` 文件中添加依赖：
@@ -198,7 +210,7 @@ docker run -itd --name ContainerName ImageTagName
          <dependency>
             <groupId>com.basic.cloud</groupId>
             <artifactId>stagging-basic-cloud</artifactId>
-            <version>${last version}</version>
+            <version>${LAST_VERSION}</version>
             <type>pom</type>
             <scope>import</scope>
          </dependency>
@@ -213,7 +225,7 @@ docker run -itd --name ContainerName ImageTagName
       <dependency>
          <groupId>com.basic.cloud</groupId>
          <artifactId>basic-common</artifactId>
-         <version>${last version}</version>
+         <version>${LAST_VERSION}</version>
       </dependency>
    </dependencies>
    
@@ -222,7 +234,7 @@ docker run -itd --name ContainerName ImageTagName
          <dependency>
             <groupId>com.basic.cloud</groupId>
             <artifactId>stagging-basic-cloud</artifactId>
-            <version>${last version}</version>
+            <version>${LAST_VERSION}</version>
             <type>pom</type>
             <scope>import</scope>
          </dependency>
@@ -250,7 +262,7 @@ docker run -itd --name ContainerName ImageTagName
         <dependency>
            <groupId>com.basic.cloud</groupId>
            <artifactId>basic-common</artifactId>
-           <version>${last version}</version>
+           <version>${LAST_VERSION}</version>
         </dependency>
      </dependencies>
      ```
@@ -402,7 +414,7 @@ docker run -itd --name ContainerName ImageTagName
       <dependency>
          <groupId>com.basic.cloud</groupId>
          <artifactId>basic-nacos-import</artifactId>
-         <version>${last version}</version>
+         <version>${LAST_VERSION}</version>
       </dependency>
    </dependencies>
    ```
@@ -464,7 +476,7 @@ spring:
       <dependency>
          <groupId>com.basic.cloud</groupId>
          <artifactId>basic-file-api</artifactId>
-         <version>${last version}</version>
+         <version>${LAST_VERSION}</version>
       </dependency>
    </dependencies>
    ```
@@ -476,6 +488,111 @@ spring:
    private final FileInfoFeignClient fileInfoFeignClient;
    
    ```
+
+##### 登录认证、退出
+
+**基础服务使用 ```OAuth2 + JWT``` 进行实现，登录认证授权遵循OAuth2协议.**
+
+1. 登录
+
+   - password模式（服务默认实现）
+
+     请求地址：```${GATEWAY}/${AUTH}```/oauth/token?username=loginName&password=loginPassword&client_id=clientId&client_secret=clientSecret&grant_type=password
+
+     请求方式：POST/GET
+
+     参数说明：
+
+     | 参数          | 描述                      |
+     | ------------- | ------------------------- |
+     | username      | 登录账号                  |
+     | password      | 登录账号密码              |
+     | client_id     | 授权客户端ID              |
+     | client_secret | 授权客户端密匙            |
+     | grant_type    | 授权模式 固定值：password |
+
+     响应示例：
+
+     ```json
+     {
+         "additionalInformation": {
+             "userAccount": "登录账号",
+             "userId": "账号唯一ID"
+         },
+         // token过期时间
+         "expiration": 1658560965062,
+         "expired": false, // token是否过期
+         "expiresIn": 7199, // token有效时长
+         "refreshToken": {
+             "expiration": 1658812965060, // refreshToken 过期时间
+             "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9" // refreshToken
+         },
+         "scope": [
+             "all"
+         ], // 授权范围
+         "tokenType": "bearer", // token 类型
+         "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9" // token
+     }
+     ```
+
+     **注意：在登录成功后，客户端应对获取到的token值与refreshToken值进行本地缓存；在后续对其他需授权的业务接口进行方式时，在请求头中添加参数：```Authorization``` 参数值：```${tokenType} + 英文空格 + ${tokenValue}```**
+
+2. 续登
+
+   请求地址：```${GATEWAY}/${AUTH}```/oauth/token?client_id=clientId&client_secret=clientSecret&grant_type=refresh_token&refresh_token=refreshTokenValue
+
+   请求方式：POST
+
+   参数说明：
+
+   | 参数          | 描述                             |
+   | ------------- | -------------------------------- |
+   | client_id     | 授权客户端ID                     |
+   | client_secret | 授权客户端密匙                   |
+   | grant_type    | 授权模式 固定值：refresh_token   |
+   | refresh_token | 登录时获得的```refreshToken```值 |
+
+   响应示例：
+
+   ```json
+   {
+       "additionalInformation": {
+           "userAccount": "账号",
+           "userId": "唯一ID"
+       },
+       "expiration": 1658561750302,
+       "expired": false,
+       "expiresIn": 7199,
+       "refreshToken": {
+           "expiration": 1658813750300,
+           "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+       },
+       "scope": [
+           "all"
+       ],
+       "tokenType": "bearer",
+       "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+   }
+   ```
+
+   **响应结果与登录接口响应结果完全一致**
+
+3. 退出
+
+   1. 清除客户端本地缓存的```tokenValue``` 与 ```refreshTokenValue```
+
+   2. 调用登出接口（非必须）
+
+      请求地址：```${GATEWAY}/${AUTH}```/oauth/token/remove?accessToken=accessTokenValue
+
+      请求方式：DELETE
+
+      参数说明：
+
+      | 参数        | 描述                         |
+      | ----------- | ---------------------------- |
+      | accessToken | 登录时获得的```tokenValue``` |
+
 
 
 #### 数据库设计说明
