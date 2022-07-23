@@ -2,6 +2,7 @@ package com.basic.cloud.uums.service;
 
 import com.basic.cloud.common.base.IBaseBeanService;
 import com.basic.cloud.uums.entity.ResourceInfo;
+import com.basic.cloud.uums.vo.ResourceUrlVO;
 
 import java.util.List;
 
@@ -35,5 +36,12 @@ public interface ResourceInfoService extends IBaseBeanService<ResourceInfo> {
      * @return
      */
     boolean matchUserResources(List<Long> resourceIds, String url, String httpMethod);
+
+    /**
+     * 保存资源信息
+     *
+     * @param resourceUrlVOS
+     */
+    void saveResourceUrl(List<ResourceUrlVO> resourceUrlVOS);
 
 }

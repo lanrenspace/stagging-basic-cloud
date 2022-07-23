@@ -20,6 +20,11 @@ public class ResourceInfo extends BisDataEntity<ResourceInfo> {
     private Long id;
 
     /**
+     * 应用服务ID
+     */
+    private String appId;
+
+    /**
      * 资源名称
      */
     private String name;

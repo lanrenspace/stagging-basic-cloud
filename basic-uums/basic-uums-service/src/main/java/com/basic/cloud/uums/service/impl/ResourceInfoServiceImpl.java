@@ -2,13 +2,18 @@ package com.basic.cloud.uums.service.impl;
 
 import com.basic.cloud.common.bean.BaseBeanServiceImpl;
 import com.basic.cloud.common.bean.BisDataEntity;
+import com.basic.cloud.common.contstant.OrgConst;
+import com.basic.cloud.common.contstant.SysConst;
+import com.basic.cloud.common.transfer.ModelMapper;
 import com.basic.cloud.uums.entity.ResourceInfo;
 import com.basic.cloud.uums.mapper.ResourceInfoMapper;
 import com.basic.cloud.uums.service.ResourceInfoService;
+import com.basic.cloud.uums.vo.ResourceUrlVO;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,6 +57,41 @@ public class ResourceInfoServiceImpl extends BaseBeanServiceImpl<ResourceInfoMap
         }
         return listByIds(resourceIds).stream().anyMatch(resourceInfo ->
                 (resourceInfo.getUrl() + RESOURCE_KEY_LINK_SYMBOL + resourceInfo.getMethod()).equals(url + RESOURCE_KEY_LINK_SYMBOL + httpMethod));
+    }
+
+    @Override
+    public void saveResourceUrl(List<ResourceUrlVO> resourceUrlVOS) {
+        if (CollectionUtils.isEmpty(resourceUrlVOS)) {
+            return;
+        }
+        resourceUrlVOS = resourceUrlVOS.stream()
+                .filter(resourceUrlVO -> !ObjectUtils.isEmpty(resourceUrlVO.getAppId())
+                        && !ObjectUtils.isEmpty(resourceUrlVO.getUrl())
+                        && !ObjectUtils.isEmpty(resourceUrlVO.getMethod()))
+                .collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(resourceUrlVOS)) {
+            return;
+        }
+        List<ResourceInfo> resourceInfos = ModelMapper.mapFromCollection(ResourceInfo.class, resourceUrlVOS, (source, target) -> {
+            target.setDelFlag(false);
+            target.setTenantCode(OrgConst.ADMIN_TENANT_CODE);
+            target.setCreateBy(SysConst.ANONYMOUS_USER);
+            target.setCreateTime(new Date());
+        });
+        List<ResourceInfo> existResource = list(getLambdaQueryWrapper()
+                .in(ResourceInfo::getAppId, resourceInfos.stream().map(ResourceInfo::getAppId).collect(Collectors.toList()))
+                .in(ResourceInfo::getUrl, resourceInfos.stream().map(ResourceInfo::getUrl).collect(Collectors.toList()))
+                .in(ResourceInfo::getMethod, resourceInfos.stream().map(ResourceInfo::getMethod).collect(Collectors.toList()))
+                .eq(BisDataEntity::getDelFlag, false));
+        if (!CollectionUtils.isEmpty(existResource)) {
+            resourceInfos = resourceInfos.stream()
+                    .filter(resourceInfo -> existResource.stream()
+                            .noneMatch(exist -> resourceInfo.getUrl().equals(exist.getUrl()) && resourceInfo.getMethod().equals(exist.getMethod())))
+                    .collect(Collectors.toList());
+        }
+        if (!CollectionUtils.isEmpty(resourceInfos)) {
+            batchInsert(resourceInfos);
+        }
     }
 
 }
