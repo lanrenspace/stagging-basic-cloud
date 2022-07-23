@@ -98,7 +98,9 @@ public class MergeFileServiceImpl implements MergeFileService {
             }).collect(Collectors.toList());
 
             try {
-                collect.add(new PdfReader(baos.toByteArray()));
+                if (baos.size() > 0) {
+                    collect.add(new PdfReader(baos.toByteArray()));
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
