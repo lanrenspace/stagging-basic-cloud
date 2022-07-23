@@ -4,6 +4,7 @@ import com.basic.cloud.common.vo.ResultData;
 import com.basic.cloud.uums.api.AnonymousInfoFeignClient;
 import com.basic.cloud.uums.api.BlackIpsFeignClient;
 import com.basic.cloud.uums.api.ResourceAuthorityFeignClient;
+import com.basic.cloud.uums.authority.constant.AuthorityCont;
 import com.basic.cloud.uums.authority.service.AuthService;
 import com.basic.cloud.uums.vo.AnonymousInfoVO;
 import com.basic.cloud.uums.vo.BlackIpVO;
@@ -36,10 +37,6 @@ public class AuthServiceImpl implements AuthService {
         this.resourceAuthorityFeignClient = resourceAuthorityFeignClient;
     }
 
-    /**
-     * Authorization认证头
-     */
-    private static final String BEARER = "Bearer ";
 
     /**
      * jwt 签名
@@ -61,8 +58,8 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Jws<Claims> getJwt(String jwtToken) {
-        if (jwtToken.startsWith(BEARER.toLowerCase()) || jwtToken.startsWith(BEARER.toUpperCase())) {
-            jwtToken = StringUtils.substring(jwtToken, BEARER.length());
+        if (jwtToken.startsWith(AuthorityCont.BEARER.toLowerCase()) || jwtToken.startsWith(AuthorityCont.BEARER.toUpperCase())) {
+            jwtToken = StringUtils.substring(jwtToken, AuthorityCont.BEARER.length());
         }
         return Jwts.parser()
                 .setSigningKey(signingKey.getBytes())

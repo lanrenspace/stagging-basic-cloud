@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -38,7 +37,6 @@ import java.util.List;
  **/
 @Configuration
 @ComponentScan(basePackages = {"com.basic.cloud.common.exceptions", "com.basic.cloud.common.boot"})
-@MapperScan(basePackages = "com.ywkj.uidgenerator.worker.mapper")
 public class CommonAutoConfiguration {
 
     /**
@@ -55,7 +53,7 @@ public class CommonAutoConfiguration {
         this.platformProperties = platformProperties;
         this.applicationContext = applicationContext;
         this.redisTemplate = redisTemplate;
-        initSwaggerConfig();
+//        initSwaggerConfig();
         logger.info("load Common comp success!");
     }
 
@@ -69,7 +67,7 @@ public class CommonAutoConfiguration {
             BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(Docket.class);
             beanDefinitionBuilder.addConstructorArgValue(DocumentationType.SWAGGER_2);
             BeanDefinition beanDefinition = beanDefinitionBuilder.getRawBeanDefinition();
-            swaggers.stream().filter(PlatformProperties.Swagger::isEnable).forEach(swagger -> {
+            swaggers.forEach(swagger -> {
                 String beanName = "swaggerDocket" + RandomStringUtils.random(6);
                 beanDefinitionRegistry.registerBeanDefinition(beanName, beanDefinition);
                 Docket docket = this.applicationContext.getBean(beanName, Docket.class);

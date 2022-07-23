@@ -6,10 +6,9 @@ import io.jsonwebtoken.*;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
-import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
@@ -21,8 +20,6 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.net.URI;
-import java.util.LinkedHashSet;
 import java.util.Objects;
 
 import static com.basic.cloud.common.contstant.SysConst.*;
@@ -42,6 +39,12 @@ public class AccessGatewayFilter implements GlobalFilter {
 
     private final AuthService authService;
 
+    /**
+     * swagger请求后缀
+     */
+    @Value("${gate.ignore.swagger.endWith:/v2/api-docs}")
+    private String swaggerEndWith;
+
     public AccessGatewayFilter(AuthService authService) {
         this.authService = authService;
     }
@@ -53,7 +56,7 @@ public class AccessGatewayFilter implements GlobalFilter {
         String authentication = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         logger.info("Access filter. url:{}, access_token:{}", url, authentication);
         // 白名单请求
-        if (anonymousReq(request)) {
+        if (anonymousReq(request) || swaggerReq(url)) {
             return chain.filter(exchange);
         }
         // 有授权请求头,校验权限
@@ -155,5 +158,15 @@ public class AccessGatewayFilter implements GlobalFilter {
      */
     private boolean anonymousReq(ServerHttpRequest request) {
         return FilterHeaderCont.ANONYMOUS_REQ_VALUE.equals(request.getHeaders().getFirst(FilterHeaderCont.ANONYMOUS_REQ_PARAM));
+    }
+
+    /**
+     * swagger文档
+     *
+     * @param url
+     * @return
+     */
+    private boolean swaggerReq(String url) {
+        return url.endsWith(swaggerEndWith);
     }
 }

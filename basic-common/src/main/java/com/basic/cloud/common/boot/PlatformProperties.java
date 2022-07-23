@@ -91,11 +91,6 @@ public class PlatformProperties {
          */
         private ApiInfo apiInfo;
 
-        /**
-         * 是否启用
-         */
-        private boolean enable;
-
         @Data
         public static class ApiInfo {
 

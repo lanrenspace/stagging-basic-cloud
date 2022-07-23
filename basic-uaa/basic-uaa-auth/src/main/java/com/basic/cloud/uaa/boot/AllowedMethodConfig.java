@@ -24,7 +24,7 @@ public class AllowedMethodConfig {
 
     @PostConstruct
     public void reconfigure() {
-        Set<HttpMethod> allowedMethods = new HashSet<>(Arrays.asList(HttpMethod.POST, HttpMethod.GET));
+        Set<HttpMethod> allowedMethods = new HashSet<>(Arrays.asList(HttpMethod.POST, HttpMethod.GET, HttpMethod.DELETE));
         tokenEndpoint.setAllowedRequestMethods(allowedMethods);
     }
 }
