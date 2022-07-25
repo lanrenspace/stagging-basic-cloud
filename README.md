@@ -694,6 +694,12 @@ public interface FileInfoFeignClient {
 数据实体描述：[请求黑名单IP信息表](#authority_black_ip)
 
 
+**接口资源白名单配置：**
+
+在接口白名单配置中的资源信息将不受认证拦截；
+
+详细配置信息参考：[接口资源白名单数据实体描述](#uum_anonymous_info)
+
 
 
 #### 数据库设计说明
@@ -1045,7 +1051,7 @@ uum_resource_authority（资源授权信息）
 | update_time    | datetime |      | 更新时间                       |
 | del_flag       | tinyint  |      | 是否逻辑删除                   |
 
-uum_anonymous_info（白名单资源信息）
+<a id="uum_anonymous_info">uum_anonymous_info（白名单资源信息）</a>
 
 | 字段名称    | 类型     | 约束 | 描述                  |
 | ----------- | -------- | ---- | --------------------- |
