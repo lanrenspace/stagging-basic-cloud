@@ -769,6 +769,38 @@ public interface FileInfoFeignClient {
   | refresh_token_validity  | int     |      | 设定客户端的refresh_token的有效时间值(单位:秒)，一般情况下refresh_token的有效时长要大于access_token的有效时长 |
   | additional_information  | varchar |      | 预留字段，可定义自定义参数：json格式数据                     |
   | autoapprove             | varchar |      | 适用于grant_type="authorization_code"的情况，用户是否自动Approval操作，可选值包括 true,false, read,write |
+  
+  
+  oauth_access_token（授权access_token信息）
+
+  | 字段名称          | 类型      | 约束 | 描述                                                         |
+  | ----------------- | --------- | ---- | ------------------------------------------------------------ |
+  | token_id          | varchar   |      | 该字段的值是将access_token的值通过MD5加密后存储的            |
+  | token             | blob      |      | 存储将OAuth2AccessToken对象序列化后的二进制数据，是真实的AccessToken数据值 |
+  | authentication_id | varchar   |      | 该字段具有唯一性, 其值是根据当前的username,client_id与scope通过MD5加密生成的 |
+  | user_name         | varchar   |      | 登录时的用户名, 若客户端没有用户名,如客户端没有用户名，则该值等于client_id |
+  | client_id         | varchar   |      | client_id的值                                                |
+  | authentication    | blob      |      | 存储将OAuth2Authentication对象序列化后的二进制数据           |
+  | refresh_token     | varchar   |      | 该字段的值是将refresh_token的值通过MD5加密后存储的，主要用来续签时使用 |
+  | create_time       | timestamp |      | 数据的创建时间,精确到秒,由数据库在插入数据时取当前系统时间自动生成(扩展字段) |
+
+  oauth_refresh_token（续签access_token的信息）
+
+  | 字段名称       | 类型      | 约束 | 描述                                                         |
+  | -------------- | --------- | ---- | ------------------------------------------------------------ |
+  | token_id       | varchar   |      | 该字段的值是将refresh_token的值通过MD5加密后存储的           |
+  | token          | blob      |      | 存储将OAuth2RefreshToken对象序列化后的二进制数据             |
+  | authentication | blob      |      | 存储将OAuth2Authentication对象序列化后的二进制数据           |
+  | create_time    | timestamp |      | 数据的创建时间,精确到秒,由数据库在插入数据时取当前系统时间自动生成(扩展字段) |
+
+  oauth_code（授权码信息）
+
+  | 字段名称       | 类型      | 约束 | 描述                                                         |
+  | -------------- | --------- | ---- | ------------------------------------------------------------ |
+  | code           | varchar   |      | 存储服务端系统生成的code的值(未加密)                         |
+  | authentication | blob      |      | 存储将AuthorizationRequestHolder对象序列化后的二进制数据     |
+  | create_time    | timestamp |      | 数据的创建时间,精确到秒,由数据库在插入数据时取当前系统时间自动生成(扩展字段) |
+  
 
 - **basic-uums**
 
