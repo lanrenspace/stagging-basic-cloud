@@ -10,7 +10,8 @@
   * [在Maven Project 中使用](#在maven-project-中使用)
   * [Basic Usage](#basic-usage基于springboot编写)
   * [集成Nacos Discovery 与 Nacos Config](#集成nacos-discovery-与-nacos-config)
-  * [集成Gateway网关](#集成gateway网关)
+  * [集成Gateway网关组件](#集成gateway网关)
+  * [集成OpenFeign组件](#集成openfeign)
   * [文件上传](#文件上传)
   * [登录认证、续签、退出](#登录认证退出)
 * [数据库设计说明](#数据库设计说明)
@@ -481,6 +482,41 @@ spring:
           filters:
             - StripPrefix=1
 ```
+
+##### 集成OpenFeign
+
+*具体业务服务需要对其他服务提供接口服务时，在Api包中进行集成；*
+
+**引入组件：**
+
+```xml
+<!--
+......
+-->
+<dependencies>
+   <dependency>
+      <groupId>com.basic.cloud</groupId>
+      <artifactId>basic-feign-import</artifactId>
+      <version>${LAST_VERSION}</version>
+   </dependency>
+</dependencies>
+```
+
+**编写接口：为实现规范化 Feign path的定义必须以```/feign/```开头**
+
+```java
+@FeignClient(value = "${api.feign.client.file}", path = "/feign/fileInfo", contextId = "fileInfoFeignClient")
+public interface FileInfoFeignClient {
+    // ......
+}
+```
+
+- value：指定服务提供者
+- path：feign接口路径
+- contextId：SpringBean注册名（必填、唯一），建议与接口名一致
+
+**注意：组件默认扫描Feign注册路径为```com.basic.cloud```包及其子包，如需扫描其他包则在服务调用发使用```@EnableFeignClients```注解进行自定义配置即可;**
+
 
 ##### 文件上传
 
