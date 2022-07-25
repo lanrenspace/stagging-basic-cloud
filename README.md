@@ -671,9 +671,17 @@ public interface FileInfoFeignClient {
 
 **黑名单配置：**
 
-接口添加：```/anonymousInfo/add```
+接口添加：```/blackIps/add```
 
 接口描述：```${GATEWAY_PATH}```/doc.html#/basic.uum.service/black-ips-controller/addUsingPOST
+
+接口删除：```/blackIps/remove```
+
+接口描述：```${GATEWAY_PATH}```/doc.html#/basic.uum.service/black-ips-controller/removeUsingDELETE
+
+查看是否存在：```/blackIps/exits```
+
+接口描述：```${GATEWAY_PATH}```/doc.html#/basic.uum.service/black-ips-controller/exitsUsingGET
 
 手动添加：在数据表```authority_black_ip```中新增一条数据即可
 
