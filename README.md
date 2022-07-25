@@ -14,6 +14,8 @@
   * [集成OpenFeign组件](#集成openfeign)
   * [文件上传](#文件上传)
   * [登录认证、续签、退出](#登录认证退出)
+* [组件使用说明](#组件使用说明)
+  * [basic\-gateway（网关组件）](#basic-gateway网关组件)
 * [数据库设计说明](#数据库设计说明)
   * [ER图](#er图)
   * [数据实体描述](#数据实体描述)
@@ -648,6 +650,35 @@ public interface FileInfoFeignClient {
       | 参数        | 描述                         |
       | ----------- | ---------------------------- |
       | accessToken | 登录时获得的```tokenValue``` |
+
+
+#### 组件使用说明
+
+##### basic-gateway（网关组件）
+
+*所有服务请求的统一出入口，黑名单拦截、令牌解析、接口文档、权限控制、限流等在此组件处理；*
+
+**组件属性配置**
+
+| name                                 | description                                                 | option                                                       |
+| ------------------------------------ | ----------------------------------------------------------- | ------------------------------------------------------------ |
+| spring.application.name              | 服务名称                                                    | default: basic.gateway.service                               |
+| gate.ignore.swagger.path             | Swaager2服务调用默认接口                                    | default: /v2/api-docs                                        |
+| gate.ignore.swagger.service          | Swaager2接口文档忽略的服务名称，多个服务以```/```分割       | default: basic.uaa.service                                   |
+| uaa.auth.jwt.signingKey              | jwt 签名                                                    | 需要与UAA服务配置的 ```uaa.auth.jwt.signingKey``` 参数值一致 |
+| gate.ignore.authentication.startWith | 不需要网关签权的url配置，多个请求头以英文逗号进行分割       | default: /oauth,/open                                        |
+| gate.internal.call.startWith         | 内部调用不需要网关鉴权url配置，多个请求头以英文逗号进行分割 | default: /feign                                              |
+
+**黑名单配置：**
+
+接口添加：```/anonymousInfo/add```
+
+接口描述：```${GATEWAY_PATH}```/doc.html#/basic.uum.service/black-ips-controller/addUsingPOST
+
+手动添加：在数据表```authority_black_ip```中新增一条数据即可
+
+数据实体描述：
+
 
 
 
