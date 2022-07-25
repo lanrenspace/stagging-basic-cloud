@@ -5,6 +5,7 @@
 * [业务组件包拆分说明](#业务组件包拆分说明)
 * [业务系统架构图](#业务系统架构图)
 * [中间件安装配置](#中间件安装配置)
+* [接口文档使用](#接口文档使用)
 * [QuickStart Guide](#quickstart-guide)
   * [在Maven Project 中使用](#在maven-project-中使用)
   * [Basic Usage](#basic-usage基于springboot编写)
@@ -186,6 +187,25 @@ docker run -itd --name ContainerName ImageTagName
             -d --restart=always \
             registry.cn-beijing.aliyuncs.com/itstyle/fastdfs:1.0
    ```
+
+
+####  接口文档使用
+
+*项目默认集成```Swagger2```,项目接口代码编写遵循Swagger2语法，文档在线访问地址：```${对外网关服务地址}/doc.html```;*
+
+**系统Feign接口，在文档中应该有所标识，遵循命名注释如下：**
+
+```java
+@Api(value = "Feign:业务描述")
+@RestController
+@RequestMapping("/feign/xxxx")
+public class AnonymousInfoController {
+    // ......
+}
+```
+
+**注意：Feign类接口在开发环境（dev、test）下能够允许外部调用，但在预生产（sit）与生产环境（prod）下不允许外部调用**
+
 
 #### QuickStart Guide
 
