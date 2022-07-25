@@ -710,6 +710,9 @@ public interface FileInfoFeignClient {
 
 ###### basic-uums
 
+![image](https://github.com/lanrenspace/stagging-basic-cloud/blob/master/design/er/uums_er.png)
+
+
 ##### 数据实体描述
 
 ###### basic-file
