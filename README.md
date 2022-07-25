@@ -16,6 +16,9 @@
   * [登录认证、续签、退出](#登录认证退出)
 * [组件使用说明](#组件使用说明)
   * [basic\-gateway（网关组件）](#basic-gateway网关组件)
+    * [组件属性配置](#组件属性配置)
+    * [黑名单配置](#黑名单配置)
+    * [接口资源白名单配置](#接口资源白名单配置)
 * [数据库设计说明](#数据库设计说明)
   * [ER图](#er图)
     * [basic\-file（文件服务）](#basic-file)
@@ -664,7 +667,7 @@ public interface FileInfoFeignClient {
 
 *所有服务请求的统一出入口，黑名单拦截、令牌解析、接口文档、权限控制、限流等在此组件处理；*
 
-**组件属性配置**
+###### **组件属性配置**
 
 | name                                 | description                                                 | option                                                       |
 | ------------------------------------ | ----------------------------------------------------------- | ------------------------------------------------------------ |
@@ -675,7 +678,7 @@ public interface FileInfoFeignClient {
 | gate.ignore.authentication.startWith | 不需要网关签权的url配置，多个请求头以英文逗号进行分割       | default: /oauth,/open                                        |
 | gate.internal.call.startWith         | 内部调用不需要网关鉴权url配置，多个请求头以英文逗号进行分割 | default: /feign                                              |
 
-**黑名单配置：**
+###### **黑名单配置**
 
 接口添加：```/blackIps/add```
 
@@ -694,7 +697,7 @@ public interface FileInfoFeignClient {
 数据实体描述：[请求黑名单IP信息表](#authority_black_ip)
 
 
-**接口资源白名单配置：**
+###### **接口资源白名单配置**
 
 在接口白名单配置中的资源信息将不受认证拦截；
 
