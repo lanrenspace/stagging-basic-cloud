@@ -14,11 +14,11 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/feign/blackIps")
-public class BlackIpsController {
+public class BlackIpsFeignController {
 
     private final BlackIpsService blackIpsService;
 
-    public BlackIpsController(BlackIpsService blackIpsService) {
+    public BlackIpsFeignController(BlackIpsService blackIpsService) {
         this.blackIpsService = blackIpsService;
     }
 

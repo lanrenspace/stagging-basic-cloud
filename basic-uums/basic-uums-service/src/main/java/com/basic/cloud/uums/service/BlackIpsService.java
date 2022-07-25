@@ -18,4 +18,12 @@ public interface BlackIpsService extends IBaseBeanService<BlackIps> {
      * @return
      */
     List<BlackIpVO> getAllBlackIp();
+
+    /**
+     * 增加黑名单配置
+     *
+     * @param blackIps
+     * @return
+     */
+    Boolean saveIp(BlackIps blackIps);
 }

@@ -1,5 +1,6 @@
 package com.basic.cloud.gateway.filter;
 
+import com.basic.cloud.gateway.boot.SwaggerProvider;
 import com.basic.cloud.gateway.contstant.FilterHeaderCont;
 import com.basic.cloud.uums.authority.service.AuthService;
 import io.jsonwebtoken.*;
@@ -38,12 +39,6 @@ public class AccessGatewayFilter implements GlobalFilter {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private final AuthService authService;
-
-    /**
-     * swagger请求后缀
-     */
-    @Value("${gate.ignore.swagger.endWith:/v2/api-docs}")
-    private String swaggerEndWith;
 
     public AccessGatewayFilter(AuthService authService) {
         this.authService = authService;
@@ -167,6 +162,6 @@ public class AccessGatewayFilter implements GlobalFilter {
      * @return
      */
     private boolean swaggerReq(String url) {
-        return url.endsWith(swaggerEndWith);
+        return url.endsWith(SwaggerProvider.API_URI);
     }
 }

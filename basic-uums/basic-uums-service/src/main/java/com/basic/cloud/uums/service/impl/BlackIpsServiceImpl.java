@@ -2,6 +2,7 @@ package com.basic.cloud.uums.service.impl;
 
 import com.basic.cloud.common.bean.BaseBeanServiceImpl;
 import com.basic.cloud.common.bean.BisDataEntity;
+import com.basic.cloud.common.exceptions.DataException;
 import com.basic.cloud.common.transfer.ModelMapper;
 import com.basic.cloud.uums.entity.BlackIps;
 import com.basic.cloud.uums.mapper.BlackIpsMapper;
@@ -28,5 +29,15 @@ public class BlackIpsServiceImpl extends BaseBeanServiceImpl<BlackIpsMapper, Bla
             return new ArrayList<>();
         }
         return ModelMapper.mapFromCollection(BlackIpVO.class, blackIps);
+    }
+
+    @Override
+    public Boolean saveIp(BlackIps blackIps) {
+        BlackIps dbBlackIp = getOne(getLambdaQueryWrapper().eq(BlackIps::getIp, blackIps.getIp())
+                .eq(BisDataEntity::getDelFlag, false));
+        if (dbBlackIp != null) {
+            throw new DataException("数据已存在,请删除后重新添加!");
+        }
+        return save(blackIps);
     }
 }
