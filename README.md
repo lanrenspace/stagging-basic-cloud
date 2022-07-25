@@ -9,7 +9,7 @@
 * [QuickStart Guide](#quickstart-guide)
   * [在Maven Project 中使用](#在maven-project-中使用)
   * [Basic Usage](#basic-usage基于springboot编写)
-  * [集成Nacos Discovery 与 Nacos Config](#集成nacos-discovery-与-nacos-config)
+  * [集成Nacos Discovery 与 Nacos Config 组件](#集成nacos-discovery-与-nacos-config)
   * [集成Gateway网关组件](#集成gateway网关)
   * [集成OpenFeign组件](#集成openfeign)
   * [文件上传](#文件上传)
@@ -18,7 +18,13 @@
   * [basic\-gateway（网关组件）](#basic-gateway网关组件)
 * [数据库设计说明](#数据库设计说明)
   * [ER图](#er图)
+    * [basic\-file（文件服务）](#basic-file)
+    * [basic\-uaa（授权服务）](#basic-uaa)
+    * [basic\-uums（用户中心服务）](#basic-uums)
   * [数据实体描述](#数据实体描述)
+    * [basic\-file（文件服务）](#basic-file-1)
+    * [basic\-uaa（授权服务）](#basic-uaa-1)
+    * [basic\-uums（用户中心服务）](#basic-uums-1)
 #### 组件说明
 | 组件名称          | 说明                              | 进度          |
 |:--------------|:--------------------------------|-------------|
@@ -694,130 +700,130 @@ public interface FileInfoFeignClient {
 
 ##### ER图
 
-- **basic-file**
+###### basic-file
 
-  ![image](https://github.com/lanrenspace/stagging-basic-cloud/blob/master/design/er/file_er.png)
+![image](https://github.com/lanrenspace/stagging-basic-cloud/blob/master/design/er/file_er.png)
 
-- **basic-uaa**
+###### basic-uaa
 
-  ![image](https://github.com/lanrenspace/stagging-basic-cloud/blob/master/design/er/uaa_er.png)
+![image](https://github.com/lanrenspace/stagging-basic-cloud/blob/master/design/er/uaa_er.png)
 
-- **basic-uums**
+###### basic-uums
 
 ##### 数据实体描述
 
-- **basic-file**
+###### basic-file
 
-  主文件信息表
+bis_file_info（主文件信息表）
 
-  | 字段名称       | 类型     | 约束 | 描述         |
-  | -------------- | -------- | ---- | ------------ |
-  | id             | bigint   | PK   | 主键ID       |
-  | file_name      | varchar  |      | 文件名称     |
-  | original_name  | varchar  |      | 原名         |
-  | storage_path   | varchar  |      | 存储路径     |
-  | storage_server | varchar  |      | 存储服务     |
-  | size           | bigint   |      | 文件大小     |
-  | category       | varchar  |      | 业务目录     |
-  | group_name     | varchar  |      | 分组名称     |
-  | path           | varchar  |      | 完整路径     |
-  | remark         | varchar  |      | 文件备注     |
-  | sort           | tinyint  |      | 排序         |
-  | tenant_code    | varchar  |      | 租户编码     |
-  | create_by      | bigint   |      | 创建用户     |
-  | create_name    | varchar  |      | 创建用户名称 |
-  | create_time    | datetime |      | 创建日期     |
-  | update_by      | bigint   |      | 编辑用户     |
-  | update_name    | varchar  |      | 更新时间     |
-  | update_time    | datetime |      | 更新时间     |
-  | del_flag       | tinyint  |      | 是否逻辑删除 |
+| 字段名称       | 类型     | 约束 | 描述         |
+| -------------- | -------- | ---- | ------------ |
+| id             | bigint   | PK   | 主键ID       |
+| file_name      | varchar  |      | 文件名称     |
+| original_name  | varchar  |      | 原名         |
+| storage_path   | varchar  |      | 存储路径     |
+| storage_server | varchar  |      | 存储服务     |
+| size           | bigint   |      | 文件大小     |
+| category       | varchar  |      | 业务目录     |
+| group_name     | varchar  |      | 分组名称     |
+| path           | varchar  |      | 完整路径     |
+| remark         | varchar  |      | 文件备注     |
+| sort           | tinyint  |      | 排序         |
+| tenant_code    | varchar  |      | 租户编码     |
+| create_by      | bigint   |      | 创建用户     |
+| create_name    | varchar  |      | 创建用户名称 |
+| create_time    | datetime |      | 创建日期     |
+| update_by      | bigint   |      | 编辑用户     |
+| update_name    | varchar  |      | 更新时间     |
+| update_time    | datetime |      | 更新时间     |
+| del_flag       | tinyint  |      | 是否逻辑删除 |
 
-  文件分片表
+bis_file_sharding（文件分片表）
 
-  | 字段名称    | 类型     | 约束 | 描述         |
-  | ----------- | -------- | ---- | ------------ |
-  | id          | bigint   | PK   | 主键ID       |
-  | shard_key   | varchar  |      | 分片编码     |
-  | file_id     | bigint   |      | 文件ID       |
-  | shard_index | int      |      | 第几个分片   |
-  | total       | int      |      | 总分片       |
-  | tenant_code | varchar  |      | 租户编码     |
-  | create_by   | bigint   |      | 创建用户     |
-  | create_name | varchar  |      | 创建用户名称 |
-  | create_time | datetime |      | 创建日期     |
-  | update_by   | bigint   |      | 编辑用户     |
-  | update_name | varchar  |      | 更新时间     |
-  | update_time | datetime |      | 更新时间     |
-  | del_flag    | tinyint  |      | 是否逻辑删除 |
+| 字段名称    | 类型     | 约束 | 描述         |
+| ----------- | -------- | ---- | ------------ |
+| id          | bigint   | PK   | 主键ID       |
+| shard_key   | varchar  |      | 分片编码     |
+| file_id     | bigint   |      | 文件ID       |
+| shard_index | int      |      | 第几个分片   |
+| total       | int      |      | 总分片       |
+| tenant_code | varchar  |      | 租户编码     |
+| create_by   | bigint   |      | 创建用户     |
+| create_name | varchar  |      | 创建用户名称 |
+| create_time | datetime |      | 创建日期     |
+| update_by   | bigint   |      | 编辑用户     |
+| update_name | varchar  |      | 更新时间     |
+| update_time | datetime |      | 更新时间     |
+| del_flag    | tinyint  |      | 是否逻辑删除 |
 
-  
 
-- **basic-uaa**
 
-  oauth_client_details（三方应用客户端信息）
+###### basic-uaa
 
-  | 字段名称                | 类型    | 约束 | 描述                                                         |
-  | ----------------------- | ------- | ---- | ------------------------------------------------------------ |
-  | client_id               | varchar | PK   | 主键,必须唯一,不能为空.<br />用于唯一标识每一个客户端(client); 在注册时必须填写(也可由服务端自动生成).<br />对于不同的grant_type,该字段都是必须的. 在实际应用中的另一个名称叫appId,与client_id是同一个概念. |
-  | resource_ids            | varchar |      | 客户端所能访问的资源id集合,多个资源时用英文逗号分隔,eg: basic.uum.service,basic.file.service |
-  | client_secret           | varchar |      | 用于指定客户端(client)的访问密匙; 在注册时必须填写(也可由服务端自动生成).<br />对于不同的grant_type,该字段都是必须的. 在实际应用中的另一个名称叫appId,与client_secret是同一个概念 |
-  | scope                   | varchar |      | 指定客户端申请的权限范围,可选值包括*read*,*write*,*trust*;若有多个权限范围用英文逗号分隔,eg: read,write |
-  | authorized_grant_types  | varchar |      | 指定客户端支持的grant_type,可选值包括authorization_code,password,refresh_token,implicit,client_credentials, 若支持多个grant_type用英文逗号分隔,eg: password,refresh_token |
-  | web_server_redirect_uri | varchar |      | 客户端的重定向URI,可为空, 当grant_type为`authorization_code`或`implicit`时使用，详情可参考OAuth流程中的redirect_uri参数说明 |
-  | authorities             | varchar |      | 指定客户端所拥有的固定角色权限值，可选, 若有多个权限值,用英文逗号分隔 eg:ROLE_UNITY,ROLE_USER |
-  | access_token_validity   | int     |      | 设定客户端的access_token的有效时间值(单位:秒)                |
-  | refresh_token_validity  | int     |      | 设定客户端的refresh_token的有效时间值(单位:秒)，一般情况下refresh_token的有效时长要大于access_token的有效时长 |
-  | additional_information  | varchar |      | 预留字段，可定义自定义参数：json格式数据                     |
-  | autoapprove             | varchar |      | 适用于grant_type="authorization_code"的情况，用户是否自动Approval操作，可选值包括 true,false, read,write |
-  
-  
-  oauth_access_token（授权access_token信息）
+oauth_client_details（三方应用客户端信息）
 
-  | 字段名称          | 类型      | 约束 | 描述                                                         |
-  | ----------------- | --------- | ---- | ------------------------------------------------------------ |
-  | token_id          | varchar   |      | 该字段的值是将access_token的值通过MD5加密后存储的            |
-  | token             | blob      |      | 存储将OAuth2AccessToken对象序列化后的二进制数据，是真实的AccessToken数据值 |
-  | authentication_id | varchar   |      | 该字段具有唯一性, 其值是根据当前的username,client_id与scope通过MD5加密生成的 |
-  | user_name         | varchar   |      | 登录时的用户名, 若客户端没有用户名,如客户端没有用户名，则该值等于client_id |
-  | client_id         | varchar   |      | client_id的值                                                |
-  | authentication    | blob      |      | 存储将OAuth2Authentication对象序列化后的二进制数据           |
-  | refresh_token     | varchar   |      | 该字段的值是将refresh_token的值通过MD5加密后存储的，主要用来续签时使用 |
-  | create_time       | timestamp |      | 数据的创建时间,精确到秒,由数据库在插入数据时取当前系统时间自动生成(扩展字段) |
+| 字段名称                | 类型    | 约束 | 描述                                                         |
+| ----------------------- | ------- | ---- | ------------------------------------------------------------ |
+| client_id               | varchar | PK   | 主键,必须唯一,不能为空.<br />用于唯一标识每一个客户端(client); 在注册时必须填写(也可由服务端自动生成).<br />对于不同的grant_type,该字段都是必须的. 在实际应用中的另一个名称叫appId,与client_id是同一个概念. |
+| resource_ids            | varchar |      | 客户端所能访问的资源id集合,多个资源时用英文逗号分隔,eg: basic.uum.service,basic.file.service |
+| client_secret           | varchar |      | 用于指定客户端(client)的访问密匙; 在注册时必须填写(也可由服务端自动生成).<br />对于不同的grant_type,该字段都是必须的. 在实际应用中的另一个名称叫appId,与client_secret是同一个概念 |
+| scope                   | varchar |      | 指定客户端申请的权限范围,可选值包括*read*,*write*,*trust*;若有多个权限范围用英文逗号分隔,eg: read,write |
+| authorized_grant_types  | varchar |      | 指定客户端支持的grant_type,可选值包括authorization_code,password,refresh_token,implicit,client_credentials, 若支持多个grant_type用英文逗号分隔,eg: password,refresh_token |
+| web_server_redirect_uri | varchar |      | 客户端的重定向URI,可为空, 当grant_type为`authorization_code`或`implicit`时使用，详情可参考OAuth流程中的redirect_uri参数说明 |
+| authorities             | varchar |      | 指定客户端所拥有的固定角色权限值，可选, 若有多个权限值,用英文逗号分隔 eg:ROLE_UNITY,ROLE_USER |
+| access_token_validity   | int     |      | 设定客户端的access_token的有效时间值(单位:秒)                |
+| refresh_token_validity  | int     |      | 设定客户端的refresh_token的有效时间值(单位:秒)，一般情况下refresh_token的有效时长要大于access_token的有效时长 |
+| additional_information  | varchar |      | 预留字段，可定义自定义参数：json格式数据                     |
+| autoapprove             | varchar |      | 适用于grant_type="authorization_code"的情况，用户是否自动Approval操作，可选值包括 true,false, read,write |
 
-  oauth_refresh_token（续签access_token的信息）
 
-  | 字段名称       | 类型      | 约束 | 描述                                                         |
-  | -------------- | --------- | ---- | ------------------------------------------------------------ |
-  | token_id       | varchar   |      | 该字段的值是将refresh_token的值通过MD5加密后存储的           |
-  | token          | blob      |      | 存储将OAuth2RefreshToken对象序列化后的二进制数据             |
-  | authentication | blob      |      | 存储将OAuth2Authentication对象序列化后的二进制数据           |
-  | create_time    | timestamp |      | 数据的创建时间,精确到秒,由数据库在插入数据时取当前系统时间自动生成(扩展字段) |
+oauth_access_token（授权access_token信息）
 
-  oauth_code（授权码信息）
+| 字段名称          | 类型      | 约束 | 描述                                                         |
+| ----------------- | --------- | ---- | ------------------------------------------------------------ |
+| token_id          | varchar   |      | 该字段的值是将access_token的值通过MD5加密后存储的            |
+| token             | blob      |      | 存储将OAuth2AccessToken对象序列化后的二进制数据，是真实的AccessToken数据值 |
+| authentication_id | varchar   |      | 该字段具有唯一性, 其值是根据当前的username,client_id与scope通过MD5加密生成的 |
+| user_name         | varchar   |      | 登录时的用户名, 若客户端没有用户名,如客户端没有用户名，则该值等于client_id |
+| client_id         | varchar   |      | client_id的值                                                |
+| authentication    | blob      |      | 存储将OAuth2Authentication对象序列化后的二进制数据           |
+| refresh_token     | varchar   |      | 该字段的值是将refresh_token的值通过MD5加密后存储的，主要用来续签时使用 |
+| create_time       | timestamp |      | 数据的创建时间,精确到秒,由数据库在插入数据时取当前系统时间自动生成(扩展字段) |
 
-  | 字段名称       | 类型      | 约束 | 描述                                                         |
-  | -------------- | --------- | ---- | ------------------------------------------------------------ |
-  | code           | varchar   |      | 存储服务端系统生成的code的值(未加密)                         |
-  | authentication | blob      |      | 存储将AuthorizationRequestHolder对象序列化后的二进制数据     |
-  | create_time    | timestamp |      | 数据的创建时间,精确到秒,由数据库在插入数据时取当前系统时间自动生成(扩展字段) |
-  
+oauth_refresh_token（续签access_token的信息）
 
-- **basic-uums**
+| 字段名称       | 类型      | 约束 | 描述                                                         |
+| -------------- | --------- | ---- | ------------------------------------------------------------ |
+| token_id       | varchar   |      | 该字段的值是将refresh_token的值通过MD5加密后存储的           |
+| token          | blob      |      | 存储将OAuth2RefreshToken对象序列化后的二进制数据             |
+| authentication | blob      |      | 存储将OAuth2Authentication对象序列化后的二进制数据           |
+| create_time    | timestamp |      | 数据的创建时间,精确到秒,由数据库在插入数据时取当前系统时间自动生成(扩展字段) |
 
-  <a id="authority_black_ip">authority_black_ip（请求黑名单IP信息）</a>
+oauth_code（授权码信息）
 
-  | 字段名称      | 类型     | 约束 | 描述                      |
-  | ------------- | -------- | ---- | ------------------------- |
-  | id            | bigint   | PK   | 主键ID                    |
-  | ip            | varchar  |      | ip                        |
-  | disabled_date | datetime |      | 禁用时间                  |
-  | deadline_date | datetime |      | 截止时间 为null则永久禁用 |
-  | tenant_code   | varchar  |      | 租户编码                  |
-  | create_by     | bigint   |      | 创建用户                  |
-  | create_name   | varchar  |      | 创建用户名称              |
-  | create_time   | datetime |      | 创建日期                  |
-  | update_by     | bigint   |      | 编辑用户                  |
-  | update_name   | varchar  |      | 更新时间                  |
-  | update_time   | datetime |      | 更新时间                  |
-  | del_flag      | tinyint  |      | 是否逻辑删除              |
+| 字段名称       | 类型      | 约束 | 描述                                                         |
+| -------------- | --------- | ---- | ------------------------------------------------------------ |
+| code           | varchar   |      | 存储服务端系统生成的code的值(未加密)                         |
+| authentication | blob      |      | 存储将AuthorizationRequestHolder对象序列化后的二进制数据     |
+| create_time    | timestamp |      | 数据的创建时间,精确到秒,由数据库在插入数据时取当前系统时间自动生成(扩展字段) |
+
+
+###### basic-uums
+
+<a id="authority_black_ip">authority_black_ip（请求黑名单IP信息）</a>
+
+| 字段名称      | 类型     | 约束 | 描述                      |
+| ------------- | -------- | ---- | ------------------------- |
+| id            | bigint   | PK   | 主键ID                    |
+| ip            | varchar  |      | ip                        |
+| disabled_date | datetime |      | 禁用时间                  |
+| deadline_date | datetime |      | 截止时间 为null则永久禁用 |
+| tenant_code   | varchar  |      | 租户编码                  |
+| create_by     | bigint   |      | 创建用户                  |
+| create_name   | varchar  |      | 创建用户名称              |
+| create_time   | datetime |      | 创建日期                  |
+| update_by     | bigint   |      | 编辑用户                  |
+| update_name   | varchar  |      | 更新时间                  |
+| update_time   | datetime |      | 更新时间                  |
+| del_flag      | tinyint  |      | 是否逻辑删除              |
 
