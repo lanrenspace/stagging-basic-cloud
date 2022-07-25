@@ -700,6 +700,8 @@ public interface FileInfoFeignClient {
 
 - **basic-uaa**
 
+  ![image](https://github.com/lanrenspace/stagging-basic-cloud/blob/master/design/er/uaa_er.png)
+
 - **basic-uums**
 
 ##### 数据实体描述
