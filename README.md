@@ -754,6 +754,22 @@ public interface FileInfoFeignClient {
 
 - **basic-uaa**
 
+  oauth_client_details（三方应用客户端信息）
+
+  | 字段名称                | 类型    | 约束 | 描述                                                         |
+  | ----------------------- | ------- | ---- | ------------------------------------------------------------ |
+  | client_id               | varchar | PK   | 主键,必须唯一,不能为空.<br />用于唯一标识每一个客户端(client); 在注册时必须填写(也可由服务端自动生成).<br />对于不同的grant_type,该字段都是必须的. 在实际应用中的另一个名称叫appId,与client_id是同一个概念. |
+  | resource_ids            | varchar |      | 客户端所能访问的资源id集合,多个资源时用英文逗号分隔,eg: basic.uum.service,basic.file.service |
+  | client_secret           | varchar |      | 用于指定客户端(client)的访问密匙; 在注册时必须填写(也可由服务端自动生成).<br />对于不同的grant_type,该字段都是必须的. 在实际应用中的另一个名称叫appId,与client_secret是同一个概念 |
+  | scope                   | varchar |      | 指定客户端申请的权限范围,可选值包括*read*,*write*,*trust*;若有多个权限范围用英文逗号分隔,eg: read,write |
+  | authorized_grant_types  | varchar |      | 指定客户端支持的grant_type,可选值包括authorization_code,password,refresh_token,implicit,client_credentials, 若支持多个grant_type用英文逗号分隔,eg: password,refresh_token |
+  | web_server_redirect_uri | varchar |      | 客户端的重定向URI,可为空, 当grant_type为`authorization_code`或`implicit`时使用，详情可参考OAuth流程中的redirect_uri参数说明 |
+  | authorities             | varchar |      | 指定客户端所拥有的固定角色权限值，可选, 若有多个权限值,用英文逗号分隔 eg:ROLE_UNITY,ROLE_USER |
+  | access_token_validity   | int     |      | 设定客户端的access_token的有效时间值(单位:秒)                |
+  | refresh_token_validity  | int     |      | 设定客户端的refresh_token的有效时间值(单位:秒)，一般情况下refresh_token的有效时长要大于access_token的有效时长 |
+  | additional_information  | varchar |      | 预留字段，可定义自定义参数：json格式数据                     |
+  | autoapprove             | varchar |      | 适用于grant_type="authorization_code"的情况，用户是否自动Approval操作，可选值包括 true,false, read,write |
+
 - **basic-uums**
 
   <a id="authority_black_ip">authority_black_ip（请求黑名单IP信息）</a>
