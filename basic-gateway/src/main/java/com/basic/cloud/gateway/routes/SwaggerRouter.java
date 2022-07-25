@@ -18,8 +18,11 @@ public class SwaggerRouter {
 
     @Bean
     public RouterFunction<ServerResponse> swaggerRouters(SwaggerHandler swaggerHandler) {
-        return RouterFunctions.route(RequestPredicates.GET("/swagger-resources/configuration/ui").and(RequestPredicates.accept(MediaType.ALL)), swaggerHandler::uiConfiguration)
-                .andRoute(RequestPredicates.GET("/swagger-resources/configuration/security").and(RequestPredicates.accept(MediaType.ALL)), swaggerHandler::securityConfiguration)
-                .andRoute(RequestPredicates.GET("/swagger-resources").and(RequestPredicates.accept(MediaType.ALL)), serverRequest -> swaggerHandler.swaggerResource());
+        return RouterFunctions.route(RequestPredicates.GET("/swagger-resources/configuration/ui")
+                        .and(RequestPredicates.accept(MediaType.ALL)), serverRequest -> swaggerHandler.uiConfiguration())
+                .andRoute(RequestPredicates.GET("/swagger-resources/configuration/security")
+                        .and(RequestPredicates.accept(MediaType.ALL)), serverRequest -> swaggerHandler.securityConfiguration())
+                .andRoute(RequestPredicates.GET("/swagger-resources")
+                        .and(RequestPredicates.accept(MediaType.ALL)), serverRequest -> swaggerHandler.swaggerResource());
     }
 }

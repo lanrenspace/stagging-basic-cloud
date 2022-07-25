@@ -43,7 +43,8 @@ public class AnonymousFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         List<AnonymousInfoVO> anonymousInfos = authService.getAnonymousInfos();
         if (!CollectionUtils.isEmpty(anonymousInfos)) {
-            String url = exchange.getRequest().getPath().value();
+            ServerHttpRequest request = exchange.getRequest();
+            String url = request.getPath().value();
             Route route = exchange.getAttribute(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR);
             boolean match;
             if (null != route && !ObjectUtils.isEmpty(route.getId())) {

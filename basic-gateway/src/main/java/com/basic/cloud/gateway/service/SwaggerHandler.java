@@ -15,7 +15,7 @@ public interface SwaggerHandler {
      *
      * @return
      */
-    Mono<ServerResponse> uiConfiguration(ServerRequest request);
+    Mono<ServerResponse> uiConfiguration();
 
     /**
      * swagger资源
@@ -29,5 +29,5 @@ public interface SwaggerHandler {
      *
      * @return
      */
-    Mono<ServerResponse> securityConfiguration(ServerRequest request);
+    Mono<ServerResponse> securityConfiguration();
 }

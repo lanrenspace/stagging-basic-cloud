@@ -31,7 +31,7 @@ public class SwaggerHandlerImpl implements SwaggerHandler {
     }
 
     @Override
-    public Mono<ServerResponse> uiConfiguration(ServerRequest request) {
+    public Mono<ServerResponse> uiConfiguration() {
         return ServerResponse
                 .ok()
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -47,7 +47,7 @@ public class SwaggerHandlerImpl implements SwaggerHandler {
     }
 
     @Override
-    public Mono<ServerResponse> securityConfiguration(ServerRequest request) {
+    public Mono<ServerResponse> securityConfiguration() {
         return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON_UTF8)
                 .body(BodyInserters.fromObject(Optional.ofNullable(securityConfiguration).orElse(SecurityConfigurationBuilder.builder().build())));
     }
