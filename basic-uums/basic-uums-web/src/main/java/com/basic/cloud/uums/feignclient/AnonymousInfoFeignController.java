@@ -14,11 +14,11 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/feign/anonymousInfo")
-public class AnonymousInfoController {
+public class AnonymousInfoFeignController {
 
     private final AnonymousInfoService anonymousInfoService;
 
-    public AnonymousInfoController(AnonymousInfoService anonymousInfoService) {
+    public AnonymousInfoFeignController(AnonymousInfoService anonymousInfoService) {
         this.anonymousInfoService = anonymousInfoService;
     }
 
