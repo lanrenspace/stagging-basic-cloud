@@ -677,7 +677,7 @@ public interface FileInfoFeignClient {
 
 手动添加：在数据表```authority_black_ip```中新增一条数据即可
 
-数据实体描述：
+数据实体描述：[请求黑名单IP信息表](#authority_black_ip)
 
 
 
@@ -745,3 +745,21 @@ public interface FileInfoFeignClient {
 - **basic-uaa**
 
 - **basic-uums**
+
+  <a id="authority_black_ip">authority_black_ip（请求黑名单IP信息）</a>
+
+  | 字段名称      | 类型     | 约束 | 描述                      |
+  | ------------- | -------- | ---- | ------------------------- |
+  | id            | bigint   | PK   | 主键ID                    |
+  | ip            | varchar  |      | ip                        |
+  | disabled_date | datetime |      | 禁用时间                  |
+  | deadline_date | datetime |      | 截止时间 为null则永久禁用 |
+  | tenant_code   | varchar  |      | 租户编码                  |
+  | create_by     | bigint   |      | 创建用户                  |
+  | create_name   | varchar  |      | 创建用户名称              |
+  | create_time   | datetime |      | 创建日期                  |
+  | update_by     | bigint   |      | 编辑用户                  |
+  | update_name   | varchar  |      | 更新时间                  |
+  | update_time   | datetime |      | 更新时间                  |
+  | del_flag      | tinyint  |      | 是否逻辑删除              |
+
