@@ -830,3 +830,235 @@ oauth_code（授权码信息）
 | update_time   | datetime |      | 更新时间                  |
 | del_flag      | tinyint  |      | 是否逻辑删除              |
 
+
+uum_user_info（用户主信息）
+
+| 字段名称             | 类型     | 约束 | 描述                 |
+| -------------------- | -------- | ---- | -------------------- |
+| id                   | bigint   | PK   | 主键ID               |
+| account              | varchar  |      | 账号                 |
+| name                 | varchar  |      | 名称                 |
+| password             | varchar  |      | 密码                 |
+| slat                 | varchar  |      | 密码盐值             |
+| user_no              | varchar  |      | 用户编号/工号        |
+| mobile               | varchar  |      | 电话                 |
+| email                | varchar  |      | 邮箱                 |
+| wx_open_id           | varchar  |      | WX Open Id           |
+| status               | tinyint  |      | 状态                 |
+| user_image           | varchar  |      | 用户头像             |
+| user_image_thumbnail | varchar  |      | 用户头像缩略图       |
+| type                 | tinyint  |      | 用户类型             |
+| nick_name            | varchar  |      | 昵称                 |
+| third_no             | varchar  |      | 三方编码（公司编码） |
+| sex                  | tinyint  |      | 性别                 |
+| tenant_code          | varchar  |      | 租户编码             |
+| create_by            | bigint   |      | 创建用户             |
+| create_name          | varchar  |      | 创建用户名称         |
+| create_time          | datetime |      | 创建日期             |
+| update_by            | bigint   |      | 编辑用户             |
+| update_name          | varchar  |      | 更新时间             |
+| update_time          | datetime |      | 更新时间             |
+| del_flag             | tinyint  |      | 是否逻辑删除         |
+
+uum_user_ext（用户扩展信息表）
+
+| 字段名称              | 类型     | 约束 | 描述             |
+| --------------------- | -------- | ---- | ---------------- |
+| user_id               | bigint   | PK   | 用户ID           |
+| user_password_changed | datetime |      | 初始密码改变日期 |
+| user_enabled_date     | datetime |      | 账号启用日期     |
+| user_disabled_date    | datetime |      | 失效时间         |
+| user_account_locked   | tinyint  |      | 是否锁定         |
+| last_login_date       | datetime |      | 最后登录日期     |
+| login_fails           | tinyint  |      | 登录失败次数     |
+| remark                | varchar  |      | 备注信息         |
+| user_description      | varchar  |      | 用户描述         |
+| tenant_code           | varchar  |      | 租户编码         |
+| create_by             | bigint   |      | 创建用户         |
+| create_name           | varchar  |      | 创建用户名称     |
+| create_time           | datetime |      | 创建日期         |
+| update_by             | bigint   |      | 编辑用户         |
+| update_name           | varchar  |      | 更新时间         |
+| update_time           | datetime |      | 更新时间         |
+| del_flag              | tinyint  |      | 是否逻辑删除     |
+
+uum_unit_info（组织机构信息）
+
+| 字段名称        | 类型     | 约束 | 描述                                    |
+| --------------- | -------- | ---- | --------------------------------------- |
+| id              | bigint   | PK   | 主键ID                                  |
+| unit_code       | varchar  |      | 机构编码                                |
+| unit_name       | varchar  |      | 机构名称                                |
+| parent_unit_id  | bigint   |      | 上级组织机构编码                        |
+| unit_type       | tinyint  |      | 组织机构类型，1组织机构，2部门，3分公司 |
+| order_num       | int      |      | 排序号，越小越好                        |
+| valid           | tinyint  |      | 是否有效                                |
+| unit_full_name  | varchar  |      | 机构全路径名称                          |
+| sub_tenant_code | varchar  |      | 下级租户编号，下级机构编码              |
+| enabled_date    | datetime |      | 启用日期                                |
+| tree_path       | varchar  |      | 树结构处理，树路径                      |
+| admin_account   | varchar  |      | 组织管理员账号                          |
+| tenant_code     | varchar  |      | 租户编码                                |
+| create_by       | bigint   |      | 创建用户                                |
+| create_name     | varchar  |      | 创建用户名称                            |
+| create_time     | datetime |      | 创建日期                                |
+| update_by       | bigint   |      | 编辑用户                                |
+| update_name     | varchar  |      | 更新时间                                |
+| update_time     | datetime |      | 更新时间                                |
+| del_flag        | tinyint  |      | 是否逻辑删除                            |
+
+uum_user_unit（用户机构信息）
+
+| 字段名称    | 类型     | 约束 | 描述                   |
+| ----------- | -------- | ---- | ---------------------- |
+| id          | bigint   | PK   | 主键ID                 |
+| user_id     | bigint   |      | 用户Id                 |
+| unit_id     | bigint   |      | 机构部门ID             |
+| main        | tinyint  |      | 是否主部门             |
+| valid       | tinyint  |      | 是否有效               |
+| order_num   | int      |      | 多部门情况时的先后排序 |
+| tenant_code | varchar  |      | 租户编码               |
+| create_by   | bigint   |      | 创建用户               |
+| create_name | varchar  |      | 创建用户名称           |
+| create_time | datetime |      | 创建日期               |
+| update_by   | bigint   |      | 编辑用户               |
+| update_name | varchar  |      | 更新时间               |
+| update_time | datetime |      | 更新时间               |
+| del_flag    | tinyint  |      | 是否逻辑删除           |
+
+uum_role_info（角色信息）
+
+| 字段名称         | 类型     | 约束 | 描述                          |
+| ---------------- | -------- | ---- | ----------------------------- |
+| id               | bigint   | PK   | 主键ID                        |
+| role_name        | varchar  |      | 角色名称                      |
+| role_code        | varchar  |      | 角色编码                      |
+| role_description | varchar  |      | 角色描述                      |
+| common           | tinyint  |      | 是否公共角色                  |
+| role_type        | tinyint  |      | 角色类型,1管理角色，2业务角色 |
+| update_table     | tinyint  |      | 是否可维护                    |
+| user_numbers     | int      |      | 角色用户数                    |
+| tenant_code      | varchar  |      | 租户编码                      |
+| create_by        | bigint   |      | 创建用户                      |
+| create_name      | varchar  |      | 创建用户名称                  |
+| create_time      | datetime |      | 创建日期                      |
+| update_by        | bigint   |      | 编辑用户                      |
+| update_name      | varchar  |      | 更新时间                      |
+| update_time      | datetime |      | 更新时间                      |
+| del_flag         | tinyint  |      | 是否逻辑删除                  |
+
+uum_user_group_role（用户或组织角色关联信息）
+
+| 字段名称        | 类型     | 约束 | 描述                                                         |
+| --------------- | -------- | ---- | ------------------------------------------------------------ |
+| id              | bigint   | PK   | 主键ID                                                       |
+| role_id         | bigint   |      | 角色ID                                                       |
+| user_group_id   | bigint   |      | 当关联以用户为单位时，这里放的是用户ID<br />当以组织部门为单位时，这里放的是组织部门ID |
+| user_group_type | tinyint  |      | 关联类型，1用户为单位，2组织部门为单位                       |
+| tenant_code     | varchar  |      | 租户编码                                                     |
+| create_by       | bigint   |      | 创建用户                                                     |
+| create_name     | varchar  |      | 创建用户名称                                                 |
+| create_time     | datetime |      | 创建日期                                                     |
+| update_by       | bigint   |      | 编辑用户                                                     |
+| update_name     | varchar  |      | 更新时间                                                     |
+| update_time     | datetime |      | 更新时间                                                     |
+| del_flag        | tinyint  |      | 是否逻辑删除                                                 |
+
+uum_menu_info（菜单信息）
+
+| 字段名称       | 类型     | 约束 | 描述                               |
+| -------------- | -------- | ---- | ---------------------------------- |
+| id             | bigint   | PK   | 主键ID                             |
+| menu_name      | varchar  |      | 菜单名称                           |
+| parent_menu_id | bigint   |      | 父级菜单ID                         |
+| menu_type      | tinyint  |      | 菜单类型 1业务菜单,0管理菜单       |
+| page_point     | tinyint  |      | 是否页面资源  boolean              |
+| menu_url       | varchar  |      | 菜单url                            |
+| menu_open_mode | tinyint  |      | 打开模式  1.工作区打开 2新窗口打开 |
+| menu_image_url | varchar  |      | 菜单图标样式                       |
+| order_num      | int      |      | 排序                               |
+| menu_chief     | tinyint  |      | 是否菜单叶子节点  boolean          |
+| product_id     | bigint   |      | 产品ID                             |
+| loading        | tinyint  |      | 是否加载业务菜单 boolean           |
+| tenant_code    | varchar  |      | 租户编码                           |
+| create_by      | bigint   |      | 创建用户                           |
+| create_name    | varchar  |      | 创建用户名称                       |
+| create_time    | datetime |      | 创建日期                           |
+| update_by      | bigint   |      | 编辑用户                           |
+| update_name    | varchar  |      | 更新时间                           |
+| update_time    | datetime |      | 更新时间                           |
+| del_flag       | tinyint  |      | 是否逻辑删除                       |
+
+uum_role_menu （角色菜单信息）
+
+| 字段名称    | 类型     | 约束 | 描述                          |
+| ----------- | -------- | ---- | ----------------------------- |
+| id          | bigint   | PK   | 主键ID                        |
+| role_id     | bigint   |      | 角色ID                        |
+| menu_id     | bigint   |      | 菜单ID                        |
+| semi_select | tinyint  |      | 是否半选 boolean 适应前端组件 |
+| tenant_code | varchar  |      | 租户编码                      |
+| create_by   | bigint   |      | 创建用户                      |
+| create_name | varchar  |      | 创建用户名称                  |
+| create_time | datetime |      | 创建日期                      |
+| update_by   | bigint   |      | 编辑用户                      |
+| update_name | varchar  |      | 更新时间                      |
+| update_time | datetime |      | 更新时间                      |
+| del_flag    | tinyint  |      | 是否逻辑删除                  |
+
+uum_resource_info（服务资源信息）
+
+| 字段名称    | 类型     | 约束 | 描述         |
+| ----------- | -------- | ---- | ------------ |
+| id          | bigint   | PK   | 主键ID       |
+| app_id      | varchar  |      | 服务名称     |
+| name        | varchar  |      | 资源名称     |
+| url         | varchar  |      | 资源url      |
+| method      | varchar  |      | httpMethod   |
+| description | varchar  |      | 资源描述     |
+| product_id  | bigint   |      | 产品ID       |
+| tenant_code | varchar  |      | 租户编码     |
+| create_by   | bigint   |      | 创建用户     |
+| create_name | varchar  |      | 创建用户名称 |
+| create_time | datetime |      | 创建日期     |
+| update_by   | bigint   |      | 编辑用户     |
+| update_name | varchar  |      | 更新时间     |
+| update_time | datetime |      | 更新时间     |
+| del_flag    | tinyint  |      | 是否逻辑删除 |
+
+uum_resource_authority（资源授权信息）
+
+| 字段名称       | 类型     | 约束 | 描述                           |
+| -------------- | -------- | ---- | ------------------------------ |
+| id             | bigint   | PK   | 主键ID                         |
+| role_id        | bigint   |      | 角色ID                         |
+| resource_id    | bigint   |      | 资源ID                         |
+| resource_type  | tinyint  |      | 资源类型                       |
+| resource_opt   | tinyint  |      | 资源操作类型,1可以使用,2可分配 |
+| authority_desc | varchar  |      | 描述                           |
+| tenant_code    | varchar  |      | 租户编码                       |
+| create_by      | bigint   |      | 创建用户                       |
+| create_name    | varchar  |      | 创建用户名称                   |
+| create_time    | datetime |      | 创建日期                       |
+| update_by      | bigint   |      | 编辑用户                       |
+| update_name    | varchar  |      | 更新时间                       |
+| update_time    | datetime |      | 更新时间                       |
+| del_flag       | tinyint  |      | 是否逻辑删除                   |
+
+uum_anonymous_info（白名单资源信息）
+
+| 字段名称    | 类型     | 约束 | 描述                  |
+| ----------- | -------- | ---- | --------------------- |
+| id          | bigint   | PK   | 主键ID                |
+| app_id      | varchar  |      | 应用服务ID            |
+| url         | varchar  |      | 请求服务URL           |
+| http_method | varchar  |      | 请求方式：POST、GET等 |
+| description | varchar  |      | 描述                  |
+| tenant_code | varchar  |      | 租户编码              |
+| create_by   | bigint   |      | 创建用户              |
+| create_name | varchar  |      | 创建用户名称          |
+| create_time | datetime |      | 创建日期              |
+| update_by   | bigint   |      | 编辑用户              |
+| update_name | varchar  |      | 更新时间              |
+| update_time | datetime |      | 更新时间              |
+| del_flag    | tinyint  |      | 是否逻辑删除          |
