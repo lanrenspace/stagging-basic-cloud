@@ -14,8 +14,23 @@
   * [集成OpenFeign组件](#集成openfeign)
   * [文件上传](#文件上传)
   * [登录认证、续签、退出](#登录认证退出)
+* [Q&amp;A](#qa)
+  * [携带授权令牌请求接口资源后如何获取当前请求用户信息?](#携带授权令牌请求接口资源后如何获取当前请求用户信息)
+  * [请求参数非空校验？参数格式校验？](#请求参数非空校验参数格式校验)
+  * [各种Model之间如何快速相互转换？（Dto to Entity、Entity to Vo等）](#各种model之间如何快速相互转换dto-to-entityentity-to-vo等)
+  * [需要获取服务中指定Spring管理的Bean对象？](#需要获取服务中指定spring管理的bean对象)
+  * [需要获取当前服务运行环境？](#需要获取当前服务运行环境)
+  * [需要使用Redis进行缓存操作？](#需要使用redis进行缓存操作)
+  * [Rest接口全局响应返回格式用哪个？](#rest接口全局响应返回格式用哪个)
+  * [Rest接口全局响应返回分页格式用哪个？](#rest接口全局响应返回分页格式用哪个)
+  * [系统提供的内置异常有哪些？](#系统提供的内置异常有哪些)
+  * [系统内置异常编码定义有哪些？](#系统内置异常编码定义有哪些)
+  * [内置的分页接口请求对象？](#内置的分页接口请求对象)
 * [组件使用说明](#组件使用说明)
   * [basic\-gateway（网关组件）](#basic-gateway网关组件)
+    * [组件属性配置](#组件属性配置)
+    * [黑名单配置](#黑名单配置)
+    * [接口资源白名单配置](#接口资源白名单配置)
 * [数据库设计说明](#数据库设计说明)
   * [ER图](#er图)
     * [basic\-file（文件服务）](#basic-file)
@@ -658,13 +673,209 @@ public interface FileInfoFeignClient {
       | accessToken | 登录时获得的```tokenValue``` |
 
 
+#### Q&A
+
+*```basic-common```包默认集成hutool工具包，常用工具详见：https://www.hutool.cn/docs*
+
+
+
+##### 携带授权令牌请求接口资源后如何获取当前请求用户信息?
+
+```java
+com.basic.cloud.common.bean.UserDetail userDetail = com.basic.cloud.common.utils.UserUtil.getUser();
+```
+
+<!--UserDetail 类中包含当前请求用户大部分信息数据（用户基本信息、角色、组织机构等）-->
+
+
+
+##### 请求参数非空校验？参数格式校验？
+
+```java
+public ResultData<Boolean> add(@Validated @RequestBody BlackIpsDTO blackIpsDTO) {
+    // ......
+}
+```
+
+<!--使用org.springframework.validation.annotation.Validated 注解开启校验-->
+
+<!--项目默认使用Spring Validation进行校验,具体注解用法请参考Spring Validation相关文档-->
+
+
+
+##### 各种Model之间如何快速相互转换？（Dto to Entity、Entity to Vo等）
+
+```java
+// DTO
+@MappingData
+public class BlackIpsDTO implements Serializable {
+
+    /**
+     * ip
+     */
+    @MappingField
+    private String ip;
+
+    /**
+     * 禁用时间
+     */
+    @MappingField(targetClass = Date.class)
+    private Long disabledDate;
+
+    /**
+     * 截止时间
+     */
+    @MappingField(targetClass = Date.class)
+    private Long deadlineDate;
+}
+
+// convert
+BlackIpsDTO source = new BlackIpsDTO();
+BlackIps target = new BlackIps();
+ModelMapper.map(target, source);
+```
+
+<!--1.在转换与被转换其中一个class上添加com.basic.cloud.common.annotion.MappingData注解,在转换与被转换property上添加com.basic.cloud.common.annotion.MappingField注解.-->
+
+执行转换：
+
+- 单个对象转换
+
+  ```java
+  com.basic.cloud.common.transfer.ModelMapper.map(target, source);
+  // OR
+  com.basic.cloud.common.transfer.ModelMapper.mapFrom(targetClass,source)
+  ```
+
+  
+
+- 多个对象转换
+
+  ```java
+  com.basic.cloud.common.transfer.ModelMapper.mapFromCollection(targetClass,sourceCollection);
+  // OR
+  com.basic.cloud.common.transfer.ModelMapper.mapFromCollection(targetClass,StremSource);
+  ```
+
+  
+
+- 转换是自定义额外属性
+
+  ```java
+  com.basic.cloud.common.transfer.ModelMapper.map(target, source,Custom MappingFunctional);
+  // OR
+  com.basic.cloud.common.transfer.ModelMapper.mapFromCollection(targetClass,sourceCollection,Custom MappingFunctional);
+  ```
+
+
+
+注解参数说明：
+
+```java
+com.basic.cloud.common.annotion.MappingData
+// targetClass : 目标class
+// filter: 自定义class类型过滤
+
+com.basic.cloud.common.annotion.MappingField
+// name: 指定target property名称
+// targetClass: 指定target property class类型
+// postFilter: 指定target property 类型过滤
+```
+
+
+
+##### 需要获取服务中指定Spring管理的Bean对象？
+
+```java
+com.basic.cloud.common.utils.AppContextHelper.getBean(beanName or beanClass);
+```
+
+
+
+##### 需要获取当前服务运行环境？
+
+```java
+com.basic.cloud.common.utils.AppContextHelper.getActiveProfile();
+```
+
+
+
+##### 需要使用Redis进行缓存操作？
+
+```java
+com.basic.cloud.common.utils.RedisUtil.exists(key);
+```
+
+RedisUtil中提供的常用方法包括：set、get、expire、exists、delete、increasing、decr、hmget、hmset等；
+
+
+
+##### Rest接口全局响应返回格式用哪个？
+
+```java
+com.basic.cloud.common.vo.ResultData<T>
+```
+
+ResultData中包含多个常用静态方法如：ok()、error()等；
+
+
+
+##### Rest接口全局响应返回分页格式用哪个？
+
+```java
+com.basic.cloud.common.vo.ResultPage<T>
+```
+
+
+
+##### 系统提供的内置异常有哪些？
+
+```java
+// 数据处理异常
+com.basic.cloud.common.exceptions.DataException
+// 服务处理异常
+com.basic.cloud.common.exceptions.ServiceException
+// 三方服务调用异常
+com.basic.cloud.common.exceptions.TripartiteServiceException
+```
+
+
+
+##### 系统内置异常编码定义有哪些？
+
+```java
+// class
+com.basic.cloud.common.enums.SysErrorTypeEnum
+```
+
+- -1：系统异常！
+- 1000：数据异常！
+- 4416：网关异常！
+- 4098：网关超时！
+- 4356：服务未找到！
+- 8193：无效token！
+
+tip：可以在自己的业务实现中去实现 ```com.basic.cloud.common.base.ErrorType``` 接口，这样使用 ```com.basic.cloud.common.vo.ResultData<T>``` 时会更加方便；
+
+
+
+##### 内置的分页接口请求对象？
+
+```java
+com.basic.cloud.common.dto.PageDTO
+```
+
+tip：在分页查看接口中，具体业务可以进行继承扩展；
+
+
+
 #### 组件使用说明
 
 ##### basic-gateway（网关组件）
 
 *所有服务请求的统一出入口，黑名单拦截、令牌解析、接口文档、权限控制、限流等在此组件处理；*
 
-**组件属性配置**
+###### **组件属性配置**
 
 | name                                 | description                                                 | option                                                       |
 | ------------------------------------ | ----------------------------------------------------------- | ------------------------------------------------------------ |
@@ -675,7 +886,7 @@ public interface FileInfoFeignClient {
 | gate.ignore.authentication.startWith | 不需要网关签权的url配置，多个请求头以英文逗号进行分割       | default: /oauth,/open                                        |
 | gate.internal.call.startWith         | 内部调用不需要网关鉴权url配置，多个请求头以英文逗号进行分割 | default: /feign                                              |
 
-**黑名单配置：**
+###### **黑名单配置**
 
 接口添加：```/blackIps/add```
 
@@ -693,6 +904,12 @@ public interface FileInfoFeignClient {
 
 数据实体描述：[请求黑名单IP信息表](#authority_black_ip)
 
+
+###### **接口资源白名单配置**
+
+在接口白名单配置中的资源信息将不受认证拦截；
+
+详细配置信息参考：[接口资源白名单数据实体描述](#uum_anonymous_info)
 
 
 
@@ -1045,7 +1262,7 @@ uum_resource_authority（资源授权信息）
 | update_time    | datetime |      | 更新时间                       |
 | del_flag       | tinyint  |      | 是否逻辑删除                   |
 
-uum_anonymous_info（白名单资源信息）
+<a id="uum_anonymous_info">uum_anonymous_info（白名单资源信息）</a>
 
 | 字段名称    | 类型     | 约束 | 描述                  |
 | ----------- | -------- | ---- | --------------------- |
