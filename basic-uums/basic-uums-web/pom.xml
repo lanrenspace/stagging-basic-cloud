@@ -26,7 +26,15 @@
         </dependency>
         <dependency>
             <groupId>com.basic.cloud</groupId>
+            <artifactId>basic-abs-import</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.basic.cloud</groupId>
             <artifactId>basic-file-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.skywalking</groupId>
+            <artifactId>apm-toolkit-logback-1.x</artifactId>
         </dependency>
     </dependencies>
 
