@@ -12,6 +12,7 @@
   * [集成Nacos Discovery 与 Nacos Config 组件](#集成nacos-discovery-与-nacos-config)
   * [集成Gateway网关组件](#集成gateway网关)
   * [集成OpenFeign组件](#集成openfeign)
+  * [集成SpringBootAdmin服务](#集成springbootadmin服务)
   * [文件上传](#文件上传)
   * [登录认证、续签、退出](#登录认证退出)
   * [分布式接口幂等性使用](#分布式接口幂等性使用)
@@ -540,6 +541,56 @@ public interface FileInfoFeignClient {
 - contextId：SpringBean注册名（必填、唯一），建议与接口名一致
 
 **注意：组件默认扫描Feign注册路径为```com.basic.cloud```包及其子包，如需扫描其他包则在服务调用发使用```@EnableFeignClients```注解进行自定义配置即可;**
+
+
+##### 集成SpringBootAdmin服务
+
+1. 启动**basic-abs-web**服务
+
+2. 在需要集成的服务中引入依赖
+
+   ```xml
+   <!--
+   ......
+   -->
+   <dependencies>
+      <dependency>
+         <groupId>com.basic.cloud</groupId>
+         <artifactId>basic-abs-import</artifactId>
+         <version>${LAST_VERSION}</version>
+      </dependency>
+   </dependencies>
+   ```
+
+3. 添加配置
+
+   ```yaml
+   spring:
+     boot:
+       admin:
+         client:
+           url: http://localhost:8100
+           username: username
+           password: password
+   management:
+     endpoints:
+       web:
+         exposure:
+           include: '*'
+     endpoint:
+       health:
+         show-details: ALWAYS
+   ```
+
+   参数说明：
+
+   spring.boot.admin.client.url：配置basic-abs-web服务地址
+
+   spring.boot.admin.client.username：配置basic-abs-web服务登录账号
+
+   spring.boot.admin.client.password：配置basic-abs-web服务登录密码
+
+   management：监控端点配置，详情参考：https://codecentric.github.io/spring-boot-admin/current/#spring-boot-admin-client
 
 
 ##### 文件上传
