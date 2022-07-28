@@ -14,6 +14,7 @@
   * [集成OpenFeign组件](#集成openfeign)
   * [文件上传](#文件上传)
   * [登录认证、续签、退出](#登录认证退出)
+  * [分布式接口幂等性使用](#分布式接口幂等性使用)
 * [Q&amp;A](#qa)
   * [携带授权令牌请求接口资源后如何获取当前请求用户信息?](#携带授权令牌请求接口资源后如何获取当前请求用户信息)
   * [请求参数非空校验？参数格式校验？](#请求参数非空校验参数格式校验)
@@ -671,6 +672,46 @@ public interface FileInfoFeignClient {
       | 参数        | 描述                         |
       | ----------- | ---------------------------- |
       | accessToken | 登录时获得的```tokenValue``` |
+
+
+##### 分布式接口幂等性使用
+
+**组件默认基于Redis进行实现，业务可实现```com.basic.cloud.common.idempotent.IdempotentManager```接口进行自定义实现**
+
+实现原理：
+
+![image](https://github.com/lanrenspace/stagging-basic-cloud/blob/master/design/redis_idem.png)
+
+使用方式：
+
+在需要幂等的方法上添加注解```com.basic.cloud.common.annotion.Idempotent```,通过SPEL指定幂等key的生成规则；
+
+示例：
+
+```java
+@Idempotent(key = "#exampleDTO.name")
+@PostMapping("/save")
+public ResultData save(@RequestBody ExampleDTO exampleDTO) throws InterruptedException {
+	//......
+    return ResultData.ok();
+}
+```
+
+```@Idempotent```注解参数说明：
+
+key：指定幂等控制的key（必须具有唯一性的）
+
+maxLockMilli：加锁最长时间（单位毫秒），默认值10秒
+
+generator：指定key生成器实现，可自行实现```com.basic.cloud.common.base.IdInjectionStrategy```接口
+
+idempotentManager：指定幂等管理器BeanName, 多个管理器情况下使用 @Primary 的管理器, 默认的是 Redis方式，可自行实现```com.basic.cloud.common.idempotent.IdempotentManager```接口
+
+组件属性配置：
+
+| name                         | description | option         |
+| ---------------------------- | ----------- | -------------- |
+| platform.idem.redisKeyPrefix | redis前缀   | default：idem: |
 
 
 #### Q&A
