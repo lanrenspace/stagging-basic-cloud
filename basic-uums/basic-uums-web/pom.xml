@@ -32,10 +32,10 @@
             <groupId>com.basic.cloud</groupId>
             <artifactId>basic-file-api</artifactId>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.skywalking</groupId>
             <artifactId>apm-toolkit-logback-1.x</artifactId>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <build>
