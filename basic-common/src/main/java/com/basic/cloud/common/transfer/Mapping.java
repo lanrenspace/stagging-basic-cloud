@@ -4,6 +4,7 @@ package com.basic.cloud.common.transfer;
  * @Author lanrenspace@163.com
  * @Description: 自定义转换器
  **/
+@FunctionalInterface
 public interface Mapping<ST, TT> {
 
     /**

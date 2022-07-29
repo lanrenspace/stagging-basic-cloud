@@ -21,6 +21,7 @@
         <module>basic-abs-web</module>
         <module>basic-print</module>
         <module>basic-import</module>
+        <!--<module>basic-elasticsearch</module>-->
     </modules>
 
     <properties>
@@ -45,6 +46,7 @@
         <redis.version>2.7.2</redis.version>
         <fastjson.version>1.2.56</fastjson.version>
         <hutool.version>5.8.4</hutool.version>
+        <!--<skywalking-toolkit.version>8.10.0</skywalking-toolkit.version>-->
     </properties>
 
     <parent>
@@ -248,6 +250,11 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.basic.cloud</groupId>
+                <artifactId>basic-abs-import</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
                 <version>${springboot.version}</version>
@@ -269,12 +276,16 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
+            <!--<dependency>
+                <groupId>org.apache.skywalking</groupId>
+                <artifactId>apm-toolkit-logback-1.x</artifactId>
+                <version>${skywalking-toolkit.version}</version>
+            </dependency>-->
         </dependencies>
     </dependencyManagement>
 

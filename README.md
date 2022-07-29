@@ -12,8 +12,10 @@
   * [集成Nacos Discovery 与 Nacos Config 组件](#集成nacos-discovery-与-nacos-config)
   * [集成Gateway网关组件](#集成gateway网关)
   * [集成OpenFeign组件](#集成openfeign)
+  * [集成SpringBootAdmin服务](#集成springbootadmin服务)
   * [文件上传](#文件上传)
   * [登录认证、续签、退出](#登录认证退出)
+  * [分布式接口幂等性使用](#分布式接口幂等性使用)
 * [Q&amp;A](#qa)
   * [携带授权令牌请求接口资源后如何获取当前请求用户信息?](#携带授权令牌请求接口资源后如何获取当前请求用户信息)
   * [请求参数非空校验？参数格式校验？](#请求参数非空校验参数格式校验)
@@ -541,6 +543,56 @@ public interface FileInfoFeignClient {
 **注意：组件默认扫描Feign注册路径为```com.basic.cloud```包及其子包，如需扫描其他包则在服务调用发使用```@EnableFeignClients```注解进行自定义配置即可;**
 
 
+##### 集成SpringBootAdmin服务
+
+1. 启动**basic-abs-web**服务
+
+2. 在需要集成的服务中引入依赖
+
+   ```xml
+   <!--
+   ......
+   -->
+   <dependencies>
+      <dependency>
+         <groupId>com.basic.cloud</groupId>
+         <artifactId>basic-abs-import</artifactId>
+         <version>${LAST_VERSION}</version>
+      </dependency>
+   </dependencies>
+   ```
+
+3. 添加配置
+
+   ```yaml
+   spring:
+     boot:
+       admin:
+         client:
+           url: http://localhost:8100
+           username: username
+           password: password
+   management:
+     endpoints:
+       web:
+         exposure:
+           include: '*'
+     endpoint:
+       health:
+         show-details: ALWAYS
+   ```
+
+   参数说明：
+
+   spring.boot.admin.client.url：配置basic-abs-web服务地址
+
+   spring.boot.admin.client.username：配置basic-abs-web服务登录账号
+
+   spring.boot.admin.client.password：配置basic-abs-web服务登录密码
+
+   management：监控端点配置，详情参考：https://codecentric.github.io/spring-boot-admin/current/#spring-boot-admin-client
+
+
 ##### 文件上传
 
 在业务服务中上传文件附件使用
@@ -671,6 +723,46 @@ public interface FileInfoFeignClient {
       | 参数        | 描述                         |
       | ----------- | ---------------------------- |
       | accessToken | 登录时获得的```tokenValue``` |
+
+
+##### 分布式接口幂等性使用
+
+**组件默认基于Redis进行实现，业务可实现```com.basic.cloud.common.idempotent.IdempotentManager```接口进行自定义实现**
+
+实现原理：
+
+![image](https://github.com/lanrenspace/stagging-basic-cloud/blob/master/design/redis_idem.png)
+
+使用方式：
+
+在需要幂等的方法上添加注解```com.basic.cloud.common.annotion.Idempotent```,通过SPEL指定幂等key的生成规则；
+
+示例：
+
+```java
+@Idempotent(key = "#exampleDTO.name")
+@PostMapping("/save")
+public ResultData save(@RequestBody ExampleDTO exampleDTO) throws InterruptedException {
+	//......
+    return ResultData.ok();
+}
+```
+
+```@Idempotent```注解参数说明：
+
+key：指定幂等控制的key（必须具有唯一性的）
+
+maxLockMilli：加锁最长时间（单位毫秒），默认值10秒
+
+generator：指定key生成器实现，可自行实现```com.basic.cloud.common.base.IdInjectionStrategy```接口
+
+idempotentManager：指定幂等管理器BeanName, 多个管理器情况下使用 @Primary 的管理器, 默认的是 Redis方式，可自行实现```com.basic.cloud.common.idempotent.IdempotentManager```接口
+
+组件属性配置：
+
+| name                         | description | option         |
+| ---------------------------- | ----------- | -------------- |
+| platform.idem.redisKeyPrefix | redis前缀   | default：idem: |
 
 
 #### Q&A

@@ -36,6 +36,10 @@
         </dependency>
         <dependency>
             <groupId>com.basic.cloud</groupId>
+            <artifactId>basic-abs-import</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.basic.cloud</groupId>
             <artifactId>basic-common</artifactId>
             <exclusions>
                 <exclusion>

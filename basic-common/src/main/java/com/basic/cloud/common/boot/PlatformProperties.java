@@ -44,6 +44,11 @@ public class PlatformProperties {
     private Jwt jwt = new Jwt();
 
     /**
+     * 幂等配置
+     */
+    private Idempotent idem = new Idempotent();
+
+    /**
      * 系统环境
      */
     @Data
@@ -189,5 +194,17 @@ public class PlatformProperties {
          * 系统使用：refreshTokenValiditySeconds * (86400 * 3)
          */
         private Integer refreshTokenValiditySeconds = 86400 * 4;
+    }
+
+    /**
+     * 幂等配置
+     */
+    @Data
+    public static class Idempotent {
+
+        /**
+         * redis前缀
+         */
+        private String redisKeyPrefix = "idem:";
     }
 }
