@@ -22,6 +22,7 @@
         <module>basic-print</module>
         <module>basic-import</module>
         <module>basic-message</module>
+        <module>basic-business-log</module>
         <!--<module>basic-elasticsearch</module>-->
     </modules>
 
@@ -268,17 +269,27 @@
             </dependency>
             <dependency>
                 <groupId>com.basic.cloud</groupId>
-                <artifactId>basic-message-core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.basic.cloud</groupId>
                 <artifactId>basic-message-entity</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.basic.cloud</groupId>
                 <artifactId>basic-message-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.basic.cloud</groupId>
+                <artifactId>basic-business-log-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.basic.cloud</groupId>
+                <artifactId>basic-business-log-entity</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.basic.cloud</groupId>
+                <artifactId>basic-business-log-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

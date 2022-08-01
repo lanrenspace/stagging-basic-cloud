@@ -1,9 +1,18 @@
 package com.basic.cloud.uums.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.api.R;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.basic.cloud.common.bean.BaseBeanServiceImpl;
 import com.basic.cloud.common.bean.BisDataEntity;
 import com.basic.cloud.common.bean.UserDetail;
 import com.basic.cloud.common.contstant.DelEnum;
+import com.basic.cloud.common.vo.ResultPage;
+import com.basic.cloud.uums.contstant.UumConst;
+import com.basic.cloud.uums.dto.AddUserReqQuickDto;
+import com.basic.cloud.uums.dto.QueryUserInfoReqDto;
 import com.basic.cloud.uums.entity.UnitInfo;
 import com.basic.cloud.uums.entity.UserInfo;
 import com.basic.cloud.uums.mapper.UserInfoMapper;
@@ -11,10 +20,13 @@ import com.basic.cloud.uums.service.UnitInfoService;
 import com.basic.cloud.uums.service.UserGroupRoleService;
 import com.basic.cloud.uums.service.UserInfoService;
 import com.basic.cloud.uums.vo.RoleInfoVO;
+import com.basic.cloud.uums.vo.UserInfoVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -60,6 +72,7 @@ public class UserInfoServiceImpl extends BaseBeanServiceImpl<UserInfoMapper, Use
             }).collect(Collectors.toList());
             userDetail.setRoleInfos(roleInfos);
         }
+
         UnitInfo unitInfo = unitInfoService.getUnitByUser(userInfo.getId(), userInfo.getTenantCode());
         if (unitInfo != null) {
             UserDetail.UnitInfo detailUnit = new UserDetail.UnitInfo();
@@ -71,5 +84,43 @@ public class UserInfoServiceImpl extends BaseBeanServiceImpl<UserInfoMapper, Use
             userDetail.setUnitInfos(Collections.singletonList(detailUnit));
         }
         return userDetail;
+    }
+
+    @Override
+    public void addUserQuick(AddUserReqQuickDto addUserReqQuickDto) {
+        // 判断是否合法的租户
+
+        UserInfo userInfo = new UserInfo();
+        // userInfo.setId(Long.parseLong(getIdStrategy().id()));
+        BeanUtils.copyProperties(addUserReqQuickDto, userInfo);
+        // 设置密码盐值
+        // userInfo.setSlat(RandomUtil.randomNumbers(6));
+        userInfo.setStatus(UumConst.UserStatus.ACTIVE);
+        userInfo.setAccount(addUserReqQuickDto.getMobile());
+        save(userInfo);
+    }
+
+    @Override
+    public ResultPage<UserInfoVO> list(QueryUserInfoReqDto queryUserInfoReqDto) {
+        ResultPage<UserInfoVO> result = new ResultPage<>();
+
+        LambdaQueryWrapper<UserInfo> lqw = new LambdaQueryWrapper<>();
+        if (!ObjectUtils.isEmpty(queryUserInfoReqDto.getName())) {
+            lqw.eq(UserInfo::getName, queryUserInfoReqDto.getName());
+        }
+        if (!ObjectUtils.isEmpty(queryUserInfoReqDto.getName())) {
+            lqw.eq(UserInfo::getMobile, queryUserInfoReqDto.getMobile());
+        }
+        if (!ObjectUtils.isEmpty(queryUserInfoReqDto.getName())) {
+            lqw.eq(BisDataEntity::getTenantCode, queryUserInfoReqDto.getTenantCode());
+        }
+
+        Page<UserInfo> page = getBaseMapper().selectPage(new Page<>(queryUserInfoReqDto.getPageNumber(), queryUserInfoReqDto.getPageSize()),lqw);
+
+        CopyOptions copyOptions = CopyOptions.create();
+        result.setTotal(page.getTotal());
+        result.setRows(BeanUtil.copyToList(page.getRecords(), UserInfoVO.class, copyOptions));
+
+        return result;
     }
 }
