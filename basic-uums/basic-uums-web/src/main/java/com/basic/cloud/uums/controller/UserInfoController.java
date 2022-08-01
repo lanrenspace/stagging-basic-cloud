@@ -1,4 +1,4 @@
-package com.basic.cloud.uums.feignclient;
+package com.basic.cloud.uums.controller;
 
 import cn.hutool.json.JSONUtil;
 import com.basic.cloud.common.vo.ResultData;
@@ -8,7 +8,6 @@ import com.basic.cloud.uums.dto.QueryUserInfoReqDto;
 import com.basic.cloud.uums.entity.UserInfo;
 import com.basic.cloud.uums.service.UserInfoService;
 import com.basic.cloud.uums.vo.UserInfoVO;
-import org.springframework.beans.BeanUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @Description:
  **/
 @RestController
-@RequestMapping("/feign/userInfo")
+@RequestMapping("/userInfo")
 public class UserInfoController {
 
     private final UserInfoService userInfoService;

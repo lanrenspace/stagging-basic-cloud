@@ -115,7 +115,7 @@ public class UserInfoServiceImpl extends BaseBeanServiceImpl<UserInfoMapper, Use
             lqw.eq(BisDataEntity::getTenantCode, queryUserInfoReqDto.getTenantCode());
         }
 
-        Page<UserInfo> page = getBaseMapper().selectPage(new Page<>(),lqw);
+        Page<UserInfo> page = getBaseMapper().selectPage(new Page<>(queryUserInfoReqDto.getPageNumber(), queryUserInfoReqDto.getPageSize()),lqw);
 
         CopyOptions copyOptions = CopyOptions.create();
         result.setTotal(page.getTotal());
