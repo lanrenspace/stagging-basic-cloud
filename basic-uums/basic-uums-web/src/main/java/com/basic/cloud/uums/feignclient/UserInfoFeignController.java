@@ -89,4 +89,21 @@ public class UserInfoFeignController {
         return ResultData.ok(userInfo);
     }
 
+    @GetMapping("/getByOpenId/{openId}")
+    ResultData getByOpenId(@PathVariable("openId") String openid) {
+        LambdaQueryWrapper<UserInfo> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(UserInfo::getWxOpenId, openid);
+
+        List<UserInfo> list = userInfoService.list(lqw);
+        if (CollectionUtils.isEmpty(list)) {
+            return ResultData.error("微信："+openid +"找不到对应的用户", HttpStatus.CONTINUE.INTERNAL_SERVER_ERROR);
+        }
+
+        if (list.size() > 1) {
+            return ResultData.error("微信："+openid + "找到多个对应的用户", HttpStatus.CONTINUE.INTERNAL_SERVER_ERROR);
+        }
+
+        return ResultData.ok(list.get(0));
+    }
+
 }
