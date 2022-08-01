@@ -22,4 +22,19 @@ public interface UumConst {
          */
         Integer ORG = 2;
     }
+
+    /**
+     * 用户状态
+     */
+    interface UserStatus {
+        /**
+         * 活跃的
+         */
+        Integer ACTIVE = 1;
+
+        /**
+         * 离职
+         */
+        Integer QUIT = 2;
+    }
 }

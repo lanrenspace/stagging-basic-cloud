@@ -2,7 +2,11 @@ package com.basic.cloud.uums.service;
 
 import com.basic.cloud.common.base.IBaseBeanService;
 import com.basic.cloud.common.bean.UserDetail;
+import com.basic.cloud.common.vo.ResultPage;
+import com.basic.cloud.uums.dto.AddUserReqQuickDto;
+import com.basic.cloud.uums.dto.QueryUserInfoReqDto;
 import com.basic.cloud.uums.entity.UserInfo;
+import com.basic.cloud.uums.vo.UserInfoVO;
 
 /**
  * @Author lanrenspace@163.com
@@ -25,4 +29,17 @@ public interface UserInfoService extends IBaseBeanService<UserInfo> {
      * @return
      */
     UserDetail getUserDetailInfo(Long userId);
+
+    /**
+     * 快速添加用户
+     * @param addUserReqQuickDto
+     */
+    void addUserQuick(AddUserReqQuickDto addUserReqQuickDto);
+
+    /**
+     * 查询用户列表
+     * @param queryUserInfoReqDto
+     * @return
+     */
+    ResultPage<UserInfoVO> list(QueryUserInfoReqDto queryUserInfoReqDto);
 }
