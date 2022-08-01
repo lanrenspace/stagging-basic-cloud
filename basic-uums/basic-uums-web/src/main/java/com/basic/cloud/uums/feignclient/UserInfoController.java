@@ -1,12 +1,17 @@
 package com.basic.cloud.uums.feignclient;
 
+import cn.hutool.json.JSONUtil;
 import com.basic.cloud.common.vo.ResultData;
+import com.basic.cloud.common.vo.ResultPage;
+import com.basic.cloud.uums.dto.AddUserReqQuickDto;
+import com.basic.cloud.uums.dto.QueryUserInfoReqDto;
 import com.basic.cloud.uums.entity.UserInfo;
 import com.basic.cloud.uums.service.UserInfoService;
+import com.basic.cloud.uums.vo.UserInfoVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author lanrenspace@163.com
@@ -46,4 +51,16 @@ public class UserInfoController {
         }
         return ResultData.ok(userInfoService.getUserDetailInfo(userId));
     }
+
+    @PostMapping("/addUserQuick")
+    ResultData addUserQuick(@RequestBody @Validated AddUserReqQuickDto addUserReqDto) {
+        userInfoService.addUserQuick(addUserReqDto);
+        return ResultData.ok("新增员工成功");
+    }
+
+    @GetMapping("/list")
+    ResultPage<UserInfoVO> listUserInfo(@RequestParam("data") String data) {
+        return userInfoService.list(JSONUtil.toBean(data, QueryUserInfoReqDto.class));
+    }
+
 }
