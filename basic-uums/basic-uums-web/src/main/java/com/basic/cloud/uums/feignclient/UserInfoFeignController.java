@@ -1,10 +1,12 @@
 package com.basic.cloud.uums.feignclient;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.json.JSONUtil;
 import com.basic.cloud.common.vo.ResultData;
 import com.basic.cloud.common.vo.ResultPage;
 import com.basic.cloud.uums.dto.AddUserReqQuickDto;
 import com.basic.cloud.uums.dto.QueryUserInfoReqDto;
+import com.basic.cloud.uums.dto.UserOpenIdBindReqDto;
 import com.basic.cloud.uums.entity.UserInfo;
 import com.basic.cloud.uums.service.UserInfoService;
 import com.basic.cloud.uums.vo.UserInfoVO;
@@ -60,6 +62,14 @@ public class UserInfoFeignController {
     @GetMapping("/list")
     ResultPage<UserInfoVO> listUserInfo(@RequestParam("data") String data) {
         return userInfoService.list(JSONUtil.toBean(data, QueryUserInfoReqDto.class));
+    }
+
+    @PutMapping("/bindOpenId")
+    ResultData bindOpenId(@RequestBody UserOpenIdBindReqDto userOpenIdBindReqDto) {
+        UserInfo userInfo = userInfoService.getById(userOpenIdBindReqDto.getId());
+        userInfo.setWxOpenId(userOpenIdBindReqDto.getOpenId());
+        userInfoService.updateById(userInfo);
+        return ResultData.ok("绑定成功");
     }
 
 }
