@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: basic.message.service
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.3.169:8848
+        namespace: 21dd1d4e-f474-472c-97d7-c3189b731158
+      config:
+        server-addr: 192.168.3.169:8848
+        namespace: 21dd1d4e-f474-472c-97d7-c3189b731158
+        group: BASIC
+        file-extension: yaml

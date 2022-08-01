@@ -3,12 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>basic-uums</artifactId>
+        <artifactId>basic-message</artifactId>
         <groupId>com.basic.cloud</groupId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>basic-uums-web</artifactId>
+
+    <artifactId>basic-message-web</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -18,28 +19,15 @@
     <dependencies>
         <dependency>
             <groupId>com.basic.cloud</groupId>
-            <artifactId>basic-uums-service</artifactId>
+            <artifactId>basic-message-service</artifactId>
         </dependency>
         <dependency>
             <groupId>com.basic.cloud</groupId>
             <artifactId>basic-nacos-import</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.basic.cloud</groupId>
-            <artifactId>basic-abs-import</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.basic.cloud</groupId>
-            <artifactId>basic-file-api</artifactId>
-        </dependency>
-        <!--<dependency>
-            <groupId>org.apache.skywalking</groupId>
-            <artifactId>apm-toolkit-logback-1.x</artifactId>
-        </dependency>-->
     </dependencies>
 
     <build>
-        <finalName>basic.uum.service.${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

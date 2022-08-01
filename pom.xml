@@ -21,6 +21,7 @@
         <module>basic-abs-web</module>
         <module>basic-print</module>
         <module>basic-import</module>
+        <module>basic-message</module>
         <!--<module>basic-elasticsearch</module>-->
     </modules>
 
@@ -46,6 +47,7 @@
         <redis.version>2.7.2</redis.version>
         <fastjson.version>1.2.56</fastjson.version>
         <hutool.version>5.8.4</hutool.version>
+        <aliyunsms.version>2.0.4</aliyunsms.version>
         <!--<skywalking-toolkit.version>8.10.0</skywalking-toolkit.version>-->
     </properties>
 
@@ -178,6 +180,11 @@
                 <version>${redis.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>dysmsapi20170525</artifactId>
+                <version>${aliyunsms.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.basic.cloud</groupId>
                 <artifactId>basic-common</artifactId>
                 <version>${project.version}</version>
@@ -252,6 +259,26 @@
             <dependency>
                 <groupId>com.basic.cloud</groupId>
                 <artifactId>basic-abs-import</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.basic.cloud</groupId>
+                <artifactId>basic-message-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.basic.cloud</groupId>
+                <artifactId>basic-message-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.basic.cloud</groupId>
+                <artifactId>basic-message-entity</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.basic.cloud</groupId>
+                <artifactId>basic-message-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
