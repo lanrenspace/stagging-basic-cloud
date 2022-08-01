@@ -18,9 +18,9 @@ public class UserOpenIdBindReqDto implements Serializable {
     /**
      * 名称
      */
-    @NotNull(message = "用户ID不能为空")
-    @ApiModelProperty(value = "用户ID")
-    private Long id;
+    @NotNull(message = "用户手机号不能为空")
+    @ApiModelProperty(value = "用户手机号")
+    private String mobile;
 
     /**
      * 租户编码

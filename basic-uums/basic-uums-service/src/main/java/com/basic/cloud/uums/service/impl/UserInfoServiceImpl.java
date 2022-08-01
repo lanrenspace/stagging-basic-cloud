@@ -89,8 +89,8 @@ public class UserInfoServiceImpl extends BaseBeanServiceImpl<UserInfoMapper, Use
     @Override
     public void addUserQuick(AddUserReqQuickDto addUserReqQuickDto) {
         // 判断是否合法的租户
-
         UserInfo userInfo = new UserInfo();
+
         // userInfo.setId(Long.parseLong(getIdStrategy().id()));
         BeanUtils.copyProperties(addUserReqQuickDto, userInfo);
         // 设置密码盐值
