@@ -2,6 +2,7 @@ package com.basic.cloud.common.starter;
 
 import com.basic.cloud.common.base.AutoConfigurationConditional;
 import com.basic.cloud.common.base.IdInjectionStrategy;
+import com.basic.cloud.common.bcrypt.BCryptPassword;
 import com.basic.cloud.common.bean.DefaultIdInjectionStrategy;
 import com.basic.cloud.common.boot.AfterSpringLoad;
 import com.basic.cloud.common.boot.PlatformProperties;
@@ -42,7 +43,7 @@ public class CommonAutoConfiguration {
     /**
      * logger
      */
-    private static Logger logger = LoggerFactory.getLogger(CommonAutoConfiguration.class);
+    private static final Logger logger = LoggerFactory.getLogger(CommonAutoConfiguration.class);
 
     private final PlatformProperties platformProperties;
     private final ConfigurableApplicationContext applicationContext;
@@ -121,5 +122,15 @@ public class CommonAutoConfiguration {
     @Bean
     public AfterSpringLoad afterSpringLoad() {
         return new AfterSpringLoad();
+    }
+
+    /**
+     * 密码加解密
+     *
+     * @return
+     */
+    @Bean
+    public BCryptPassword bCryptPassword() {
+        return new BCryptPassword(6, null);
     }
 }
