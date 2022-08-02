@@ -25,6 +25,10 @@
             <groupId>com.basic.cloud</groupId>
             <artifactId>basic-nacos-import</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.basic.cloud</groupId>
+            <artifactId>basic-abs-import</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
