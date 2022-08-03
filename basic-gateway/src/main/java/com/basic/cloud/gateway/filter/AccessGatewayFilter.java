@@ -1,5 +1,8 @@
 package com.basic.cloud.gateway.filter;
 
+import com.alibaba.fastjson.JSON;
+import com.basic.cloud.common.enums.SysErrorTypeEnum;
+import com.basic.cloud.common.vo.ResultData;
 import com.basic.cloud.gateway.boot.SwaggerProvider;
 import com.basic.cloud.gateway.contstant.FilterHeaderCont;
 import com.basic.cloud.uums.authority.service.AuthService;
@@ -139,9 +142,10 @@ public class AccessGatewayFilter implements GlobalFilter {
     }
 
     private Mono<Void> rebuildExchange(ServerWebExchange exchange, HttpStatus httpStatus) {
-        exchange.getResponse().setStatusCode(httpStatus);
+        exchange.getResponse().setStatusCode(HttpStatus.OK);
+        ResultData<Integer> resultData = ResultData.error(SysErrorTypeEnum.PERMISSION_ERROR.getMsg(), SysErrorTypeEnum.PERMISSION_ERROR.getCode(), httpStatus.value());
         DataBuffer buffer = exchange.getResponse()
-                .bufferFactory().wrap(httpStatus.getReasonPhrase().getBytes());
+                .bufferFactory().wrap(JSON.toJSONBytes(resultData));
         return exchange.getResponse().writeWith(Flux.just(buffer));
     }
 

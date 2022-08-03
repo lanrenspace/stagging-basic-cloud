@@ -49,10 +49,10 @@ public class FastJsonHttpMessageCustomConverter {
         supportedMediaTypes.add(MediaType.IMAGE_PNG);
         supportedMediaTypes.add(MediaType.MULTIPART_FORM_DATA);
         supportedMediaTypes.add(MediaType.TEXT_EVENT_STREAM);
-        supportedMediaTypes.add(MediaType.TEXT_HTML);
+//        supportedMediaTypes.add(MediaType.TEXT_HTML);
         supportedMediaTypes.add(MediaType.TEXT_MARKDOWN);
-        supportedMediaTypes.add(MediaType.TEXT_PLAIN);
-        supportedMediaTypes.add(MediaType.TEXT_XML);
+//        supportedMediaTypes.add(MediaType.TEXT_PLAIN);
+//        supportedMediaTypes.add(MediaType.TEXT_XML);
         fastConverter.setSupportedMediaTypes(supportedMediaTypes);
         return new HttpMessageConverters(fastConverter);
     }

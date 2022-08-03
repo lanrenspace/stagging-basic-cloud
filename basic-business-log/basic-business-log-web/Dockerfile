@@ -7,7 +7,7 @@ COPY ${JAR_FILE} app.jar
 ADD ${CONF_DIR} /conf
 RUN mkdir -p /logs
 WORKDIR /home/start
-EXPOSE 9000
+EXPOSE 7400
 # build param
-# image tag: stagging-basic-cloud:file_v1.0.0
-ENTRYPOINT ["java","-server", "-Xms512m", "-Xmx512m","-jar","/app.jar","--spring.config.location=/conf/bootstrap.yml","--logging.config=/conf/logback-spring.xml"]
+# image tag: stagging-basic-cloud:abs_v1.0.0
+ENTRYPOINT ["java","-server", "-Xms128m", "-Xmx128m","-jar","/app.jar","--spring.config.location=/conf/bootstrap.yml","--logging.config=/conf/logback-spring.xml"]

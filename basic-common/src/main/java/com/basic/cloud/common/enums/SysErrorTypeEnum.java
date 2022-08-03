@@ -15,6 +15,7 @@ public enum SysErrorTypeEnum implements ErrorType {
     GATEWAY_CONNECT_TIME_OUT(4098, "网关超时"),
     GATEWAY_NOT_FOUND_SERVICE(4356, "服务未找到"),
     INVALID_TOKEN(8193, "无效token"),
+    PERMISSION_ERROR(401, "PERMISSION_ERROR"),
     ;
 
     SysErrorTypeEnum(Integer code, String msg) {

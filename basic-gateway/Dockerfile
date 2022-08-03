@@ -5,7 +5,9 @@ ENV TZ Asia/Shanghai
 ARG JAR_FILE
 COPY ${JAR_FILE} app.jar
 ADD ${CONF_DIR} /conf
+RUN mkdir -p /logs
+WORKDIR /home/start
 EXPOSE 8761
 # build param
 # image tag: stagging-basic-cloud:gateway_v1.0.0
-ENTRYPOINT ["java","-server", "-Xms512m", "-Xmx512m","-jar","/app.jar","--spring.config.location=/conf/bootstrap.yml"]
+ENTRYPOINT ["java","-server", "-Xms512m", "-Xmx512m","-jar","/app.jar","--spring.config.location=/conf/bootstrap.yml","--logging.config=/conf/logback-spring.xml"]
