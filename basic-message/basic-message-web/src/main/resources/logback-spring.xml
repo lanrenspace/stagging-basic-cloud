@@ -2,7 +2,7 @@
 <configuration>
     <!-- 配置变量 -->
     <!-- 日志文件保存路径前缀 -->
-    <property name="LOG_HOME_PATH" value="G:/stagging-logs/basic-message"/>
+    <property name="LOG_HOME_PATH" value="/logs"/>
     <property name="encoder_pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%c{0}:%L] - %msg%n"/>
     <property name="maxHistory" value="60"/>
     <property name="maxFileSize" value="10MB"/>
@@ -77,16 +77,6 @@
     </logger>
 
     <appender name="outputFileLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>ERROR</level>
-            <onMatch>DENY</onMatch>
-            <onMismatch>ACCEPT</onMismatch>
-        </filter>
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>INFO</level>
-            <level>ERROR</level>
-            <level>WARN</level>
-        </filter>
         <encoder>
             <charset>UTF-8</charset>
             <pattern>${encoder_pattern}</pattern>
