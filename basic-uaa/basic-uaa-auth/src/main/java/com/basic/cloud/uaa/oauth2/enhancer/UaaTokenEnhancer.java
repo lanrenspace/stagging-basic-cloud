@@ -45,7 +45,7 @@ public class UaaTokenEnhancer implements TokenEnhancer {
                 throw new ServiceException(resultData.getStatus(), resultData.getMsg());
             }
             if (resultData.getData() != null) {
-                redisUtil.set(String.format(SysConst.AUTH_LOGIN_CACHE_KEY, details.getId().toString()), resultData.getData());
+                redisUtil.set(String.format(SysConst.AUTH_LOGIN_CACHE_KEY, details.getId().toString()), resultData.getData(), accessToken.getExpiresIn() + 300);
             }
         }
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
