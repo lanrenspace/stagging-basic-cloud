@@ -21,7 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/feign/resourceInfo")
-public class ResourceInfoController {
+public class ResourceInfoFeignController {
 
     /**
      * logger

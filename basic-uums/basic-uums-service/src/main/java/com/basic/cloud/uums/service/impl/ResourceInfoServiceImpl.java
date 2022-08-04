@@ -5,14 +5,18 @@ import com.basic.cloud.common.bean.BisDataEntity;
 import com.basic.cloud.common.contstant.OrgConst;
 import com.basic.cloud.common.contstant.SysConst;
 import com.basic.cloud.common.transfer.ModelMapper;
+import com.basic.cloud.common.utils.RedisUtil;
+import com.basic.cloud.uums.contstant.UumCacheDefine;
 import com.basic.cloud.uums.entity.ResourceInfo;
 import com.basic.cloud.uums.mapper.ResourceInfoMapper;
 import com.basic.cloud.uums.service.ResourceInfoService;
 import com.basic.cloud.uums.vo.ResourceUrlVO;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +25,7 @@ import java.util.stream.Collectors;
  * @Author lanrenspace@163.com
  * @Description:
  **/
+@AllArgsConstructor
 @Service
 public class ResourceInfoServiceImpl extends BaseBeanServiceImpl<ResourceInfoMapper, ResourceInfo> implements ResourceInfoService {
 
@@ -29,9 +34,13 @@ public class ResourceInfoServiceImpl extends BaseBeanServiceImpl<ResourceInfoMap
      */
     private static final String RESOURCE_KEY_LINK_SYMBOL = ":";
 
+    private final RedisUtil redisUtil;
+
     @Override
-    public List<String> getAllResourceUrl() {
-        return list(getLambdaQueryWrapper().eq(BisDataEntity::getDelFlag, false)).stream()
+    public List<String> getAllResourceUrl(String appId) {
+        return list(getLambdaQueryWrapper()
+                .eq(!ObjectUtils.isEmpty(appId), ResourceInfo::getAppId, appId)
+                .eq(BisDataEntity::getDelFlag, false)).stream()
                 .map(resourceInfo -> resourceInfo.getUrl() + RESOURCE_KEY_LINK_SYMBOL + resourceInfo.getMethod()).collect(Collectors.toList());
     }
 
@@ -40,7 +49,7 @@ public class ResourceInfoServiceImpl extends BaseBeanServiceImpl<ResourceInfoMap
         if (ObjectUtils.isEmpty(url) || ObjectUtils.isEmpty(httpMethod)) {
             return false;
         }
-        List<String> allResourceUrl = getAllResourceUrl();
+        List<String> allResourceUrl = getAllResourceUrl(null);
         if (CollectionUtils.isEmpty(allResourceUrl)) {
             return false;
         }
@@ -92,6 +101,15 @@ public class ResourceInfoServiceImpl extends BaseBeanServiceImpl<ResourceInfoMap
         if (!CollectionUtils.isEmpty(resourceInfos)) {
             batchInsert(resourceInfos);
         }
+    }
+
+    @Override
+    public void refreshCache(String appId) {
+        List<String> allResourceUrl = this.getAllResourceUrl(appId);
+        if (null == allResourceUrl) {
+            allResourceUrl = new ArrayList<>();
+        }
+        this.redisUtil.set(UumCacheDefine.RES_URL_KEY, allResourceUrl);
     }
 
 }

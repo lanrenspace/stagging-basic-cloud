@@ -15,9 +15,10 @@ public interface ResourceInfoService extends IBaseBeanService<ResourceInfo> {
     /**
      * 获取所有的资源url
      *
+     * @param appId
      * @return url：格式 = url:method
      */
-    List<String> getAllResourceUrl();
+    List<String> getAllResourceUrl(String appId);
 
     /**
      * 根据请求url匹配资源url
@@ -44,4 +45,10 @@ public interface ResourceInfoService extends IBaseBeanService<ResourceInfo> {
      */
     void saveResourceUrl(List<ResourceUrlVO> resourceUrlVOS);
 
+    /**
+     * 刷新缓存
+     *
+     * @param appId
+     */
+    void refreshCache(String appId);
 }
