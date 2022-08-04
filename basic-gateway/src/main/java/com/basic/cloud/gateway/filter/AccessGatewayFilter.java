@@ -107,7 +107,11 @@ public class AccessGatewayFilter implements GlobalFilter {
         } catch (ExpiredJwtException | MalformedJwtException | SignatureException exception) {
             logger.error("user token error :{}", exception.getMessage());
             if (!authService.ignoreAuthentication(url)) {
-                return unauthorized(exchange);
+                if (exception instanceof ExpiredJwtException) {
+                    return expiredJwt(exchange, exception.getMessage());
+                } else {
+                    return unauthorized(exchange);
+                }
             }
         }
         if (authService.ignoreAuthentication(url)) {
@@ -128,7 +132,7 @@ public class AccessGatewayFilter implements GlobalFilter {
      * @return
      */
     private Mono<Void> forbidden(ServerWebExchange exchange) {
-        return rebuildExchange(exchange, HttpStatus.FORBIDDEN);
+        return failPack(exchange, HttpStatus.FORBIDDEN);
     }
 
     /**
@@ -138,12 +142,28 @@ public class AccessGatewayFilter implements GlobalFilter {
      * @return
      */
     private Mono<Void> unauthorized(ServerWebExchange exchange) {
-        return rebuildExchange(exchange, HttpStatus.UNAUTHORIZED);
+        return failPack(exchange, HttpStatus.UNAUTHORIZED);
     }
 
-    private Mono<Void> rebuildExchange(ServerWebExchange exchange, HttpStatus httpStatus) {
-        exchange.getResponse().setStatusCode(HttpStatus.OK);
+    /**
+     * 令牌过期
+     *
+     * @param exchange
+     * @param msg
+     * @return
+     */
+    private Mono<Void> expiredJwt(ServerWebExchange exchange, String msg) {
+        ResultData<String> resultData = ResultData.error(SysErrorTypeEnum.EXPIRED_JWT_ERROR.getMsg(), SysErrorTypeEnum.EXPIRED_JWT_ERROR.getCode(), msg);
+        return rebuildExchange(exchange, resultData);
+    }
+
+    private Mono<Void> failPack(ServerWebExchange exchange, HttpStatus httpStatus) {
         ResultData<Integer> resultData = ResultData.error(SysErrorTypeEnum.PERMISSION_ERROR.getMsg(), SysErrorTypeEnum.PERMISSION_ERROR.getCode(), httpStatus.value());
+        return rebuildExchange(exchange, resultData);
+    }
+
+    private Mono<Void> rebuildExchange(ServerWebExchange exchange, ResultData<?> resultData) {
+        exchange.getResponse().setStatusCode(HttpStatus.OK);
         DataBuffer buffer = exchange.getResponse()
                 .bufferFactory().wrap(JSON.toJSONBytes(resultData));
         return exchange.getResponse().writeWith(Flux.just(buffer));

@@ -16,7 +16,7 @@ public enum SysErrorTypeEnum implements ErrorType {
     GATEWAY_NOT_FOUND_SERVICE(4356, "服务未找到"),
     INVALID_TOKEN(8193, "无效token"),
     PERMISSION_ERROR(401, "PERMISSION_ERROR"),
-    ;
+    EXPIRED_JWT_ERROR(4001, "EXPIRED_TOKEN");
 
     SysErrorTypeEnum(Integer code, String msg) {
         this.code = code;
