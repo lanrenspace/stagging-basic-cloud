@@ -21,7 +21,7 @@ public class SwaggerHandlerImpl implements SwaggerHandler {
 
     private final UiConfiguration uiConfiguration;
     private final SwaggerResourcesProvider swaggerResources;
-    private SecurityConfiguration securityConfiguration;
+    private final SecurityConfiguration securityConfiguration;
 
     public SwaggerHandlerImpl(@Autowired(required = false) UiConfiguration uiConfiguration, SwaggerResourcesProvider swaggerResources,
                               @Autowired(required = false) SecurityConfiguration securityConfiguration) {
