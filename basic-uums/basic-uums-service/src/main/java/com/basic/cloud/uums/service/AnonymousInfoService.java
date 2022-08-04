@@ -15,7 +15,15 @@ public interface AnonymousInfoService extends IBaseBeanService<AnonymousInfo> {
     /**
      * 获取所有的白名单信息
      *
+     * @param appId
      * @return
      */
-    List<AnonymousInfoVO> getAllAnonymousInfo();
+    List<AnonymousInfoVO> getAllAnonymousInfo(String appId);
+
+    /**
+     * 刷新缓存
+     *
+     * @param appId
+     */
+    void refreshCache(String appId);
 }

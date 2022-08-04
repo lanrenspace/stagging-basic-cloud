@@ -1,6 +1,7 @@
 package com.basic.cloud.uums.boot;
 
 import com.basic.cloud.common.base.IAfterSpringLoadService;
+import com.basic.cloud.uums.service.AnonymousInfoService;
 import com.basic.cloud.uums.service.BlackIpsService;
 import com.basic.cloud.uums.service.ResourceInfoService;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class UumAfterSpringLoadServiceImpl implements IAfterSpringLoadService {
 
     private final ResourceInfoService resourceInfoService;
     private final BlackIpsService blackIpsService;
+    private final AnonymousInfoService anonymousInfoService;
 
     @Override
     public void run() throws Exception {
@@ -34,6 +36,10 @@ public class UumAfterSpringLoadServiceImpl implements IAfterSpringLoadService {
         logger.info("load blackIps start...");
         this.blackIpsService.refreshCache();
         logger.info("load blackIps end...");
+
+        logger.info("load anonymousInfo start...");
+        this.anonymousInfoService.refreshCache(null);
+        logger.info("load anonymousInfo end...");
     }
 
     @Override

@@ -19,4 +19,9 @@ public class UumCacheDefine {
      * 黑名单IP地址 KEY
      */
     public final static String BLACK_IPS_KEY = CacheDefine.getKey("UUM:PLATFORM", "BLACK_IPS");
+
+    /**
+     * 匿名接口信息 KEY
+     */
+    public final static String ANONYMOUS_INFO_KEY = CacheDefine.getKey("UUM:PLATFORM", "ANONYMOUS_INFO");
 }
