@@ -1,6 +1,7 @@
 package com.basic.cloud.uums.boot;
 
 import com.basic.cloud.common.base.IAfterSpringLoadService;
+import com.basic.cloud.uums.service.BlackIpsService;
 import com.basic.cloud.uums.service.ResourceInfoService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -21,12 +22,18 @@ public class UumAfterSpringLoadServiceImpl implements IAfterSpringLoadService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private final ResourceInfoService resourceInfoService;
+    private final BlackIpsService blackIpsService;
 
     @Override
     public void run() throws Exception {
+
         logger.info("load resource url start...");
         this.resourceInfoService.refreshCache(null);
         logger.info("load resource url end...");
+
+        logger.info("load blackIps start...");
+        this.blackIpsService.refreshCache();
+        logger.info("load blackIps end...");
     }
 
     @Override

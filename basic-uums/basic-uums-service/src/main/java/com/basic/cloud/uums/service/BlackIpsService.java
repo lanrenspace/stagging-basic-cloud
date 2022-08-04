@@ -26,4 +26,9 @@ public interface BlackIpsService extends IBaseBeanService<BlackIps> {
      * @return
      */
     Boolean saveIp(BlackIps blackIps);
+
+    /**
+     * 刷新缓存
+     */
+    void refreshCache();
 }

@@ -9,9 +9,14 @@ import com.basic.cloud.common.contstant.CacheDefine;
 public class UumCacheDefine {
 
     /**
-     * 获取资源URL KEY
+     * 资源URL KEY
      *
      * @return
      */
     public final static String RES_URL_KEY = CacheDefine.getKey("UUM:PLATFORM", "RES_URL");
+
+    /**
+     * 黑名单IP地址 KEY
+     */
+    public final static String BLACK_IPS_KEY = CacheDefine.getKey("UUM:PLATFORM", "BLACK_IPS");
 }
