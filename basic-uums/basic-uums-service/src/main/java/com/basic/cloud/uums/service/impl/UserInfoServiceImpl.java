@@ -3,7 +3,6 @@ package com.basic.cloud.uums.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.basic.cloud.common.bean.BaseBeanServiceImpl;
 import com.basic.cloud.common.bean.BisDataEntity;
@@ -26,7 +25,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -108,10 +106,10 @@ public class UserInfoServiceImpl extends BaseBeanServiceImpl<UserInfoMapper, Use
         if (!ObjectUtils.isEmpty(queryUserInfoReqDto.getName())) {
             lqw.eq(UserInfo::getName, queryUserInfoReqDto.getName());
         }
-        if (!ObjectUtils.isEmpty(queryUserInfoReqDto.getName())) {
+        if (!ObjectUtils.isEmpty(queryUserInfoReqDto.getMobile())) {
             lqw.eq(UserInfo::getMobile, queryUserInfoReqDto.getMobile());
         }
-        if (!ObjectUtils.isEmpty(queryUserInfoReqDto.getName())) {
+        if (!ObjectUtils.isEmpty(queryUserInfoReqDto.getTenantCode())) {
             lqw.eq(BisDataEntity::getTenantCode, queryUserInfoReqDto.getTenantCode());
         }
 
