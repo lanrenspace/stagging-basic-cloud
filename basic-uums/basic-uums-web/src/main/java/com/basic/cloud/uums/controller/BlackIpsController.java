@@ -8,6 +8,8 @@ import com.basic.cloud.uums.dto.BlackIpsDTO;
 import com.basic.cloud.uums.entity.BlackIps;
 import com.basic.cloud.uums.service.BlackIpsService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/blackIps")
 public class BlackIpsController {
+
+    /**
+     * logger
+     */
+    private final Logger logger = LoggerFactory.getLogger(BlackIpsController.class);
 
     private final BlackIpsService blackIpsService;
 
@@ -68,6 +75,19 @@ public class BlackIpsController {
                 .eq(BlackIps::getIp, ip)
                 .eq(BisDataEntity::getDelFlag, false)
                 .set(BisDataEntity::getDelFlag, true));
+        return ResultData.ok();
+    }
+
+    /**
+     * 刷新缓存
+     *
+     * @return
+     */
+    @GetMapping("/refreshCache")
+    public ResultData<Void> refreshCache() {
+        logger.info("refresh blackIps start...");
+        blackIpsService.refreshCache();
+        logger.info("refresh blackIps end...");
         return ResultData.ok();
     }
 }

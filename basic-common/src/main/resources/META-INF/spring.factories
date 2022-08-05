@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.basic.cloud.common.starter.CommonAutoConfiguration,\
-  com.basic.cloud.common.starter.SwaggerAutoConfiguration
+  com.basic.cloud.common.starter.SwaggerAutoConfiguration,\
+  com.basic.cloud.common.starter.BusinessAutoConfiguration

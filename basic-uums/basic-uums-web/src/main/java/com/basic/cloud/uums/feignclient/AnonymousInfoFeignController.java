@@ -29,6 +29,6 @@ public class AnonymousInfoFeignController {
      */
     @GetMapping("/all")
     public List<AnonymousInfoVO> all() {
-        return this.anonymousInfoService.getAllAnonymousInfo();
+        return this.anonymousInfoService.getAllAnonymousInfo(null);
     }
 }
