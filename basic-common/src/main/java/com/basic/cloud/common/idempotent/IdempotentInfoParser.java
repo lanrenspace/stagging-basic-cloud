@@ -5,10 +5,14 @@ import com.basic.cloud.common.exceptions.IdempotentException;
 import com.basic.cloud.common.expression.CommonCachedExpressionEvaluator;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @Author lanrenspace@163.com
@@ -16,13 +20,13 @@ import java.util.Optional;
  **/
 public class IdempotentInfoParser extends CommonCachedExpressionEvaluator {
 
-    private AnnotationMetaDataHolder annotationMetaDataHolder;
+    private final AnnotationMetaDataHolder annotationMetaDataHolder;
 
-    private Map<String, IdempotentManager> idempotentManagerMap;
+    private final Map<String, IdempotentManager> idempotentManagerMap;
 
-    private Map<String, IdInjectionStrategy> keyGeneratorMap;
+    private final Map<String, IdInjectionStrategy> keyGeneratorMap;
 
-    private IdempotentManager idempotentManager;
+    private final IdempotentManager idempotentManager;
 
 
     public IdempotentInfoParser(AnnotationMetaDataHolder annotationMetaDataHolder,
@@ -65,7 +69,12 @@ public class IdempotentInfoParser extends CommonCachedExpressionEvaluator {
         if (StringUtils.isBlank(keyInAnnotation)) {
             return clazz.getName() + "_" + method.getName();
         }
-        return evaluatorExpressionStr(keyInAnnotation, target, clazz, method, args);
+        List<String> keyAnnotationArrays = Arrays.stream(keyInAnnotation.split("#")).filter(item -> !ObjectUtils.isEmpty(item)).collect(Collectors.toList());
+        StringBuilder resultKey = new StringBuilder();
+        for (String keyAnnotation : keyAnnotationArrays) {
+            resultKey.append(evaluatorExpressionStr("#" + keyAnnotation, target, clazz, method, args));
+        }
+        return resultKey.toString();
     }
 
 
