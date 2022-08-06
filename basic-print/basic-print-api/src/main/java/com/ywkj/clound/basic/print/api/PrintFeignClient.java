@@ -1,6 +1,7 @@
 package com.ywkj.clound.basic.print.api;
 
 import com.basic.cloud.common.vo.ResultData;
+import com.basic.cloud.file.vo.FileInfoVO;
 import com.ywkj.cloud.basic.print.dto.PrintDataDto;
 import com.ywkj.cloud.basic.print.dto.merge.MergeFileReqDto;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -15,7 +16,7 @@ public interface PrintFeignClient {
      * @return
      */
     @PostMapping("/pdf")
-    ResultData pdf(PrintDataDto printDataDto);
+    ResultData<FileInfoVO>  pdf(PrintDataDto printDataDto);
 
     /**
      * 合并文件到一个pdf中
@@ -23,5 +24,5 @@ public interface PrintFeignClient {
      * @return
      */
     @PostMapping("/merge")
-    ResultData merge(MergeFileReqDto mergeFileReqDto);
+    ResultData<FileInfoVO>  merge(MergeFileReqDto mergeFileReqDto);
 }

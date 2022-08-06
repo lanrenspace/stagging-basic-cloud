@@ -1,6 +1,5 @@
 package com.basic.cloud.uums.dto;
 
-import com.basic.cloud.uums.entity.UserInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -24,9 +23,19 @@ public class AddUserReqQuickDto implements Serializable {
     private String name;
 
     /**
+     * 账户
+     */
+    @ApiModelProperty(value = "账户")
+    private String account;
+    /**
+     * openid
+     */
+    @ApiModelProperty(value = "openId")
+    private String openId;
+
+    /**
      * 电话
      */
-    @NotNull(message = "用户手机号不能为空")
     @ApiModelProperty(value = "用户手机号")
     private String mobile;
 

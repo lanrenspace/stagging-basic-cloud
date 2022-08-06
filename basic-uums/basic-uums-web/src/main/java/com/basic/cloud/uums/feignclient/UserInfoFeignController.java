@@ -1,6 +1,5 @@
 package com.basic.cloud.uums.feignclient;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.basic.cloud.common.vo.ResultData;
@@ -11,6 +10,7 @@ import com.basic.cloud.uums.dto.UserOpenIdBindReqDto;
 import com.basic.cloud.uums.entity.UserInfo;
 import com.basic.cloud.uums.service.UserInfoService;
 import com.basic.cloud.uums.vo.UserInfoVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
@@ -27,6 +27,7 @@ import java.util.List;
 @RequestMapping("/feign/userInfo")
 public class UserInfoFeignController {
 
+    @Autowired
     private final UserInfoService userInfoService;
 
     public UserInfoFeignController(UserInfoService userInfoService) {

@@ -21,6 +21,7 @@ import com.basic.cloud.uums.service.UserInfoService;
 import com.basic.cloud.uums.vo.RoleInfoVO;
 import com.basic.cloud.uums.vo.UserInfoVO;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
@@ -37,8 +38,13 @@ import java.util.stream.Collectors;
 @Service
 public class UserInfoServiceImpl extends BaseBeanServiceImpl<UserInfoMapper, UserInfo> implements UserInfoService {
 
+    @Autowired
     private final UserGroupRoleService userGroupRoleService;
+    @Autowired
     private final UnitInfoService unitInfoService;
+
+    @Autowired
+    private   UserInfoMapper userInfoMapper;
 
     public UserInfoServiceImpl(UserGroupRoleService userGroupRoleService, UnitInfoService unitInfoService) {
         this.userGroupRoleService = userGroupRoleService;
@@ -94,7 +100,6 @@ public class UserInfoServiceImpl extends BaseBeanServiceImpl<UserInfoMapper, Use
         // 设置密码盐值
         // userInfo.setSlat(RandomUtil.randomNumbers(6));
         userInfo.setStatus(UumConst.UserStatus.ACTIVE);
-        userInfo.setAccount(addUserReqQuickDto.getMobile());
         save(userInfo);
     }
 
@@ -113,7 +118,7 @@ public class UserInfoServiceImpl extends BaseBeanServiceImpl<UserInfoMapper, Use
             lqw.eq(BisDataEntity::getTenantCode, queryUserInfoReqDto.getTenantCode());
         }
 
-        Page<UserInfo> page = getBaseMapper().selectPage(new Page<>(queryUserInfoReqDto.getPageNumber(), queryUserInfoReqDto.getPageSize()),lqw);
+        Page<UserInfo> page = userInfoMapper.selectPage(new Page<>(queryUserInfoReqDto.getPageNumber(), queryUserInfoReqDto.getPageSize()),lqw);
 
         CopyOptions copyOptions = CopyOptions.create();
         result.setTotal(page.getTotal());

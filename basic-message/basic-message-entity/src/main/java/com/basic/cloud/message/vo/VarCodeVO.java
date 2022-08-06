@@ -2,6 +2,7 @@ package com.basic.cloud.message.vo;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Tolerate;
 
 import java.io.Serializable;
 
@@ -22,5 +23,8 @@ public class VarCodeVO implements Serializable {
      * 有效时长
      */
     private Long second;
+
+    @Tolerate
+    public VarCodeVO(){}
 
 }
