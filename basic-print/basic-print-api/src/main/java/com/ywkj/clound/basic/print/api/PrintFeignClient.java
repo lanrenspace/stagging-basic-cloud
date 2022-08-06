@@ -16,7 +16,7 @@ public interface PrintFeignClient {
      * @return
      */
     @PostMapping("/pdf")
-    ResultData<FileInfoVO> pdf(PrintDataDto printDataDto);
+    ResultData<FileInfoVO>  pdf(PrintDataDto printDataDto);
 
     /**
      * 合并文件到一个pdf中
@@ -24,5 +24,5 @@ public interface PrintFeignClient {
      * @return
      */
     @PostMapping("/merge")
-    ResultData<FileInfoVO> merge(MergeFileReqDto mergeFileReqDto);
+    ResultData<FileInfoVO>  merge(MergeFileReqDto mergeFileReqDto);
 }

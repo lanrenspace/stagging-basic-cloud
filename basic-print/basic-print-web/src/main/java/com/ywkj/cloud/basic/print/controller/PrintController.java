@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
-
 @RestController
 @AllArgsConstructor
 @RequestMapping("/basic/feign/print")
@@ -27,7 +25,8 @@ public class PrintController {
     @ApiOperation(value = "生成pdf打印")
     @PostMapping("/pdf")
     public ResultData<FileInfoVO> pdf(@RequestBody @Validated PrintDataDto printDataDto) throws Exception {
-        return ResultData.ok(printService.printPdf(printDataDto));
+        FileInfoVO fileInfoVO = printService.printPdf(printDataDto);
+        return ResultData.ok(fileInfoVO);
     }
 
     @ApiOperation(value = "合并后打印")

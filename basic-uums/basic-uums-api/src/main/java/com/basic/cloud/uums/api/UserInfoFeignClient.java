@@ -3,14 +3,12 @@ package com.basic.cloud.uums.api;
 import com.basic.cloud.common.vo.ResultData;
 import com.basic.cloud.common.vo.ResultPage;
 import com.basic.cloud.uums.dto.AddUserReqQuickDto;
+import com.basic.cloud.uums.dto.UserOpenIdBindReqDto;
 import com.basic.cloud.uums.entity.UserInfo;
 import com.basic.cloud.uums.vo.UserInfoVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author lanrenspace@163.com
@@ -51,5 +49,11 @@ public interface UserInfoFeignClient {
 
     @GetMapping("/list")
     ResultPage<UserInfoVO> listUserInfo(@RequestParam("data") String jsonData);
+
+    @PutMapping("/bindOpenId")
+    ResultData bindOpenId(@RequestBody UserOpenIdBindReqDto userOpenIdBindReqDto);
+
+    @GetMapping("/getByOpenId/{openId}")
+    ResultData getByOpenId(@PathVariable("openId") String openid);
 
 }
