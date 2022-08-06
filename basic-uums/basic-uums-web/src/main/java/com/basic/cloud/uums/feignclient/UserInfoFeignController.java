@@ -47,13 +47,12 @@ public class UserInfoFeignController {
     /**
      * 根据用户账号查询用户信息
      *
-     * @param userAccount 账号
+     * @param userOpenId 账号
      */
     @GetMapping("/queryUserByOpenId")
-    public UserInfo queryUserByOpenId(String userAccount) {
-        return userInfoService.queryUserByOpenId(userAccount);
+    public ResultData<UserInfo> queryUserByOpenId(String userOpenId) {
+        return ResultData.ok(userInfoService.queryUserByOpenId(userOpenId));
     }
-
 
     /**
      * 根据用户ID获取用户详情

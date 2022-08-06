@@ -32,7 +32,7 @@ public interface UserInfoFeignClient {
      * @param userOpenId 账号
      */
     @GetMapping("/queryUserByOpenId")
-    UserInfo queryUserByOpenId(@RequestParam("userOpenId") String userOpenId);
+    ResultData<UserInfo> queryUserByOpenId(@RequestParam("userOpenId") String userOpenId);
 
 
     /**
