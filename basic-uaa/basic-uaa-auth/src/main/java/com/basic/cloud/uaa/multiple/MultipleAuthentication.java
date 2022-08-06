@@ -13,6 +13,7 @@ public class MultipleAuthentication {
 
     private String authType;
     private String username;
+    private String openId;
     private Map<String, String[]> authParameters;
 
     public String getAuthParameter(String parameter) {

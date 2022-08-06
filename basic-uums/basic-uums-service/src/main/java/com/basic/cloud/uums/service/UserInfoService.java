@@ -23,6 +23,14 @@ public interface UserInfoService extends IBaseBeanService<UserInfo> {
     UserInfo queryUserByAccount(String userAccount);
 
     /**
+     * 根据用户账号查询用户信息
+     *
+     * @param openId
+     * @return
+     */
+    UserInfo queryUserByOpenId(String openId);
+
+    /**
      * 根据用户ID获取详情
      *
      * @param userId

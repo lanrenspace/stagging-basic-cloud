@@ -27,6 +27,16 @@ public interface UserInfoFeignClient {
     @GetMapping("/queryUserByAccount")
     UserInfo queryUserByAccount(@RequestParam("userAccount") String userAccount);
 
+
+    /**
+     * 根据用户微信号查询用户信息
+     *
+     * @param userOpenId 账号
+     */
+    @GetMapping("/queryUserByOpenId")
+    UserInfo queryUserByOpenId(@RequestParam("userOpenId") String userOpenId);
+
+
     /**
      * 根据用户ID获取用户详情
      *

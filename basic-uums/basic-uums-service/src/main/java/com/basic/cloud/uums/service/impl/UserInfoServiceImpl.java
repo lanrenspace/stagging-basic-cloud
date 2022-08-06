@@ -55,6 +55,13 @@ public class UserInfoServiceImpl extends BaseBeanServiceImpl<UserInfoMapper, Use
     }
 
     @Override
+    public UserInfo queryUserByOpenId(String openId) {
+        Optional<UserInfo> first = getBaseMapper().selectList(getLambdaQueryWrapper().eq(UserInfo::getWxOpenId, openId)
+                .eq(BisDataEntity::getDelFlag, DelEnum.NOT_DELETED.getCode())).stream().findFirst();
+        return first.orElse(null);
+    }
+
+    @Override
     public UserDetail getUserDetailInfo(Long userId) {
         UserInfo userInfo = getById(userId);
         UserDetail userDetail = new UserDetail();
