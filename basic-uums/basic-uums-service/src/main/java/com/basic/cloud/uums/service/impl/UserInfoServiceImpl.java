@@ -106,6 +106,7 @@ public class UserInfoServiceImpl extends BaseBeanServiceImpl<UserInfoMapper, Use
         BeanUtils.copyProperties(addUserReqQuickDto, userInfo);
         // 设置密码盐值
         // userInfo.setSlat(RandomUtil.randomNumbers(6));
+        userInfo.setAccount(addUserReqQuickDto.getMobile());
         userInfo.setStatus(UumConst.UserStatus.ACTIVE);
         save(userInfo);
     }

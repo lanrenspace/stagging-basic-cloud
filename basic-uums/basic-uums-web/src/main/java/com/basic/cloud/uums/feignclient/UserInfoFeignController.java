@@ -1,5 +1,6 @@
 package com.basic.cloud.uums.feignclient;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.basic.cloud.common.vo.ResultData;
@@ -34,15 +35,18 @@ public class UserInfoFeignController {
         this.userInfoService = userInfoService;
     }
 
+
+
     /**
-     * 根据用户账号查询用户信息
+     * 根据账号id查询用户信息
      *
      * @param userAccount 账号
      */
-    @GetMapping("/queryUserByAccount")
+    @GetMapping("/queryUserById")
     public UserInfo queryUserByAccount(String userAccount) {
         return userInfoService.queryUserByAccount(userAccount);
     }
+
 
     /**
      * 根据用户账号查询用户信息
@@ -92,7 +96,10 @@ public class UserInfoFeignController {
         if (list.size() > 1) {
             return ResultData.error("手机号："+userOpenIdBindReqDto.getMobile() + "找到多个对应的用户", HttpStatus.CONTINUE.INTERNAL_SERVER_ERROR);
         }
+        if (StrUtil.isNotBlank(list.get(0).getWxOpenId())){
 
+            return ResultData.error("手机号："+userOpenIdBindReqDto.getMobile() + "用户已绑定微信了", HttpStatus.CONTINUE.INTERNAL_SERVER_ERROR);
+        }
         UserInfo userInfo = list.get(0);
         userInfo.setWxOpenId(userOpenIdBindReqDto.getOpenId());
         userInfoService.updateById(userInfo);

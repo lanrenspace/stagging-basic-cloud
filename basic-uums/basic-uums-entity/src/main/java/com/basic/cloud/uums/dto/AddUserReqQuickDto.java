@@ -22,16 +22,6 @@ public class AddUserReqQuickDto implements Serializable {
     @ApiModelProperty(value = "用户姓名")
     private String name;
 
-    /**
-     * 账户
-     */
-    @ApiModelProperty(value = "账户")
-    private String account;
-    /**
-     * openid
-     */
-    @ApiModelProperty(value = "openId")
-    private String openId;
 
     /**
      * 电话
@@ -39,10 +29,5 @@ public class AddUserReqQuickDto implements Serializable {
     @ApiModelProperty(value = "用户手机号")
     private String mobile;
 
-    /**
-     * 租户编码
-     */
-    @NotNull
-    @ApiModelProperty(value = "租户编码")
-    protected String tenantCode;
+
 }
