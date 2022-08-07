@@ -1,4 +1,4 @@
-package com.ywkj.clound.basic.print.api;
+package com.ywkj.cloud.basic.print.api;
 
 import com.basic.cloud.common.vo.ResultData;
 import com.basic.cloud.file.vo.FileInfoVO;
