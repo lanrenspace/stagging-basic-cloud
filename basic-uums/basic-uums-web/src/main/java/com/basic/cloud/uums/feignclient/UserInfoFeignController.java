@@ -42,7 +42,7 @@ public class UserInfoFeignController {
      *
      * @param userAccount 账号
      */
-    @GetMapping("/queryUserById")
+    @GetMapping("/queryUserByAccount")
     public UserInfo queryUserByAccount(String userAccount) {
         return userInfoService.queryUserByAccount(userAccount);
     }
