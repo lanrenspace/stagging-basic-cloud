@@ -2,6 +2,7 @@ package com.basic.cloud.common.bcrypt;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.security.SecureRandom;
 import java.util.regex.Pattern;
@@ -10,7 +11,7 @@ import java.util.regex.Pattern;
  * @Author lanrenspace@163.com
  * @Description:
  **/
-public class BCryptPassword {
+public class BCryptPassword implements PasswordEncoder {
 
     private final Pattern BCRYPT_PATTERN;
 

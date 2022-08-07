@@ -17,7 +17,6 @@
         <module>basic-uums</module>
         <module>basic-tenant</module>
         <module>basic-gateway</module>
-        <module>basic-uaa</module>
         <module>basic-abs-web</module>
         <module>basic-print</module>
         <module>basic-import</module>
