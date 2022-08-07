@@ -1,4 +1,4 @@
-package com.basic.cloud.uums.enums;
+package com.basic.cloud.uums.contstant.enums;
 
 import com.basic.cloud.common.base.ErrorType;
 import lombok.Getter;

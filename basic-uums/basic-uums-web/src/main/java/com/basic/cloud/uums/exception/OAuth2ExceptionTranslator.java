@@ -2,7 +2,7 @@ package com.basic.cloud.uums.exception;
 
 import com.basic.cloud.common.enums.SysErrorTypeEnum;
 import com.basic.cloud.common.exceptions.ServiceException;
-import com.basic.cloud.uums.enums.UumErrorTypeEnum;
+import com.basic.cloud.uums.contstant.enums.UumErrorTypeEnum;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;

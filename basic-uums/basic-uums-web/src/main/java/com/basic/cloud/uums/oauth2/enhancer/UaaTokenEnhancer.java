@@ -1,11 +1,14 @@
 package com.basic.cloud.uums.oauth2.enhancer;
 
+import cn.hutool.core.util.ObjectUtil;
+import com.basic.cloud.common.bean.UserDetail;
 import com.basic.cloud.common.contstant.SysConst;
 import com.basic.cloud.common.exceptions.ServiceException;
 import com.basic.cloud.common.utils.RedisUtil;
 import com.basic.cloud.common.vo.ResultData;
-import com.basic.cloud.uaa.entity.UserJwt;
-import com.basic.cloud.uums.api.UserInfoFeignClient;
+import com.basic.cloud.uums.entity.UserInfo;
+import com.basic.cloud.uums.entity.UserJwt;
+import com.basic.cloud.uums.service.UserInfoService;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -24,11 +27,11 @@ import java.util.Map;
 public class UaaTokenEnhancer implements TokenEnhancer {
 
     private final RedisUtil redisUtil;
-    private final UserInfoFeignClient userInfoFeignClient;
+    private final UserInfoService userInfoService;
 
-    public UaaTokenEnhancer(RedisUtil redisUtil, UserInfoFeignClient userInfoFeignClient) {
+    public UaaTokenEnhancer(RedisUtil redisUtil, UserInfoService userInfoService) {
         this.redisUtil = redisUtil;
-        this.userInfoFeignClient = userInfoFeignClient;
+        this.userInfoService = userInfoService;
     }
 
     @Override
@@ -38,12 +41,10 @@ public class UaaTokenEnhancer implements TokenEnhancer {
         UserJwt details = (UserJwt) authentication.getPrincipal();
         if (null != details) {
             additionalInfo.put(SysConst.TOKEN_AFFIX_USER_ID, details.getId());
-            ResultData resultData = userInfoFeignClient.getUserDetailInfo(details.getId());
-            if (resultData.getStatus() != HttpStatus.OK.value()) {
-                throw new ServiceException(resultData.getStatus(), resultData.getMsg());
-            }
-            if (resultData.getData() != null) {
-                redisUtil.set(String.format(SysConst.AUTH_LOGIN_CACHE_KEY, details.getId().toString()), resultData.getData(), accessToken.getExpiresIn() + 300);
+            UserDetail userDetail = userInfoService.getUserDetailInfo(details.getId());
+
+            if (!ObjectUtil.isEmpty(userDetail)) {
+                redisUtil.set(String.format(SysConst.AUTH_LOGIN_CACHE_KEY, details.getId().toString()), userDetail, accessToken.getExpiresIn() + 300);
             }
         }
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
